@@ -13,8 +13,17 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        qtmainwindow.cpp
+        qtmainwindow.cpp \
+    usb/usb_util.cpp \
+    log/log.cpp
 
-HEADERS  += qtmainwindow.h
+HEADERS  += qtmainwindow.h \
+    usb/usb_util.h \
+    log/log.h
 
 FORMS    += qtmainwindow.ui
+
+win32: LIBS += -L$$PWD/libs/ -llibusb-1.0
+
+INCLUDEPATH += $$PWD/libs
+DEPENDPATH += $$PWD/libs
