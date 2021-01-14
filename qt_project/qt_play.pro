@@ -27,3 +27,6 @@ win32: LIBS += -L$$PWD/libs/ -llibusb-1.0
 
 INCLUDEPATH += $$PWD/libs
 DEPENDPATH += $$PWD/libs
+
+RESOURCES += \
+    resources.qrc

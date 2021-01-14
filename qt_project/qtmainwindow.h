@@ -16,7 +16,21 @@ public:
     ~QtMainWindow();
 
 private:
+    void initMainWidow();
+    void initMenu();
+    void initToolBar();
+    void initStatusBar();
+
+private slots:
+    void onNewFileClicked();
+
+private:
     Ui::QtMainWindow *ui;
+
+    QMenuBar *mMenuBar;
+    QToolBar *mToolBar;
+    QStatusBar *mStatusBar;
+
 };
 
 #endif // QTMAINWINDOW_H
