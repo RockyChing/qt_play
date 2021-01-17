@@ -11,15 +11,21 @@
 #include <QApplication>
 
 #include "usb/usb_util.h"
+#include "camera/uvc_camera.h"
 
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+#if 0
     QtMainWindow w;
     w.show();
 
 	UsbUtil usbTest(0, 0);
+#else
+    UVCCamera camera;
+    camera.show();
+#endif
     return a.exec();
 }
 

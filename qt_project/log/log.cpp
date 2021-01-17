@@ -46,3 +46,8 @@ void Logger::log(int level, const char *tag, const char *fmt, ...)
 	va_end(ap);
 }
 
+void Logger::info(const QString tag, const QString s)
+{
+    if (Logger::mLevel >= LOG_INFO)
+        qDebug() << tag << ": " << s;
+}
