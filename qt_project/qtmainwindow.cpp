@@ -16,6 +16,8 @@ QtMainWindow::QtMainWindow(QWidget *parent) :
     initMenu();
     initToolBar();
     initStatusBar();
+
+    initSignalSlots();
 }
 
 QtMainWindow::~QtMainWindow()
@@ -62,7 +64,18 @@ void QtMainWindow::initStatusBar()
     mStatusBar->showMessage(tr("Running..."));
 }
 
+void QtMainWindow::initSignalSlots()
+{
+    connect(ui->btnFinance, SIGNAL(clicked()), this, SLOT(onBtnFinanceClicked()));
+}
+
 void QtMainWindow::onNewFileClicked()
 {
     log_info("onNewFileClicked");
+}
+
+void QtMainWindow::onBtnFinanceClicked()
+{
+    Finance *f = new Finance();
+    f->show();
 }

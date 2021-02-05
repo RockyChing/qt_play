@@ -2,6 +2,7 @@
 #define QTMAINWINDOW_H
 
 #include <QMainWindow>
+#include "finance/finance.h"
 
 namespace Ui {
 class QtMainWindow;
@@ -20,9 +21,11 @@ private:
     void initMenu();
     void initToolBar();
     void initStatusBar();
+    void initSignalSlots();
 
 private slots:
     void onNewFileClicked();
+    void onBtnFinanceClicked();
 
 private:
     Ui::QtMainWindow *ui;

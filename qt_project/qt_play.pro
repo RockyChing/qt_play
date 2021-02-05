@@ -15,13 +15,16 @@ TEMPLATE = app
 SOURCES += main.cpp\
         qtmainwindow.cpp \
     usb/usb_util.cpp \
-    log/log.cpp
+    log/log.cpp \
+    finance/finance.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
-    log/log.h
+    log/log.h \
+    finance/finance.h
 
-FORMS    += qtmainwindow.ui
+FORMS    += qtmainwindow.ui \
+    finance/finance.ui
 
 win32: LIBS += -L$$PWD/libs/ -llibusb-1.0
 
