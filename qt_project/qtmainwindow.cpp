@@ -3,6 +3,7 @@
 
 #include "qtmainwindow.h"
 #include "ui_qtmainwindow.h"
+#include "nl_del/nl_del.h"
 
 
 QtMainWindow::QtMainWindow(QWidget *parent) :
@@ -40,7 +41,7 @@ void QtMainWindow::initMainWidow()
 void QtMainWindow::initMenu()
 {
     QMenu *menuFile = mMenuBar->addMenu(tr("&File"));
-    QMenu *menuedit = mMenuBar->addMenu(tr("&Edit"));
+    QMenu *menuEdit = mMenuBar->addMenu(tr("&Edit"));
     QMenu *menuHelp = mMenuBar->addMenu(tr("&Help"));
 
     /* set File actions */
@@ -52,6 +53,11 @@ void QtMainWindow::initMenu()
     menuFile->addAction(tr("&Save"));
     menuFile->addSeparator();
     menuFile->addAction(tr("&Exit"));
+
+    /* set Edit actions */
+    QAction *actDelNewline = menuEdit->addAction(tr("文本段落间隔"), this,
+            SLOT(onDelNewlineClicked()), QKeySequence(tr("Ctrl+D")));
+    actDelNewline->setStatusTip(tr("Delete new line in a file..."));
 }
 
 void QtMainWindow::initToolBar()
@@ -72,6 +78,12 @@ void QtMainWindow::initSignalSlots()
 void QtMainWindow::onNewFileClicked()
 {
     log_info("onNewFileClicked");
+}
+
+void QtMainWindow::onDelNewlineClicked()
+{
+    NewlineDelete *d = new NewlineDelete();
+    d->show();
 }
 
 void QtMainWindow::onBtnFinanceClicked()

@@ -16,15 +16,18 @@ SOURCES += main.cpp\
         qtmainwindow.cpp \
     usb/usb_util.cpp \
     log/log.cpp \
-    finance/finance.cpp
+    finance/finance.cpp \
+    nl_del/nl_del.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
     log/log.h \
-    finance/finance.h
+    finance/finance.h \
+    nl_del/nl_del.h
 
 FORMS    += qtmainwindow.ui \
-    finance/finance.ui
+    finance/finance.ui \
+    nl_del/nl_del.ui
 
 win32: LIBS += -L$$PWD/libs/ -llibusb-1.0
 
