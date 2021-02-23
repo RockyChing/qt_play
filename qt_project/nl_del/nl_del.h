@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QLineEdit>
+#include <QSpinBox>
 
 namespace Ui {
 class NewlineDelete;
@@ -29,6 +30,7 @@ private:
     QPushButton *mBtnProcess;
 
     QLineEdit  *mFilePath;
+    QSpinBox *mSpinBixLineNum;
 
 private:
     QString mFileAbsPath;

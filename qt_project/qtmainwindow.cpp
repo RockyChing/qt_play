@@ -55,7 +55,7 @@ void QtMainWindow::initMenu()
     menuFile->addAction(tr("&Exit"));
 
     /* set Edit actions */
-    QAction *actDelNewline = menuEdit->addAction(tr("文本段落间隔"), this,
+    QAction *actDelNewline = menuEdit->addAction(tr("段落间隔转换"), this,
             SLOT(onDelNewlineClicked()), QKeySequence(tr("Ctrl+D")));
     actDelNewline->setStatusTip(tr("Delete new line in a file..."));
 }

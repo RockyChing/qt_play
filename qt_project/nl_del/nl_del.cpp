@@ -32,6 +32,7 @@ void NewlineDelete::initUI()
     mBtnProcess = ui->btnNlDelProcess;
 
     mFilePath = ui->lineEditFilePath;
+    mSpinBixLineNum = ui->spinBoxLineNum;
 
     connect(mBtnOpen, SIGNAL(clicked()), this, SLOT(onBtnOpenClicked()));
     connect(mBtnProcess, SIGNAL(clicked()), this, SLOT(onBtnProcessClicked()));
@@ -79,7 +80,16 @@ void NewlineDelete::onBtnProcessClicked()
                         continue;
                     }
                     line.remove(QRegExp("\\s"));
-                    out << line << "\r\n\r\n";
+                    out << line;
+
+                    int lineNum = mSpinBixLineNum->value();
+                    if (1 == lineNum)
+                        out << "\r\n";
+                    else if (2 == lineNum)
+                        out << "\r\n\r\n";
+                    else if (3 == lineNum)
+                        out << "\r\n\r\n\r\n";
+                    else {}
                 }
 
                 out.flush();
