@@ -17,13 +17,15 @@ SOURCES += main.cpp\
     usb/usb_util.cpp \
     log/log.cpp \
     finance/finance.cpp \
-    nl_del/nl_del.cpp
+    nl_del/nl_del.cpp \
+    config/appsettings.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
     log/log.h \
     finance/finance.h \
-    nl_del/nl_del.h
+    nl_del/nl_del.h \
+    config/appsettings.h
 
 FORMS    += qtmainwindow.ui \
     finance/finance.ui \

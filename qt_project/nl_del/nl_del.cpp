@@ -4,13 +4,14 @@
 #include <QIODevice>
 #include <QTextStream>
 #include <QMessageBox>
+
 #include <QDebug>
 
-#include "log/log.h"
+#include "config/appsettings.h"
 #include "nl_del.h"
 #include "ui_nl_del.h"
 
-static const char *LOG_TAG = "nl_del";
+//static const char *LOG_TAG = "nl_del";
 
 NewlineDelete::NewlineDelete(QWidget *parent) :
     QDialog(parent),
@@ -19,6 +20,11 @@ NewlineDelete::NewlineDelete(QWidget *parent) :
     ui->setupUi(this);
 
     initUI();
+    QSettings s(AppSettings::APP_SETTINGS_FILE, QSettings::IniFormat);
+    mFileAbsPath = s.value(AppSettings::NL_PATH).toString();
+    if (!mFileAbsPath.isEmpty()) {
+        mFilePath->setText(mFileAbsPath);
+    }
 }
 
 NewlineDelete::~NewlineDelete()
@@ -53,6 +59,8 @@ void NewlineDelete::onBtnOpenClicked()
         mFilePath->setText("no file!");
     } else {
         mFilePath->setText(mFileAbsPath);
+        QSettings s(AppSettings::APP_SETTINGS_FILE, QSettings::IniFormat);
+        s.setValue(AppSettings::NL_PATH, mFileAbsPath);
     }
 }
 
@@ -76,7 +84,6 @@ void NewlineDelete::onBtnProcessClicked()
                 while (!in.atEnd()) {
                     QString line = in.readLine();
                     if (line.isEmpty()) {
-                        log_info("newline");
                         continue;
                     }
                     line.remove(QRegExp("\\s"));

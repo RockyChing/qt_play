@@ -11,6 +11,7 @@
 #include <QApplication>
 
 #include "usb/usb_util.h"
+#include "config/appsettings.h"
 
 
 int main(int argc, char *argv[])
@@ -19,7 +20,8 @@ int main(int argc, char *argv[])
     QtMainWindow w;
     w.show();
 
-	UsbUtil usbTest(0, 0);
+    AppSettings settings;
+    //UsbUtil usbTest(0, 0);
     return a.exec();
 }
 
