@@ -18,18 +18,21 @@ SOURCES += main.cpp\
     log/log.cpp \
     finance/finance.cpp \
     nl_del/nl_del.cpp \
-    config/appsettings.cpp
+    config/appsettings.cpp \
+    edit/text2htmldlg.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
     log/log.h \
     finance/finance.h \
     nl_del/nl_del.h \
-    config/appsettings.h
+    config/appsettings.h \
+    edit/text2htmldlg.h
 
 FORMS    += qtmainwindow.ui \
     finance/finance.ui \
-    nl_del/nl_del.ui
+    nl_del/nl_del.ui \
+    edit/text2htmldlg.ui
 
 win32: LIBS += -L$$PWD/libs/ -llibusb-1.0
 

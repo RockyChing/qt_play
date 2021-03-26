@@ -26,6 +26,7 @@ private:
 private slots:
     void onNewFileClicked();
     void onDelNewlineClicked();
+    void onText2HtmlClicked();
     void onBtnFinanceClicked();
 
 private:
