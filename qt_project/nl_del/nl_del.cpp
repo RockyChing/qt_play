@@ -80,6 +80,7 @@ void NewlineDelete::onBtnProcessClicked()
                 }
                 QTextStream out(&fileDst);
 
+                const int lineNum = mSpinBixLineNum->value();
                 QTextStream in(&fileSrc);
                 while (!in.atEnd()) {
                     QString line = in.readLine();
@@ -89,7 +90,6 @@ void NewlineDelete::onBtnProcessClicked()
                     line.remove(QRegExp("\\s"));
                     out << line;
 
-                    int lineNum = mSpinBixLineNum->value();
                     if (1 == lineNum)
                         out << "\r\n";
                     else if (2 == lineNum)
