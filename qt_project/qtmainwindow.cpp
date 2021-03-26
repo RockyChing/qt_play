@@ -3,6 +3,7 @@
 
 #include "qtmainwindow.h"
 #include "ui_qtmainwindow.h"
+#include "config/appsettings.h"
 #include "nl_del/nl_del.h"
 #include "edit/text2htmldlg.h"
 
@@ -13,7 +14,7 @@ QtMainWindow::QtMainWindow(QWidget *parent) :
     mMenuBar(NULL), mToolBar(NULL), mStatusBar(NULL)
 {
     ui->setupUi(this);
-
+    setWindowTitle(AppSettings::APP_VERSION());
     initMainWidow();
     initMenu();
     initToolBar();

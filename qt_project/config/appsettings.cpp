@@ -19,10 +19,19 @@ const QString AppSettings::APP_SETTINGS_FILE = "configs.ini";
 
 const QString AppSettings::NL_PATH = "nlf_path";
 
+const QString AppSettings::QT_PLAY_MAJOR = "1";
+const QString AppSettings::QT_PLAY_MINOR = "0";
+const QString AppSettings::QT_PLAY_MICRO = "0";
+
 
 AppSettings::AppSettings()
 {
     // QCoreApplication::applicationDirPath(); //读取应用程序可执行文件所在的目录
     QCoreApplication::setOrganizationName(ORG_NAME);
     QCoreApplication::setApplicationName(APP_NAME);
+}
+
+QString AppSettings::APP_VERSION()
+{
+    return APP_NAME + " (v" + QT_PLAY_MAJOR + "." + QT_PLAY_MINOR + "." + QT_PLAY_MICRO + ")";
 }
