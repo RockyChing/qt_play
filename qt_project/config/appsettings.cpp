@@ -21,7 +21,7 @@ const QString AppSettings::NL_PATH = "nlf_path";
 
 const QString AppSettings::QT_PLAY_MAJOR = "1";
 const QString AppSettings::QT_PLAY_MINOR = "0";
-const QString AppSettings::QT_PLAY_MICRO = "0";
+const QString AppSettings::QT_PLAY_MICRO = "1";
 
 
 AppSettings::AppSettings()

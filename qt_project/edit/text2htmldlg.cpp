@@ -25,9 +25,11 @@ void Text2HtmlDlg::initUI()
 {
     mTextHtmlEdit = ui->textHtmlEdit;
     mBtnTransform = ui->btnTransform;
+    mBtnClear = ui->btnClear;
     mBtnCopy = ui->btnCopy;
 
     connect(mBtnTransform, SIGNAL(clicked()), this, SLOT(onBtnTransformClicked()));
+    connect(mBtnClear, SIGNAL(clicked()), this, SLOT(onBtnClearClicked()));
     connect(mBtnCopy, SIGNAL(clicked()), this, SLOT(onBtnCopyClicked()));
 }
 
@@ -58,6 +60,11 @@ void Text2HtmlDlg::onBtnTransformClicked()
     result.append("&#160;</p>");
     mTextHtmlEdit->clear();
     mTextHtmlEdit->setPlainText(result);
+}
+
+void Text2HtmlDlg::onBtnClearClicked()
+{
+    mTextHtmlEdit->clear();
 }
 
 void Text2HtmlDlg::onBtnCopyClicked()

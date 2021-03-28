@@ -21,6 +21,7 @@ private:
 
 private slots:
     void onBtnTransformClicked();
+    void onBtnClearClicked();
     void onBtnCopyClicked();
 
 private:
@@ -28,6 +29,7 @@ private:
 
     QPlainTextEdit *mTextHtmlEdit;
     QPushButton *mBtnTransform;
+    QPushButton *mBtnClear;
     QPushButton *mBtnCopy;
 };
 
