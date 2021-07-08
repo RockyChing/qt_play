@@ -79,6 +79,7 @@ void QtMainWindow::initStatusBar()
 void QtMainWindow::initSignalSlots()
 {
     connect(ui->btnFinance, SIGNAL(clicked()), this, SLOT(onBtnFinanceClicked()));
+    connect(ui->btnExit, SIGNAL(clicked()), this, SLOT(onBtnExitClicked()));
 }
 
 void QtMainWindow::onNewFileClicked()
@@ -104,4 +105,9 @@ void QtMainWindow::onBtnFinanceClicked()
 {
     Finance *f = new Finance();
     f->show();
+}
+
+void QtMainWindow::onBtnExitClicked()
+{
+    this->close();
 }
