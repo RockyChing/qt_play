@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     finance/finance.cpp \
     nl_del/nl_del.cpp \
     config/appsettings.cpp \
-    edit/text2htmldlg.cpp
+    edit/text2htmldlg.cpp \
+    account/AccountJsonData.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
@@ -27,16 +28,20 @@ HEADERS  += qtmainwindow.h \
     finance/finance.h \
     nl_del/nl_del.h \
     config/appsettings.h \
-    edit/text2htmldlg.h
+    edit/text2htmldlg.h \
+    account/AccountJsonData.h
 
 FORMS    += qtmainwindow.ui \
     finance/finance.ui \
     nl_del/nl_del.ui \
     edit/text2htmldlg.ui
 
-win32: LIBS += -L$$PWD/libs/ -llibusb-1.0
+win32: LIBS += -L$$PWD/libs/ -llibusb-1.0 \
+    -llibcrypto-1_1 -llibssl-1_1
 
 INCLUDEPATH += $$PWD/libs
+INCLUDEPATH += $$PWD/util/crypto/include
+
 DEPENDPATH += $$PWD/libs
 
 RESOURCES += \

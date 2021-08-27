@@ -6,7 +6,7 @@
 #include "config/appsettings.h"
 #include "nl_del/nl_del.h"
 #include "edit/text2htmldlg.h"
-
+#include "account/AccountJsonData.h"
 
 QtMainWindow::QtMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -79,6 +79,7 @@ void QtMainWindow::initStatusBar()
 void QtMainWindow::initSignalSlots()
 {
     connect(ui->btnFinance, SIGNAL(clicked()), this, SLOT(onBtnFinanceClicked()));
+    connect(ui->btnAccount, SIGNAL(clicked()), this, SLOT(onBtnAccountClicked()));
     connect(ui->btnExit, SIGNAL(clicked()), this, SLOT(onBtnExitClicked()));
 }
 
@@ -107,7 +108,13 @@ void QtMainWindow::onBtnFinanceClicked()
     f->show();
 }
 
+void QtMainWindow::onBtnAccountClicked()
+{
+    AccountJsonData ad(JSON_DATA_PLAIN);
+}
+
 void QtMainWindow::onBtnExitClicked()
 {
     this->close();
 }
+
