@@ -18,10 +18,11 @@ const QString AppSettings::APP_NAME = "qt_play";
 const QString AppSettings::APP_SETTINGS_FILE = "configs.ini";
 
 const QString AppSettings::NL_PATH = "nlf_path";
+const QString AppSettings::ACCOUNT_PATH = "account_path";
 
 const QString AppSettings::QT_PLAY_MAJOR = "1";
-const QString AppSettings::QT_PLAY_MINOR = "0";
-const QString AppSettings::QT_PLAY_MICRO = "1";
+const QString AppSettings::QT_PLAY_MINOR = "1";
+const QString AppSettings::QT_PLAY_MICRO = "0";
 
 
 AppSettings::AppSettings()

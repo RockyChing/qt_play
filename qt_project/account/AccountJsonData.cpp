@@ -1,5 +1,15 @@
+/*
+ * Copyright (C) 2020 RockyChing
+ *
+ * Date: 2021/8/27
+ * Note: UTF-8, Unix(LF)
+ *
+ * RockyChing <zdh1021680772@163.com>
+ * You may clone this project at: https://github.com/RockyChing/qt_play.git
+ */
 #include <QObject>
 #include <QString>
+#include <QFile>
 #include <QByteArray>
 #include <QMessageBox>
 #include <QJsonDocument>
@@ -9,10 +19,42 @@
 #include <QDebug>
 #include "AccountJsonData.h"
 
-AccountJsonData::AccountJsonData(const char *str)
+AccountJsonData::AccountJsonData()
 {
-    qDebug("json: %s", str);
-    QByteArray byteArr(str, strlen(str));
+    mPwd.clear();
+}
+
+AccountJsonData::AccountJsonData(const char *c_str)
+{
+    jsonParser(c_str);
+}
+
+AccountJsonData::AccountJsonData(const QString &str)
+{
+    const char *ptr = str.toLatin1().data();
+    jsonParser(ptr);
+}
+
+AccountJsonData::AccountJsonData(QFile &file)
+{
+    if (file.exists()) {
+        if (file.open(QIODevice::ReadOnly)) {
+            QTextStream in(&file);
+            QString str = in.readAll();
+            if (str.size() > 0) {
+                const char *ptr = str.toLatin1().data();
+                jsonParser(ptr);
+            }
+
+            file.close();
+        }
+    }
+}
+
+void AccountJsonData::jsonParser(const char *c_str)
+{
+    qDebug("json: %s", c_str);
+    QByteArray byteArr(c_str, strlen(c_str));
 
     QJsonParseError jsonError;
     QJsonDocument jsonDoc = QJsonDocument::fromJson(byteArr, &jsonError);
@@ -53,5 +95,31 @@ AccountJsonData::AccountJsonData(const char *str)
         }
     } else {
         QMessageBox::warning(NULL, QObject::tr("Warning"), jsonError.errorString());
+    }
+}
+
+void AccountJsonData::setFileName(const QString &name)
+{
+    mFile.setFileName(name);
+}
+
+void AccountJsonData::setPassword(const QString &name)
+{
+    mPwd.append(name);
+}
+
+void AccountJsonData::doAccountParser()
+{
+    if (mFile.exists()) {
+        if (mFile.open(QIODevice::ReadOnly)) {
+            QTextStream in(&mFile);
+            QString str = in.readAll();
+            if (str.size() > 0) {
+                const char *ptr = str.toLatin1().data();
+                jsonParser(ptr);
+            }
+
+            mFile.close();
+        }
     }
 }

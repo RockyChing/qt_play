@@ -6,7 +6,7 @@
 #include "config/appsettings.h"
 #include "nl_del/nl_del.h"
 #include "edit/text2htmldlg.h"
-#include "account/AccountJsonData.h"
+#include "account/Accounts.h"
 
 QtMainWindow::QtMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -110,7 +110,8 @@ void QtMainWindow::onBtnFinanceClicked()
 
 void QtMainWindow::onBtnAccountClicked()
 {
-    AccountJsonData ad(JSON_DATA_PLAIN);
+    Accounts *f = new Accounts();
+    f->show();
 }
 
 void QtMainWindow::onBtnExitClicked()

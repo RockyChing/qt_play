@@ -16,6 +16,10 @@ public:
 
     /* for newline object using */
     static const QString NL_PATH;
+
+    /* for account file using */
+    static const QString ACCOUNT_PATH;
+
 public:
     AppSettings();
 
