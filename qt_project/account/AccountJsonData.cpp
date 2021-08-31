@@ -18,6 +18,7 @@
 #include <QJsonArray>
 #include <QDebug>
 #include "AccountJsonData.h"
+#include "../crypto/qaes.h"
 
 AccountJsonData::AccountJsonData()
 {
@@ -71,9 +72,43 @@ void AccountJsonData::jsonParser(const char *c_str)
             }
 
             if (obj.contains("accounts")) {
-                QJsonValue accounts = obj.value("accounts");
+                QJsonValue accounts;
+                if (mDataType.contains("plain", Qt::CaseSensitive)) {
+                    accounts = obj.value("accounts");
+                } else {
+                    QJsonValue tmp = obj.value("accounts");
+                    QString b64Data = tmp.toString();
+
+                    QByteArray b64Byte = b64Data.toLatin1();
+                    QByteArray enData = QByteArray::fromBase64(b64Byte);
+                    int enDataLen = enData.size();
+
+                    uint8_t *plainData = new uint8_t[enDataLen + 32];
+                    memset(plainData, 0, enDataLen + 32);
+                    int plainDataLen;
+
+                    const uint8_t iv[] = { 0x01, 0x01, 0x07, 0x00, 0x08, 0x06, 0x05, 0x06 };
+                    const uint8_t *key = (const uint8_t *) mPwd.toLatin1().data();
+                    int res = QAes::AESDecrypt(key, mPwd.size(), iv, 8, (uint8_t *)enData.data(), enDataLen, plainData, &plainDataLen);
+                    qDebug("decry res: %d, plainDataLen: %d, plainData: %s", res, plainDataLen, plainData);
+                    QString plainString;
+                    plainString.clear();
+                    plainString.append("{\"accounts\":");
+                    plainString.append((const char *)plainData);
+                    plainString = plainString.left(plainDataLen+12);
+                    plainString.append("}");
+                    delete plainData;
+
+                    QJsonDocument doc = QJsonDocument::fromJson(plainString.toLatin1(), &jsonError);
+                    if (jsonError.error == QJsonParseError::NoError) {
+                        accounts = doc.object().value("accounts");
+                    } else {
+                        QMessageBox::warning(NULL, QObject::tr("Warning"), jsonError.errorString());
+                    }
+                }
+
                 if (!accounts.isNull()) {
-                    if (accounts.isArray() && mDataType.contains("plain", Qt::CaseSensitive)) {
+                    if (accounts.isArray()) {
                         QJsonArray ja = accounts.toArray();
                         for (int i = 0; i < ja.count(); i ++) {
                             QJsonValue aVal = ja.at(i);
@@ -86,9 +121,6 @@ void AccountJsonData::jsonParser(const char *c_str)
                         }
 
                         qDebug("Accounts: %d", mAccounts.size());
-                    } else if (accounts.isString() && mDataType.contains("encrypt", Qt::CaseSensitive)) {
-                        mEncryptBase64 = accounts.toString();
-                        qDebug() << mEncryptBase64;
                     }
                 }
             }
@@ -108,18 +140,22 @@ void AccountJsonData::setPassword(const QString &name)
     mPwd.append(name);
 }
 
+void AccountJsonData::clearPassword()
+{
+    mPwd.clear();
+}
+
 void AccountJsonData::doAccountParser()
 {
     if (mFile.exists()) {
         if (mFile.open(QIODevice::ReadOnly)) {
             QTextStream in(&mFile);
             QString str = in.readAll();
+            mFile.close();
             if (str.size() > 0) {
                 const char *ptr = str.toLatin1().data();
                 jsonParser(ptr);
             }
-
-            mFile.close();
         }
     }
 }

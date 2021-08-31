@@ -30,6 +30,7 @@ Accounts::Accounts(QWidget *parent) :
     initUI();
     initSlot();
 
+#if 0
     char intext[] = "Some Crypto Text";
     unsigned char key[] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
     unsigned char iv[] = {1,2,3,4,5,6,7,8};
@@ -44,6 +45,7 @@ Accounts::Accounts(QWidget *parent) :
     int deLen;
     QAes::AESDecrypt(key, iv, (uint8_t *)out, outLen, deout, &deLen);
     qDebug("deLen: %d, %s", deLen, deout);
+#endif
 }
 
 Accounts::~Accounts()
@@ -106,6 +108,8 @@ void Accounts::onBtnOpenClicked()
             QString pwd;
             pwd = QInputDialog::getText(this, tr("Password"), tr("Enter"), QLineEdit::Password, 0, &ok);
             mJsonData->setPassword(pwd);
+        } else {
+            mJsonData->clearPassword();
         }
 
         mJsonData->setFileName(mFileAbsPath);
@@ -123,12 +127,25 @@ void Accounts::onBtnOpenClicked()
     }
 }
 
+void Accounts::onBtnAddClicked()
+{
+    bool ok = false;
+    QString text;
+    text = QInputDialog::getMultiLineText(this, tr("Account&Password"), tr("Enter"), tr(""), &ok);
+    if (ok && !text.isEmpty()) {
+        QStringList account = text.split("\n");
+        int index = mJsonData->mAccounts.size();
+        QString name = account.at(0);
+        QString pwd = account.at(1);
+        mTableModel->setItem(index, 0, new QStandardItem(name));
+        mTableModel->setItem(index, 1, new QStandardItem(pwd));
+
+        mJsonData->mAccounts.insert(name, pwd);
+    }
+}
+
 void Accounts::onBtnSaveClicked()
 {
-    QString jsonStr;
-    jsonStr.clear();
-    jsonStr.append("{\"type\":\"plain\",\"accounts\":");
-
     QString jsonArray;
     jsonArray.clear();
     jsonArray.append("[");
@@ -152,51 +169,46 @@ void Accounts::onBtnSaveClicked()
     }
 
     if (mCboxEncry->isChecked()) {
-        int enSize = jsonArray.size();
-        const char *enData = jsonArray.toLatin1().data();
+        QString jsonEncry;
+        jsonEncry.clear();
+        jsonEncry.append("{\"type\":\"encry\",\"accounts\":");
+
+        int plainDataLen = jsonArray.size();
+        uint8_t *plainData = new uint8_t[plainDataLen+1];
+        memcpy(plainData, jsonArray.toLatin1().data(), plainDataLen);
+        plainData[plainDataLen] = '\0';
+        qDebug("plainData: %s", plainData);
+
         bool ok;
         QString pwd = QInputDialog::getText(this, tr("Password"), tr("Enter"), QLineEdit::Password, 0, &ok);
         if (ok && !pwd.isEmpty()) {
-            uint8_t *out = new uint8_t[enSize + 32];
-            int outLen;
+            uint8_t *enData = new uint8_t[plainDataLen + 32];
+            int enDataLen;
 
             const uint8_t iv[] = { 0x01, 0x01, 0x07, 0x00, 0x08, 0x06, 0x05, 0x06 };
             const uint8_t *key = (const uint8_t *) pwd.toLatin1().data();
-            QAes::AESEncrypt(key, iv, (uint8_t *)enData, enSize, out, &outLen);
-            QByteArray enBase64;
-            enBase64.clear();
-            enBase64.append((const char *)out, outLen);
+            int keyLen = pwd.toLatin1().size();
+            QAes::AESEncrypt(key, keyLen, iv, 8, plainData, plainDataLen, enData, &enDataLen);
 
-            jsonStr.append("\"");
-            jsonStr.append(enBase64.toBase64());
-            jsonStr.append("\"}");
+            QByteArray enBase64((const char *)enData, enDataLen);
 
-            file.write((const char *)jsonStr.toLatin1().data(), jsonStr.size());
-            delete out;
+            jsonEncry.append("\"");
+            jsonEncry.append(enBase64.toBase64());
+            jsonEncry.append("\"}");
+
+            file.write(jsonEncry.toLatin1());
+            delete enData;
         }
     } else {
-        jsonStr.append(jsonArray);
-        jsonStr.append("}");
-        file.write(jsonStr.toLatin1());
+        QString jsonPlain;
+        jsonPlain.clear();
+        jsonPlain.append("{\"type\":\"plain\",\"accounts\":");
+
+        jsonPlain.append(jsonArray);
+        jsonPlain.append("}");
+        file.write(jsonPlain.toLatin1());
     }
 
     file.close();
     QMessageBox::information(this, "Info", tr("Work done!"));
-}
-
-void Accounts::onBtnAddClicked()
-{
-    bool ok = false;
-    QString text;
-    text = QInputDialog::getMultiLineText(this, tr("Account&Password"), tr("Enter"), tr(""), &ok);
-    if (ok && !text.isEmpty()) {
-        QStringList account = text.split("\n");
-        int index = mJsonData->mAccounts.size();
-        QString name = account.at(0);
-        QString pwd = account.at(1);
-        mTableModel->setItem(index, 0, new QStandardItem(name));
-        mTableModel->setItem(index, 1, new QStandardItem(pwd));
-
-        mJsonData->mAccounts.insert(name, pwd);
-    }
 }

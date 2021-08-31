@@ -28,8 +28,8 @@ private:
 
 private slots:
     void onBtnOpenClicked();
-    void onBtnSaveClicked();
     void onBtnAddClicked();
+    void onBtnSaveClicked();
 
 private:
     Ui::Accounts *ui;

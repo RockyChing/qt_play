@@ -29,7 +29,7 @@
     "accounts": "base64_data"
 }
  */
-#define JSON_DATA_ENCRYPT "{\"type\":\"encrypt\",\"accounts\": \"MTIzNDU2NzgKIA==\"}"
+#define JSON_DATA_ENCRYPT "{\"type\":\"encry\",\"accounts\": \"MTIzNDU2NzgKIA==\"}"
 
 
 class AccountJsonData {
@@ -42,6 +42,7 @@ public:
 public:
     void setFileName(const QString &name);
     void setPassword(const QString &name);
+    void clearPassword();
     void doAccountParser();
 
 private:
