@@ -118,7 +118,7 @@ void Accounts::onBtnOpenClicked()
         QMap<QString, QString>::iterator iter = mJsonData->mAccounts.begin();
         int i = 0;
         while (iter != mJsonData->mAccounts.end()) {
-            mTableModel->setItem(i, 0, new QStandardItem(iter.key()));
+            mTableModel->setItem(i, 0, new QStandardItem(QString::fromLocal8Bit(iter.key().toLocal8Bit())));
             mTableModel->setItem(i, 1, new QStandardItem(iter.value()));
 
             iter ++;
@@ -173,11 +173,13 @@ void Accounts::onBtnSaveClicked()
         jsonEncry.clear();
         jsonEncry.append("{\"type\":\"encry\",\"accounts\":");
 
-        int plainDataLen = jsonArray.size();
+        QByteArray plainByte = jsonArray.toLocal8Bit();
+        int plainDataLen = plainByte.size();
         uint8_t *plainData = new uint8_t[plainDataLen+1];
-        memcpy(plainData, jsonArray.toLatin1().data(), plainDataLen);
+        memcpy(plainData, plainByte.data(), plainDataLen);
         plainData[plainDataLen] = '\0';
-        qDebug("plainData: %s", plainData);
+        qDebug("plainDataLen: %d", plainDataLen);
+        qDebug() << "plainData: " << QString::fromLocal8Bit((const char *)plainData);
 
         bool ok;
         QString pwd = QInputDialog::getText(this, tr("Password"), tr("Enter"), QLineEdit::Password, 0, &ok);
@@ -186,8 +188,8 @@ void Accounts::onBtnSaveClicked()
             int enDataLen;
 
             const uint8_t iv[] = { 0x01, 0x01, 0x07, 0x00, 0x08, 0x06, 0x05, 0x06 };
-            const uint8_t *key = (const uint8_t *) pwd.toLatin1().data();
-            int keyLen = pwd.toLatin1().size();
+            const uint8_t *key = (const uint8_t *) pwd.toLocal8Bit().data();
+            int keyLen = pwd.toLocal8Bit().size();
             QAes::AESEncrypt(key, keyLen, iv, 8, plainData, plainDataLen, enData, &enDataLen);
 
             QByteArray enBase64((const char *)enData, enDataLen);
@@ -196,7 +198,9 @@ void Accounts::onBtnSaveClicked()
             jsonEncry.append(enBase64.toBase64());
             jsonEncry.append("\"}");
 
-            file.write(jsonEncry.toLatin1());
+            const char *jsonData = jsonEncry.toLocal8Bit().data();
+            qint64 jsonDataLen = jsonEncry.toLocal8Bit().size();
+            file.write(jsonData, jsonDataLen);
             delete enData;
         }
     } else {
@@ -206,7 +210,7 @@ void Accounts::onBtnSaveClicked()
 
         jsonPlain.append(jsonArray);
         jsonPlain.append("}");
-        file.write(jsonPlain.toLatin1());
+        file.write(jsonPlain.toLocal8Bit());
     }
 
     file.close();

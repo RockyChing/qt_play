@@ -32,7 +32,7 @@ AccountJsonData::AccountJsonData(const char *c_str)
 
 AccountJsonData::AccountJsonData(const QString &str)
 {
-    const char *ptr = str.toLatin1().data();
+    const char *ptr = str.toLocal8Bit().data();
     jsonParser(ptr);
 }
 
@@ -43,7 +43,7 @@ AccountJsonData::AccountJsonData(QFile &file)
             QTextStream in(&file);
             QString str = in.readAll();
             if (str.size() > 0) {
-                const char *ptr = str.toLatin1().data();
+                const char *ptr = str.toLocal8Bit().data();
                 jsonParser(ptr);
             }
 
@@ -79,7 +79,7 @@ void AccountJsonData::jsonParser(const char *c_str)
                     QJsonValue tmp = obj.value("accounts");
                     QString b64Data = tmp.toString();
 
-                    QByteArray b64Byte = b64Data.toLatin1();
+                    QByteArray b64Byte = b64Data.toLocal8Bit();
                     QByteArray enData = QByteArray::fromBase64(b64Byte);
                     int enDataLen = enData.size();
 
@@ -88,18 +88,25 @@ void AccountJsonData::jsonParser(const char *c_str)
                     int plainDataLen;
 
                     const uint8_t iv[] = { 0x01, 0x01, 0x07, 0x00, 0x08, 0x06, 0x05, 0x06 };
-                    const uint8_t *key = (const uint8_t *) mPwd.toLatin1().data();
+                    const uint8_t *key = (const uint8_t *) mPwd.toLocal8Bit().data();
                     int res = QAes::AESDecrypt(key, mPwd.size(), iv, 8, (uint8_t *)enData.data(), enDataLen, plainData, &plainDataLen);
-                    qDebug("decry res: %d, plainDataLen: %d, plainData: %s", res, plainDataLen, plainData);
+                    if (res != 0) {
+                        QMessageBox::warning(NULL, QObject::tr("Warning"), QObject::tr("解密错误！"));
+                        return;
+                    }
+
+                    qDebug("decry res: %d, plainDataLen: %d", res, plainDataLen);
+                    qDebug() << "plainData: " << QString::fromLocal8Bit((const char *)plainData, plainDataLen);
                     QString plainString;
                     plainString.clear();
                     plainString.append("{\"accounts\":");
-                    plainString.append((const char *)plainData);
+                    plainString.append(QString::fromLocal8Bit((const char *)plainData, plainDataLen));
                     plainString = plainString.left(plainDataLen+12);
                     plainString.append("}");
+
                     delete plainData;
 
-                    QJsonDocument doc = QJsonDocument::fromJson(plainString.toLatin1(), &jsonError);
+                    QJsonDocument doc = QJsonDocument::fromJson(plainString.toUtf8(), &jsonError);
                     if (jsonError.error == QJsonParseError::NoError) {
                         accounts = doc.object().value("accounts");
                     } else {
@@ -117,7 +124,7 @@ void AccountJsonData::jsonParser(const char *c_str)
                             QString key = keys.at(0);
                             QString pwd = aObj.value(key).toString();
                             mAccounts.insert(key, pwd);
-                            qDebug() << key << pwd;
+                            qDebug() << key.toLocal8Bit() << pwd;
                         }
 
                         qDebug("Accounts: %d", mAccounts.size());
@@ -153,7 +160,7 @@ void AccountJsonData::doAccountParser()
             QString str = in.readAll();
             mFile.close();
             if (str.size() > 0) {
-                const char *ptr = str.toLatin1().data();
+                const char *ptr = str.toLocal8Bit().data();
                 jsonParser(ptr);
             }
         }
