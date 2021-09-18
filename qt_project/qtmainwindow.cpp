@@ -6,7 +6,8 @@
 #include "config/appsettings.h"
 #include "nl_del/nl_del.h"
 #include "edit/text2htmldlg.h"
-#include "account/Accounts.h"
+#include "account/AccountView.h"
+
 
 QtMainWindow::QtMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -110,7 +111,7 @@ void QtMainWindow::onBtnFinanceClicked()
 
 void QtMainWindow::onBtnAccountClicked()
 {
-    Accounts *f = new Accounts();
+    AccountView *f = new AccountView();
     f->show();
 }
 

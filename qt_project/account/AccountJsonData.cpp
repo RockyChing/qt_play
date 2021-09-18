@@ -91,7 +91,7 @@ void AccountJsonData::jsonParser(const char *c_str)
                     const uint8_t *key = (const uint8_t *) mPwd.toLocal8Bit().data();
                     int res = QAes::AESDecrypt(key, mPwd.size(), iv, 8, (uint8_t *)enData.data(), enDataLen, plainData, &plainDataLen);
                     if (res != 0) {
-                        QMessageBox::warning(NULL, QObject::tr("Warning"), QObject::tr("è§£å¯†é”™è¯¯ï¼"));
+                        QMessageBox::warning(NULL, QObject::tr("Warning"), QObject::tr("½âÃÜ´íÎó£¡"));
                         return;
                     }
 

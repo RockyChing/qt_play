@@ -20,9 +20,9 @@ SOURCES += main.cpp\
     nl_del/nl_del.cpp \
     config/appsettings.cpp \
     edit/text2htmldlg.cpp \
+    crypto/qaes.cpp \
     account/AccountJsonData.cpp \
-    account/Accounts.cpp \
-    crypto/qaes.cpp
+    account/AccountView.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
@@ -31,8 +31,6 @@ HEADERS  += qtmainwindow.h \
     nl_del/nl_del.h \
     config/appsettings.h \
     edit/text2htmldlg.h \
-    account/AccountJsonData.h \
-    account/Accounts.h \
     crypto/qaes.h \
     include/openssl/aes.h \
     include/openssl/asn1.h \
@@ -138,13 +136,15 @@ HEADERS  += qtmainwindow.h \
     include/openssl/x509_vfy.h \
     include/openssl/x509err.h \
     include/openssl/x509v3.h \
-    include/openssl/x509v3err.h
+    include/openssl/x509v3err.h \
+    account/AccountJsonData.h \
+    account/AccountView.h
 
 FORMS    += qtmainwindow.ui \
     finance/finance.ui \
     nl_del/nl_del.ui \
     edit/text2htmldlg.ui \
-    account/accounts.ui
+    account/accountview.ui
 
 win32: LIBS += -L$$PWD/libs/ -llibusb-1.0 \
     -llibcrypto-1_1 -llibssl-1_1
