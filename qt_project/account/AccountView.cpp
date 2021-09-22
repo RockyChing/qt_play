@@ -68,6 +68,7 @@ void AccountView::initUI()
         ui->lineEditFile->setText(mFileAbsPath);
     }
 
+    ui->cBoxEncrypt->setChecked(true);
     mItemModel = new QStandardItemModel(0, mTableColumnCount, this);
     mItemSelect = new QItemSelectionModel(mItemModel);
     ui->tableView->setModel(mItemModel);
@@ -75,6 +76,14 @@ void AccountView::initUI()
     ui->tableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
     ui->tableView->setSelectionBehavior(QAbstractItemView::SelectItems);
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    // table header
+    QStringList hdrList;
+    hdrList.append(tr("平台"));
+    hdrList.append(tr("账号"));
+    hdrList.append(tr("密码"));
+    hdrList.append(tr("手机"));
+    mItemModel->setHorizontalHeaderLabels(hdrList);
 }
 
 void AccountView::initSlot()
@@ -92,11 +101,6 @@ void AccountView::initModelFromStringList(QStringList& sList)
 {
     int nRow = sList.count();
     mItemModel->setRowCount(nRow - 1);
-
-    // table header
-    QString hdr = sList.at(0);
-    QStringList hdrList = hdr.split(QRegExp("\\s+"), QString::SkipEmptyParts);
-    mItemModel->setHorizontalHeaderLabels(hdrList);
 
     // table item
     QStandardItem *item;

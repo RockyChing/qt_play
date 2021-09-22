@@ -22,7 +22,7 @@ const QString AppSettings::ACCOUNT_PATH = "account_path";
 
 const QString AppSettings::QT_PLAY_MAJOR = "1";
 const QString AppSettings::QT_PLAY_MINOR = "2";
-const QString AppSettings::QT_PLAY_MICRO = "0";
+const QString AppSettings::QT_PLAY_MICRO = "1";
 
 
 AppSettings::AppSettings()
