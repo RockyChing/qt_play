@@ -7,6 +7,7 @@
 #include "nl_del/nl_del.h"
 #include "edit/text2htmldlg.h"
 #include "account/AccountView.h"
+#include "pog/PoGTableView.h"
 
 
 QtMainWindow::QtMainWindow(QWidget *parent) :
@@ -81,6 +82,7 @@ void QtMainWindow::initSignalSlots()
 {
     connect(ui->btnFinance, SIGNAL(clicked()), this, SLOT(onBtnFinanceClicked()));
     connect(ui->btnAccount, SIGNAL(clicked()), this, SLOT(onBtnAccountClicked()));
+    connect(ui->btnPoG, SIGNAL(clicked()), this, SLOT(onBtnPoGClicked()));
     connect(ui->btnExit, SIGNAL(clicked()), this, SLOT(onBtnExitClicked()));
 }
 
@@ -111,8 +113,14 @@ void QtMainWindow::onBtnFinanceClicked()
 
 void QtMainWindow::onBtnAccountClicked()
 {
-    AccountView *f = new AccountView();
-    f->show();
+    AccountView *a = new AccountView();
+    a->show();
+}
+
+void QtMainWindow::onBtnPoGClicked()
+{
+    PoGTableView *v = new PoGTableView();
+    v->show();
 }
 
 void QtMainWindow::onBtnExitClicked()

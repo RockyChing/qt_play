@@ -29,6 +29,7 @@ private slots:
     void onText2HtmlClicked();
     void onBtnFinanceClicked();
     void onBtnAccountClicked();
+    void onBtnPoGClicked();
     void onBtnExitClicked();
 
 private:

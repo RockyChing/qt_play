@@ -22,7 +22,9 @@ SOURCES += main.cpp\
     edit/text2htmldlg.cpp \
     crypto/qaes.cpp \
     account/AccountJsonData.cpp \
-    account/AccountView.cpp
+    account/AccountView.cpp \
+    pog/PoGTableInfo.cpp \
+    pog/PoGTableView.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
@@ -138,13 +140,16 @@ HEADERS  += qtmainwindow.h \
     include/openssl/x509v3.h \
     include/openssl/x509v3err.h \
     account/AccountJsonData.h \
-    account/AccountView.h
+    account/AccountView.h \
+    pog/PoGTableInfo.h \
+    pog/PoGTableView.h
 
 FORMS    += qtmainwindow.ui \
     finance/finance.ui \
     nl_del/nl_del.ui \
     edit/text2htmldlg.ui \
-    account/accountview.ui
+    account/accountview.ui \
+    pog/pogtableview.ui
 
 win32: LIBS += -L$$PWD/libs/ -llibusb-1.0 \
     -llibcrypto-1_1 -llibssl-1_1
