@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     account/AccountJsonData.cpp \
     account/AccountView.cpp \
     pog/PoGTableInfo.cpp \
-    pog/PoGTableView.cpp
+    pog/PoGTableView.cpp \
+    picmerge/PicMergeView.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
@@ -142,14 +143,16 @@ HEADERS  += qtmainwindow.h \
     account/AccountJsonData.h \
     account/AccountView.h \
     pog/PoGTableInfo.h \
-    pog/PoGTableView.h
+    pog/PoGTableView.h \
+    picmerge/PicMergeView.h
 
 FORMS    += qtmainwindow.ui \
     finance/finance.ui \
     nl_del/nl_del.ui \
     edit/text2htmldlg.ui \
     account/accountview.ui \
-    pog/pogtableview.ui
+    pog/pogtableview.ui \
+    picmerge/picmergeview.ui
 
 win32: LIBS += -L$$PWD/libs/ -llibusb-1.0 \
     -llibcrypto-1_1 -llibssl-1_1

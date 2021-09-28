@@ -30,6 +30,7 @@ private slots:
     void onBtnFinanceClicked();
     void onBtnAccountClicked();
     void onBtnPoGClicked();
+    void onBtnPicMergeClicked();
     void onBtnExitClicked();
 
 private:
