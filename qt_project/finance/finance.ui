@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>金融理财</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../resources.qrc">
+    <normaloff>:/res/images/icon_play.png</normaloff>:/res/images/icon_play.png</iconset>
+  </property>
   <widget class="QLabel" name="labelIncomeSrc">
    <property name="geometry">
     <rect>
@@ -430,7 +434,7 @@
     <string>复利计算</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -441,6 +445,7 @@
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout"/>
   </widget>
+  <zorder>layoutWidget</zorder>
   <zorder>groupBox_3</zorder>
   <zorder>groupBox</zorder>
   <zorder>labelIncomeSrc</zorder>
@@ -461,8 +466,9 @@
   <zorder>inputFuliDest</zorder>
   <zorder>btnCalcRate</zorder>
   <zorder>btnCalcFuli</zorder>
-  <zorder>horizontalSpacer</zorder>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

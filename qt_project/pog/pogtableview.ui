@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>物价表</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../resources.qrc">
+    <normaloff>:/res/images/icon_play.png</normaloff>:/res/images/icon_play.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

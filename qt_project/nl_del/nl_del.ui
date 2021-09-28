@@ -18,6 +18,10 @@
   <property name="windowTitle">
    <string>段落间隔转换器</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../resources.qrc">
+    <normaloff>:/res/images/icon_play.png</normaloff>:/res/images/icon_play.png</iconset>
+  </property>
   <widget class="QPushButton" name="btnNlDelOpen">
    <property name="geometry">
     <rect>
@@ -124,6 +128,8 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
