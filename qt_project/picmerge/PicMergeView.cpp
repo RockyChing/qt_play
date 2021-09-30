@@ -46,6 +46,7 @@ void PicMergeView::initSlot()
 
 void PicMergeView::onBtnMergeClicked()
 {
+    ui->mergeProgress->reset();
     QString dirName = QFileDialog::getExistingDirectory(this, tr("Open directory"), "./",
                                                         QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
     qDebug() << "dirName: " << dirName;
@@ -59,6 +60,7 @@ void PicMergeView::onBtnMergeClicked()
     PicMerge picMerge;
     picMerge.setMergedFileName(dirName + "/pic_merge.bin");
 
+    ui->mergeProgress->setValue(10);
     ui->infoText->appendPlainText("合并的文件：");
     for (int i = 0; i < filesInfo.size(); i ++) {
         /* 获取文件属性 */
@@ -95,6 +97,7 @@ void PicMergeView::onBtnMergeClicked()
     }
 
     picMerge.fileHeaderFlush();
+    ui->mergeProgress->setValue(50);
     ui->infoText->appendPlainText("合并为：");
     ui->infoText->appendPlainText(picMerge.getMergedFileName());
 
@@ -113,15 +116,19 @@ void PicMergeView::onBtnMergeClicked()
 
     chkResult.append("成功");
     ui->infoText->appendPlainText(chkResult);
+    ui->mergeProgress->setValue(100);
     QMessageBox::information(this, tr("图片合并"), tr("成功!"));
 }
 
 void PicMergeView::onBtnSplitClicked()
 {
+    ui->mergeProgress->reset();
+
     /* load file from currentPath */
     QString curPath = QDir::currentPath();
     QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), curPath, "(*.bin)");
     filePath = QDir::toNativeSeparators(filePath);
+    ui->mergeProgress->setValue(10);
     if (filePath.isEmpty()) {
         ui->infoText->appendPlainText(tr("文件不存在！"));
     } else {
@@ -133,6 +140,7 @@ void PicMergeView::onBtnSplitClicked()
             QString errMsg = QString("图片拆分错误！\r\n错误码：%1").arg(result);
             QMessageBox::critical(NULL, QObject::tr("错误"), errMsg);
         } else {
+            ui->mergeProgress->setValue(100);
             QMessageBox::information(this, tr("图片拆分"), tr("成功!"));
             ui->infoText->appendPlainText(tr("成功"));
         }
