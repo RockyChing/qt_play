@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     account/AccountView.cpp \
     pog/PoGTableInfo.cpp \
     pog/PoGTableView.cpp \
-    picmerge/PicMergeView.cpp
+    picmerge/PicMergeView.cpp \
+    picmerge/PicMerge.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
@@ -144,7 +145,9 @@ HEADERS  += qtmainwindow.h \
     account/AccountView.h \
     pog/PoGTableInfo.h \
     pog/PoGTableView.h \
-    picmerge/PicMergeView.h
+    picmerge/PicMergeView.h \
+    picmerge/PicInfo.h \
+    picmerge/PicMerge.h
 
 FORMS    += qtmainwindow.ui \
     finance/finance.ui \

@@ -19,6 +19,11 @@ private:
     void initUI();
     void initSlot();
 
+private slots:
+    void onBtnMergeClicked();
+    void onBtnSplitClicked();
+    void onBtnClearClicked();
+
 private:
     Ui::PicMergeView *ui;
 };

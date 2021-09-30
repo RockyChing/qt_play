@@ -6,5 +6,8 @@
         <file>res/images/icon_save.png</file>
         <file>res/images/icon_del-row.png</file>
         <file>res/images/icon_play.png</file>
+        <file>res/images/icon_divide.png</file>
+        <file>res/images/icon_merg.png</file>
+        <file>res/images/icon_clear.png</file>
     </qresource>
 </RCC>
