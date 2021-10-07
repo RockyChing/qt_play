@@ -17,16 +17,19 @@ public:
     ~QtMainWindow();
 
 private:
-    void initMainWidow();
-    void initMenu();
+    void init();
     void initToolBar();
     void initStatusBar();
-    void initSignalSlots();
+    void initSlots();
 
 private slots:
-    void onNewFileClicked();
-    void onDelNewlineClicked();
-    void onText2HtmlClicked();
+    void onFileActionNewClicked();
+    void onFileActionOpenClicked();
+    void onFileActionSaveClicked();
+
+    void onEditActionNewlineClicked();
+    void onEditActionText2HtmlClicked();
+
     void onBtnFinanceClicked();
     void onBtnAccountClicked();
     void onBtnPoGClicked();
