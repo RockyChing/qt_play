@@ -31,7 +31,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPushButton" name="btnAccountOpen">
+      <widget class="QPushButton" name="btnPoGOpen">
        <property name="font">
         <font>
          <pointsize>12</pointsize>
@@ -53,7 +53,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="btnAccountSave">
+      <widget class="QPushButton" name="btnPoGSave">
        <property name="font">
         <font>
          <pointsize>12</pointsize>

@@ -20,6 +20,9 @@ public:
     /* for account file using */
     static const QString ACCOUNT_PATH;
 
+    /* for POG path using */
+    static const QString POG_PATH;
+
 public:
     AppSettings();
 

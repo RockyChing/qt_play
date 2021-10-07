@@ -147,7 +147,8 @@ HEADERS  += qtmainwindow.h \
     pog/PoGTableView.h \
     picmerge/PicMergeView.h \
     picmerge/PicInfo.h \
-    picmerge/PicMerge.h
+    picmerge/PicMerge.h \
+    pog/PoGItem.h
 
 FORMS    += qtmainwindow.ui \
     finance/finance.ui \
