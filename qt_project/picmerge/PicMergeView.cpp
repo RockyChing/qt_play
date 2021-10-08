@@ -49,6 +49,11 @@ void PicMergeView::onBtnMergeClicked()
     ui->mergeProgress->reset();
     QString dirName = QFileDialog::getExistingDirectory(this, tr("Open directory"), "./",
                                                         QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+    if (dirName.isEmpty()) {
+        QMessageBox::warning(this, tr("图片合并"), tr("请选择目录!"));
+        return;
+    }
+
     qDebug() << "dirName: " << dirName;
 
     /* 遍历目录下所有文件 */
@@ -62,6 +67,8 @@ void PicMergeView::onBtnMergeClicked()
 
     ui->mergeProgress->setValue(10);
     ui->infoText->appendPlainText("合并的文件：");
+
+    int nPic = 0;
     for (int i = 0; i < filesInfo.size(); i ++) {
         /* 获取文件属性 */
         QFileInfo file = filesInfo.at(i);
@@ -94,6 +101,12 @@ void PicMergeView::onBtnMergeClicked()
 
         ui->infoText->appendPlainText(file.fileName());
         picMerge.append(&item, file.absoluteFilePath());
+        nPic += 1;
+    }
+
+    if (0 == nPic) {
+        QMessageBox::warning(this, tr("图片合并"), tr("没有图片!"));
+        return;
     }
 
     picMerge.fileHeaderFlush();
