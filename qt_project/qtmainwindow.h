@@ -30,6 +30,9 @@ private slots:
     void onEditActionNewlineClicked();
     void onEditActionText2HtmlClicked();
 
+    void aboutSlot();
+    void aboutQtSlot();
+
     void onBtnFinanceClicked();
     void onBtnAccountClicked();
     void onBtnPoGClicked();

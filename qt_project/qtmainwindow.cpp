@@ -1,5 +1,6 @@
 #define LOG_TAG "main"
 #include "log/log.h"
+#include <QMessageBox>
 
 #include "qtmainwindow.h"
 #include "ui_qtmainwindow.h"
@@ -85,6 +86,9 @@ void QtMainWindow::initSlots()
     connect(ui->actionNewLine, SIGNAL(triggered(bool)), this, SLOT(onEditActionNewlineClicked()));
     connect(ui->actionText2Html, SIGNAL(triggered(bool)), this, SLOT(onEditActionText2HtmlClicked()));
 
+    connect(ui->actionAboutThis, SIGNAL(triggered(bool)), this, SLOT(aboutSlot()));
+    connect(ui->actionAboutQt, SIGNAL(triggered(bool)), this, SLOT(aboutQtSlot()));
+
     connect(ui->btnFinance, SIGNAL(clicked()), this, SLOT(onBtnFinanceClicked()));
     connect(ui->btnAccount, SIGNAL(clicked()), this, SLOT(onBtnAccountClicked()));
     connect(ui->btnPoG, SIGNAL(clicked()), this, SLOT(onBtnPoGClicked()));
@@ -119,6 +123,31 @@ void QtMainWindow::onEditActionText2HtmlClicked()
     Text2HtmlDlg *d = new Text2HtmlDlg(this);
     d->setAttribute(Qt::WA_DeleteOnClose);
     d->show();
+}
+
+void QtMainWindow::aboutSlot()
+{
+    QString text = QString("<b>qt_play V%1.%2.%3</b><br/><br/>").arg(AppSettings::QT_PLAY_MAJOR).arg(AppSettings::QT_PLAY_MINOR).arg(AppSettings::QT_PLAY_MICRO);
+
+    text.append("Based on Qt ");
+    text.append(QT_VERSION_STR);
+    text.append("<br/><br/>");
+
+    text.append("Built on ");
+    text.append(__DATE__);
+    text.append(" ");
+    text.append(__TIME__);
+    text.append("<br/><br/>");
+
+    text.append("Copyright (C) 2020-2021 RockyChing &#60;zdh1021680772@163.com&#62;<br/><br/>");
+
+    text.append("The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDEING THE WARRANTY OF DESIGN, MERCHANTABLITY AND FITNESS FOR A PARTICULAR PURPOSE.");
+    QMessageBox::about(this, tr("About qt_play"), text);
+}
+
+void QtMainWindow::aboutQtSlot()
+{
+    QMessageBox::aboutQt(this);
 }
 
 void QtMainWindow::onBtnFinanceClicked()
