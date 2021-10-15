@@ -95,6 +95,8 @@ void PicMergeView::onBtnMergeClicked()
             item.format = PIC_FMT_PNG;
         } else if (file.suffix().contains("gif")) {
             item.format = PIC_FMT_GIF;
+        } else if (file.suffix().contains("webp")) {
+            item.format = PIC_FMT_WEBP;
         } else {
             continue;
         }

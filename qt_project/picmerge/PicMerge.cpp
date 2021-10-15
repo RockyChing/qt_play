@@ -45,10 +45,12 @@ void PicMerge::fileHeaderFlush()
     if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate))
         return;
 
-    quint32 nCount  = mPicInfo.size();
-    file.write((const char *) &nCount, sizeof(quint32));
+    MergeFileInfo mergeFileInfo;
+    mergeFileInfo.picInfoVer = PIC_INFO_VERSION;
+    mergeFileInfo.picInfoCnt = (quint16) mPicInfo.size();
+    file.write((const char *) &mergeFileInfo, sizeof(mergeFileInfo));
 
-    for (quint32 i = 0; i < nCount; i ++) {
+    for (quint32 i = 0; i < mergeFileInfo.picInfoCnt; i ++) {
         PicInfo info = mPicInfo.at(i);
         file.write((const char *) &info, sizeof(info));
     }
@@ -98,28 +100,28 @@ int PicMerge::fileMergeCheck()
     if (!fileMerge.open(QIODevice::ReadOnly))
         return -1;
 
-    quint32 nCount;
-    if (sizeof(nCount) != fileMerge.read((char *) &nCount, sizeof(nCount))) {
+    MergeFileInfo mergeFileInfo;
+    if (sizeof(mergeFileInfo) != fileMerge.read((char *) &mergeFileInfo, sizeof(mergeFileInfo))) {
         fileMerge.close();
         return -2;
     }
 
     PicInfo info;
     quint32 picSize = 0;
-    for (quint32 i = 0; i < nCount; i ++) {
+    for (quint16 i = 0; i < mergeFileInfo.picInfoCnt; i ++) {
         if (sizeof(info) != fileMerge.read((char *) &info, sizeof(info))) {
             fileMerge.close();
             return -3;
         }
 
-        if (!(info.format >= PIC_FMT_JPG && info.format <= PIC_FMT_GIF)) {
+        if (!(info.format >= PIC_FMT_JPG && info.format < PIC_FMT_MAX)) {
             fileMerge.close();
             return -4;
         }
         picSize += info.size;
     }
 
-    quint32 hdrSize = sizeof(nCount) + nCount * sizeof(PicInfo);
+    quint32 hdrSize = sizeof(mergeFileInfo) + mergeFileInfo.picInfoCnt * sizeof(PicInfo);
     if ((hdrSize + picSize) != fileMerge.size()) {
         fileMerge.close();
         return -5;
@@ -140,6 +142,8 @@ int PicMerge::fileSplitOne(QFile& srcFile, QString& picPath, quint32 picIndex,Pi
         suffix.append(".bmp");
     else if (PIC_FMT_GIF == picInfo->format)
         suffix.append(".gif");
+    else if (PIC_FMT_WEBP == picInfo->format)
+        suffix.append(".webp");
     else
         return -11;
 
@@ -180,14 +184,14 @@ int PicMerge::fileSplit(QString& fileName)
     if (!fileMerge.open(QIODevice::ReadOnly))
         return -1;
 
-    quint32 nCount;
-    if (sizeof(nCount) != fileMerge.read((char *) &nCount, sizeof(nCount))) {
+    MergeFileInfo mergeFileInfo;
+    if (sizeof(mergeFileInfo) != fileMerge.read((char *) &mergeFileInfo, sizeof(mergeFileInfo))) {
         fileMerge.close();
         return -2;
     }
 
     QVector<PicInfo> vecPicInfo;
-    for (quint32 i = 0; i < nCount; i ++) {
+    for (quint32 i = 0; i < mergeFileInfo.picInfoCnt; i ++) {
         PicInfo info;
         if (sizeof(PicInfo) != fileMerge.read((char *) &info, sizeof(PicInfo))) {
             fileMerge.close();
@@ -196,7 +200,7 @@ int PicMerge::fileSplit(QString& fileName)
         vecPicInfo.append(info);
     }
 
-    if (nCount != vecPicInfo.size()) {
+    if (mergeFileInfo.picInfoCnt != vecPicInfo.size()) {
         fileMerge.close();
         return -4;
     }
@@ -204,7 +208,7 @@ int PicMerge::fileSplit(QString& fileName)
     QFileInfo fileInfo(fileName);
     QString filePath = fileInfo.absolutePath();
 
-    for (quint32 i = 0; i < nCount; i ++) {
+    for (quint32 i = 0; i < mergeFileInfo.picInfoCnt; i ++) {
         PicInfo info = vecPicInfo.at(i);
         int result = fileSplitOne(fileMerge, filePath, i, &info);
         if (result) {
