@@ -8,7 +8,7 @@
  * You may clone this project at: https://github.com/RockyChing/qt_play.git
  */
 #define LOG_TAG "usb"
-#include "log/log.h"
+#include "log/Log.h"
 
 #include "usb_util.h"
 

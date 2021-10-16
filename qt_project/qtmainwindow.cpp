@@ -1,5 +1,5 @@
 #define LOG_TAG "main"
-#include "log/log.h"
+#include "log/Log.h"
 #include <QMessageBox>
 
 #include "qtmainwindow.h"
@@ -23,12 +23,21 @@ QtMainWindow::QtMainWindow(QWidget *parent) :
     initToolBar();
     //initStatusBar();
 
+    initUI();
     initSlots();
 }
 
 QtMainWindow::~QtMainWindow()
 {
+    delete mLogViewer;
     delete ui;
+}
+
+void QtMainWindow::closeEvent(QCloseEvent *event)
+{
+    if (mLogViewer) {
+        mLogViewer->close();
+    }
 }
 
 void QtMainWindow::init()
@@ -36,6 +45,13 @@ void QtMainWindow::init()
     mMenuBar = ui->menuBar;
     mToolBar = ui->toolBar;
     mStatusBar = ui->statusBar;
+    mLogViewer = new LogViewer();
+}
+
+void QtMainWindow::initUI()
+{
+    mLogViewer->show();
+    log_info("logd started\r\n");
 }
 
 void QtMainWindow::initToolBar()
@@ -176,6 +192,7 @@ void QtMainWindow::onBtnPicMergeClicked()
 
 void QtMainWindow::onBtnExitClicked()
 {
+    mLogViewer->close();
     this->close();
 }
 

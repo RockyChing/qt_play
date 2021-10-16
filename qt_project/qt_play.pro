@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,7 +16,6 @@ TEMPLATE = app
 SOURCES += main.cpp\
         qtmainwindow.cpp \
     usb/usb_util.cpp \
-    log/log.cpp \
     finance/finance.cpp \
     nl_del/nl_del.cpp \
     config/appsettings.cpp \
@@ -26,11 +26,14 @@ SOURCES += main.cpp\
     pog/PoGTableInfo.cpp \
     pog/PoGTableView.cpp \
     picmerge/PicMergeView.cpp \
-    picmerge/PicMerge.cpp
+    picmerge/PicMerge.cpp \
+    log/LogViewer.cpp \
+    log/LogServer.cpp \
+    log/LogClient.cpp \
+    log/Log.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
-    log/log.h \
     finance/finance.h \
     nl_del/nl_del.h \
     config/appsettings.h \
@@ -148,7 +151,11 @@ HEADERS  += qtmainwindow.h \
     picmerge/PicMergeView.h \
     picmerge/PicInfo.h \
     picmerge/PicMerge.h \
-    pog/PoGItem.h
+    pog/PoGItem.h \
+    log/LogViewer.h \
+    log/LogServer.h \
+    log/LogClient.h \
+    log/Log.h
 
 FORMS    += qtmainwindow.ui \
     finance/finance.ui \
@@ -156,7 +163,8 @@ FORMS    += qtmainwindow.ui \
     edit/text2htmldlg.ui \
     account/accountview.ui \
     pog/pogtableview.ui \
-    picmerge/picmergeview.ui
+    picmerge/picmergeview.ui \
+    log/logviewer.ui
 
 win32: LIBS += -L$$PWD/libs/ -llibusb-1.0 \
     -llibcrypto-1_1 -llibssl-1_1

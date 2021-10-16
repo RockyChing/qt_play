@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "finance/finance.h"
+#include "log/LogViewer.h"
 
 namespace Ui {
 class QtMainWindow;
@@ -16,8 +17,11 @@ public:
     explicit QtMainWindow(QWidget *parent = 0);
     ~QtMainWindow();
 
+    void closeEvent(QCloseEvent *event);
+
 private:
     void init();
+    void initUI();
     void initToolBar();
     void initStatusBar();
     void initSlots();
@@ -41,6 +45,7 @@ private slots:
 
 private:
     Ui::QtMainWindow *ui;
+    LogViewer *mLogViewer;
 
     QMenuBar *mMenuBar;
     QToolBar *mToolBar;
