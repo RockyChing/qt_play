@@ -15,7 +15,8 @@
 
 PicMerge::PicMerge()
 {
-
+    mNeedMergePicFiles.clear();
+    mNeedSplitPicFiles.clear();
 }
 
 void PicMerge::append(PicInfo *picInfo, QString picFilePath)
@@ -24,7 +25,7 @@ void PicMerge::append(PicInfo *picInfo, QString picFilePath)
     item.format = picInfo->format;
     item.size = picInfo->size;
     mPicInfo.append(item);
-    mPicFiles.append(picFilePath);
+    mNeedMergePicFiles.append(picFilePath);
 }
 
 void PicMerge::setMergedFileName(QString fileName)
@@ -65,8 +66,8 @@ int PicMerge::fileMerge()
     if (!fileMerge.open(QIODevice::WriteOnly | QIODevice::Append))
         return -1;
 
-    for (int i = 0; i < mPicFiles.size(); i ++) {
-        QString fileName = mPicFiles.at(i);
+    for (int i = 0; i < mNeedMergePicFiles.size(); i ++) {
+        QString fileName = mNeedMergePicFiles.at(i);
         QFile file(fileName);
 
         if (!file.open(QIODevice::ReadOnly))
@@ -150,6 +151,7 @@ int PicMerge::fileSplitOne(QFile& srcFile, QString& picPath, quint32 picIndex,Pi
     QString name = QString("pic%1").arg(picIndex);
     QString fileName(picPath + "/" + name + suffix);
     qDebug() << "Split fileName" << fileName;
+    mNeedSplitPicFiles.append(fileName);
 
     QFile file(fileName);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate))
@@ -219,4 +221,9 @@ int PicMerge::fileSplit(QString& fileName)
 
     fileMerge.close();
     return 0;
+}
+
+QStringList& PicMerge::getNeedSplitPicFiles()
+{
+    return mNeedSplitPicFiles;
 }

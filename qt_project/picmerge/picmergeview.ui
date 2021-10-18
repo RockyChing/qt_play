@@ -43,6 +43,9 @@
     </widget>
    </item>
    <item>
+    <widget class="QListWidget" name="picListWidget"/>
+   </item>
+   <item>
     <widget class="QProgressBar" name="mergeProgress">
      <property name="maximumSize">
       <size>

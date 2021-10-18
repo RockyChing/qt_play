@@ -2,6 +2,7 @@
 #define PICMERGEVIEW_H
 
 #include <QWidget>
+#include <QListWidget>
 
 namespace Ui {
 class PicMergeView;
@@ -16,8 +17,12 @@ public:
     ~PicMergeView();
 
 private:
+    void init();
     void initUI();
     void initSlot();
+
+    void clearAllPicWidgetItem();
+    void addPicWidgetItem(QString path);
 
 private slots:
     void onBtnMergeClicked();
@@ -26,6 +31,7 @@ private slots:
 
 private:
     Ui::PicMergeView *ui;
+    QListWidget *mPicListWidget;
 };
 
 #endif // PICMERGEVIEW_H

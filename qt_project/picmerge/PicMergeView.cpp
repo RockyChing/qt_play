@@ -12,28 +12,54 @@
 #include <QMessageBox>
 #include <QDir>
 #include <QDebug>
+#include <QSize>
+#include <QScrollBar>
+#include <QPixmap>
+#include <QIcon>
+#include <QListWidgetItem>
 
+#define LOG_TAG "PicMerge"
+#include "../log/log.h"
 #include "PicMergeView.h"
 #include "ui_picmergeview.h"
 #include "PicMerge.h"
 
+#define PIC_ITEM_SIZE (240)
+
 
 PicMergeView::PicMergeView(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::PicMergeView)
+    ui(new Ui::PicMergeView), mPicListWidget(NULL)
 {
     ui->setupUi(this);
+    init();
     initUI();
     initSlot();
 }
 
 PicMergeView::~PicMergeView()
 {
+    clearAllPicWidgetItem();
     delete ui;
+}
+
+void PicMergeView::init()
+{
+    mPicListWidget = ui->picListWidget;
+
+    QSize iconSize = QSize(PIC_ITEM_SIZE, PIC_ITEM_SIZE);
+    mPicListWidget->setIconSize(iconSize);
+    mPicListWidget->setResizeMode(QListView::Adjust);
+    mPicListWidget->setViewMode(QListView::IconMode);
+    mPicListWidget->setMovement(QListView::Static);
+    mPicListWidget->setSpacing(5);
+    QScrollBar *bar = mPicListWidget->horizontalScrollBar();
+    bar->setDisabled(true);
 }
 
 void PicMergeView::initUI()
 {
+    ui->infoText->hide();
     ui->guideText->setText(tr("安全考虑，把多张图片合并成一个文件"));
 }
 
@@ -42,6 +68,30 @@ void PicMergeView::initSlot()
     connect(ui->btnPicMerge, SIGNAL(clicked()), this, SLOT(onBtnMergeClicked()));
     connect(ui->btnPicSplit, SIGNAL(clicked()), this, SLOT(onBtnSplitClicked()));
     connect(ui->btnInfoClear, SIGNAL(clicked()), this, SLOT(onBtnClearClicked()));
+}
+
+void PicMergeView::clearAllPicWidgetItem()
+{
+    do {
+        QListWidgetItem *item = mPicListWidget->takeItem(0);
+        if (NULL == item)
+            break;
+        log_debug("remove item: %p\r\n", item);
+        delete item;
+        item = NULL;
+    } while (1);
+}
+
+void PicMergeView::addPicWidgetItem(QString path)
+{
+    QListWidgetItem *picItem = new QListWidgetItem();
+    QPixmap pic(path);
+    if (pic.width() > PIC_ITEM_SIZE || pic.height() > PIC_ITEM_SIZE) {
+        pic = pic.scaled(PIC_ITEM_SIZE, PIC_ITEM_SIZE, Qt::KeepAspectRatio);
+    }
+
+    picItem->setIcon(QIcon(pic));
+    mPicListWidget->addItem(picItem);
 }
 
 void PicMergeView::onBtnMergeClicked()
@@ -67,6 +117,7 @@ void PicMergeView::onBtnMergeClicked()
 
     ui->mergeProgress->setValue(10);
     ui->infoText->appendPlainText("合并的文件：");
+    clearAllPicWidgetItem();
 
     int nPic = 0;
     for (int i = 0; i < filesInfo.size(); i ++) {
@@ -104,6 +155,8 @@ void PicMergeView::onBtnMergeClicked()
         ui->infoText->appendPlainText(file.fileName());
         picMerge.append(&item, file.absoluteFilePath());
         nPic += 1;
+
+        addPicWidgetItem(file.absoluteFilePath());
     }
 
     if (0 == nPic) {
@@ -156,6 +209,15 @@ void PicMergeView::onBtnSplitClicked()
             QMessageBox::critical(NULL, QObject::tr("错误"), errMsg);
         } else {
             ui->mergeProgress->setValue(100);
+
+            clearAllPicWidgetItem();
+            QStringList& files = picMerge.getNeedSplitPicFiles();
+            for (int i = 0; i < files.size(); i ++) {
+                QString file = files.at(i);
+                addPicWidgetItem(file);
+                log_debug("split %s\r\n", file.toUtf8().data());
+            }
+
             QMessageBox::information(this, tr("图片拆分"), tr("成功!"));
             ui->infoText->appendPlainText(tr("成功"));
         }

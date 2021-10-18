@@ -22,12 +22,15 @@ public:
 
     int fileSplit(QString& fileName);
 
+    QStringList& getNeedSplitPicFiles();
+
 private:
     int fileSplitOne(QFile& srcFile, QString& picPath, quint32 picIndex,PicInfo *picInfo);
 
 private:
     QVector<PicInfo> mPicInfo;
-    QStringList mPicFiles;
+    QStringList mNeedMergePicFiles;
+    QStringList mNeedSplitPicFiles;
     QString mMergedFileName;
 };
 
