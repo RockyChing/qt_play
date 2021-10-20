@@ -72,6 +72,7 @@ void Logger::log(int level, const char *tag, const char *fmt, ...)
         dateString.append(tag);
         dateString.append("] ");
         dateString.append(buff);
+        dateString.append("\r\n");
         mLogClient->logSend(dateString.toUtf8());
     }
 

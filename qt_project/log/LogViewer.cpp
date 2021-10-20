@@ -67,7 +67,7 @@ void LogViewer::logDataHandler()
         QByteArray data = mLogServer->readAll();
         QTextCursor tc = QTextCursor(ui->logTextEdit->document());
         tc.movePosition(QTextCursor::End);
-        tc.insertText(QString::fromLocal8Bit(data.data(), data.size()));
+        tc.insertText(QString::fromUtf8(data.data(), data.size()));
         //ui->logTextEdit->insertPlainText(text);
         QScrollBar *scrollBar = ui->logTextEdit->verticalScrollBar();
         if (scrollBar) {
