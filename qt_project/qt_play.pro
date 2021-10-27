@@ -30,7 +30,9 @@ SOURCES += main.cpp\
     log/LogViewer.cpp \
     log/LogServer.cpp \
     log/LogClient.cpp \
-    log/Log.cpp
+    log/Log.cpp \
+    http/HttpClient.cpp \
+    http/HttpClientView.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
@@ -155,7 +157,9 @@ HEADERS  += qtmainwindow.h \
     log/LogViewer.h \
     log/LogServer.h \
     log/LogClient.h \
-    log/Log.h
+    log/Log.h \
+    http/HttpClient.h \
+    http/HttpClientView.h
 
 FORMS    += qtmainwindow.ui \
     finance/finance.ui \
@@ -164,7 +168,8 @@ FORMS    += qtmainwindow.ui \
     account/accountview.ui \
     pog/pogtableview.ui \
     picmerge/picmergeview.ui \
-    log/logviewer.ui
+    log/logviewer.ui \
+    http/httpclientview.ui
 
 win32: LIBS += -L$$PWD/libs/ -llibusb-1.0 \
     -llibcrypto-1_1 -llibssl-1_1

@@ -1,6 +1,7 @@
 #define LOG_TAG "main"
 #include "log/Log.h"
 #include <QMessageBox>
+#include <QThread>
 
 #include "qtmainwindow.h"
 #include "ui_qtmainwindow.h"
@@ -10,6 +11,7 @@
 #include "account/AccountView.h"
 #include "pog/PoGTableView.h"
 #include "picmerge/PicMergeView.h"
+#include "http/HttpClientView.h"
 
 
 QtMainWindow::QtMainWindow(QWidget *parent) :
@@ -107,6 +109,7 @@ void QtMainWindow::initSlots()
 
     connect(ui->btnFinance, SIGNAL(clicked()), this, SLOT(onBtnFinanceClicked()));
     connect(ui->btnAccount, SIGNAL(clicked()), this, SLOT(onBtnAccountClicked()));
+    connect(ui->btnHttpsClient, SIGNAL(clicked()), this, SLOT(onBtnHttpsClientClicked()));
     connect(ui->btnPoG, SIGNAL(clicked()), this, SLOT(onBtnPoGClicked()));
     connect(ui->btnPicMerge, SIGNAL(clicked()), this, SLOT(onBtnPicMergeClicked()));
     connect(ui->btnExit, SIGNAL(clicked()), this, SLOT(onBtnExitClicked()));
@@ -176,6 +179,12 @@ void QtMainWindow::onBtnAccountClicked()
 {
     AccountView *a = new AccountView();
     a->show();
+}
+
+void QtMainWindow::onBtnHttpsClientClicked()
+{
+    HttpClientView *f = new HttpClientView();
+    f->show();
 }
 
 void QtMainWindow::onBtnPoGClicked()

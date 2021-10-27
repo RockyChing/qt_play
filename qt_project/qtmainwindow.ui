@@ -55,6 +55,24 @@
       </property>
      </widget>
     </item>
+    <item row="1" column="1">
+     <widget class="QPushButton" name="btnPoG">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>PoG</string>
+      </property>
+     </widget>
+    </item>
     <item row="2" column="0">
      <widget class="QPushButton" name="btnAccount">
       <property name="minimumSize">
@@ -92,7 +110,7 @@
      </widget>
     </item>
     <item row="3" column="0">
-     <widget class="QPushButton" name="btnPoG">
+     <widget class="QPushButton" name="btnHttpsClient">
       <property name="minimumSize">
        <size>
         <width>0</width>
@@ -105,7 +123,7 @@
        </font>
       </property>
       <property name="text">
-       <string>PoG</string>
+       <string>Https</string>
       </property>
      </widget>
     </item>
