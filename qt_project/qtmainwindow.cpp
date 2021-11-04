@@ -16,7 +16,7 @@
 
 QtMainWindow::QtMainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::QtMainWindow),
+    ui(new Ui::QtMainWindow), mLogViewer(NULL),
     mMenuBar(NULL), mToolBar(NULL), mStatusBar(NULL)
 {
     ui->setupUi(this);
@@ -32,6 +32,7 @@ QtMainWindow::QtMainWindow(QWidget *parent) :
 QtMainWindow::~QtMainWindow()
 {
     delete mLogViewer;
+    mLogViewer = NULL;
     delete ui;
 }
 
@@ -52,8 +53,6 @@ void QtMainWindow::init()
 
 void QtMainWindow::initUI()
 {
-    mLogViewer->show();
-    log_info("logd started\r\n");
 }
 
 void QtMainWindow::initToolBar()
@@ -103,6 +102,7 @@ void QtMainWindow::initSlots()
 
     connect(ui->actionNewLine, SIGNAL(triggered(bool)), this, SLOT(onEditActionNewlineClicked()));
     connect(ui->actionText2Html, SIGNAL(triggered(bool)), this, SLOT(onEditActionText2HtmlClicked()));
+    connect(ui->actionLog, SIGNAL(triggered(bool)), this, SLOT(onEditActionLogClicked()));
 
     connect(ui->actionAboutThis, SIGNAL(triggered(bool)), this, SLOT(aboutSlot()));
     connect(ui->actionAboutQt, SIGNAL(triggered(bool)), this, SLOT(aboutQtSlot()));
@@ -142,6 +142,14 @@ void QtMainWindow::onEditActionText2HtmlClicked()
     Text2HtmlDlg *d = new Text2HtmlDlg(this);
     d->setAttribute(Qt::WA_DeleteOnClose);
     d->show();
+}
+
+void QtMainWindow::onEditActionLogClicked()
+{
+    if (NULL != mLogViewer && mLogViewer->isHidden()) {
+        mLogViewer->show();
+        log_info("logd started\r\n");
+    }
 }
 
 void QtMainWindow::aboutSlot()
