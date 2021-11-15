@@ -110,6 +110,7 @@ void QtMainWindow::initSlots()
     connect(ui->btnFinance, SIGNAL(clicked()), this, SLOT(onBtnFinanceClicked()));
     connect(ui->btnAccount, SIGNAL(clicked()), this, SLOT(onBtnAccountClicked()));
     connect(ui->btnHttpsClient, SIGNAL(clicked()), this, SLOT(onBtnHttpsClientClicked()));
+    connect(ui->btnWeb, SIGNAL(clicked()), this, SLOT(onBtnWebBrowerClicked()));
     connect(ui->btnPoG, SIGNAL(clicked()), this, SLOT(onBtnPoGClicked()));
     connect(ui->btnPicMerge, SIGNAL(clicked()), this, SLOT(onBtnPicMergeClicked()));
     connect(ui->btnExit, SIGNAL(clicked()), this, SLOT(onBtnExitClicked()));
@@ -193,6 +194,11 @@ void QtMainWindow::onBtnHttpsClientClicked()
 {
     HttpClientView *f = new HttpClientView();
     f->show();
+}
+
+void QtMainWindow::onBtnWebBrowerClicked()
+{
+
 }
 
 void QtMainWindow::onBtnPoGClicked()

@@ -9,5 +9,9 @@
         <file>res/images/icon_merg.png</file>
         <file>res/images/icon_clear.png</file>
         <file>res/images/icon_file_new.png</file>
+        <file>res/images/icon_back.png</file>
+        <file>res/images/icon_forward.png</file>
+        <file>res/images/icon_refresh.png</file>
+        <file>res/images/icon_search.png</file>
     </qresource>
 </RCC>

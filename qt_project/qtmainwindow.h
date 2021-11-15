@@ -41,6 +41,7 @@ private slots:
     void onBtnFinanceClicked();
     void onBtnAccountClicked();
     void onBtnHttpsClientClicked();
+    void onBtnWebBrowerClicked();
     void onBtnPoGClicked();
     void onBtnPicMergeClicked();
     void onBtnExitClicked();
