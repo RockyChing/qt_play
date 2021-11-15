@@ -27,6 +27,9 @@ void Text2HtmlDlg::initUI()
     mBtnTransform = ui->btnTransform;
     mBtnClear = ui->btnClear;
     mBtnCopy = ui->btnCopy;
+    mBtnCopy->setVisible(false);
+
+    ui->spinBoxNlineNum->setValue(1);
 
     connect(mBtnTransform, SIGNAL(clicked()), this, SLOT(onBtnTransformClicked()));
     connect(mBtnClear, SIGNAL(clicked()), this, SLOT(onBtnClearClicked()));
@@ -60,6 +63,7 @@ void Text2HtmlDlg::onBtnTransformClicked()
     result.append("&#160;</p>");
     mTextHtmlEdit->clear();
     mTextHtmlEdit->setPlainText(result);
+    onBtnCopyClicked();
 }
 
 void Text2HtmlDlg::onBtnClearClicked()

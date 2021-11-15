@@ -23,7 +23,7 @@ const QString AppSettings::POG_PATH = "pog_path";
 
 const QString AppSettings::QT_PLAY_MAJOR = "1";
 const QString AppSettings::QT_PLAY_MINOR = "6";
-const QString AppSettings::QT_PLAY_MICRO = "2";
+const QString AppSettings::QT_PLAY_MICRO = "3";
 
 
 AppSettings::AppSettings()
