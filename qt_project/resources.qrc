@@ -13,5 +13,6 @@
         <file>res/images/icon_forward.png</file>
         <file>res/images/icon_refresh.png</file>
         <file>res/images/icon_search.png</file>
+        <file>res/images/icon_filter.png</file>
     </qresource>
 </RCC>

@@ -11,6 +11,8 @@
 #include <QStringList>
 #include <QFile>
 #include <QFileDialog>
+#include <QTemporaryFile>
+#include <QTextStream>
 #include <QIODevice>
 #include <QSettings>
 #include <QDateTime>
@@ -18,6 +20,8 @@
 #include <QMessageBox>
 #include <QList>
 
+#define LOG_TAG "PoGTableView"
+#include "../log/log.h"
 #include "config/appsettings.h"
 #include "PoGTableView.h"
 #include "ui_pogtableview.h"
@@ -66,6 +70,7 @@ void PoGTableView::initUI()
 void PoGTableView::initSlot()
 {
     connect(ui->btnPoGOpen, SIGNAL(clicked()), this, SLOT(onBtnOpenClicked()));
+    connect(ui->btnPoGFilter, SIGNAL(clicked()), this, SLOT(onBtnFilterClicked()));
 }
 
 void PoGTableView::initTableModel()
@@ -156,9 +161,11 @@ int PoGTableView::fileFillTable(int column, QList<PoGItem> &items)
     return 0;
 }
 
-void PoGTableView::clearEmptyItem()
+void PoGTableView::clearTableItemAll()
 {
-
+    if (mItemModel != NULL) {
+        mItemModel->removeRows(0, mItemModel->rowCount());
+    }
 }
 
 void PoGTableView::onBtnOpenClicked()
@@ -234,4 +241,79 @@ void PoGTableView::onBtnOpenClicked()
             return;
         }
     }
+}
+
+void PoGTableView::onBtnFilterClicked()
+{
+    if (NULL == mItemModel)
+        return;
+
+    // 1. save table data to a temp file & filter null rows
+    QTemporaryFile tmpFile;
+    if (!tmpFile.open()) {
+        log_error("create tmpFile failed!");
+        return;
+    }
+
+    tmpFile.setAutoRemove(true);
+    log_info("tmp file: %s", tmpFile.fileName().toUtf8().data());
+    int rowCount = mItemModel->rowCount();
+    int columnCount = mItemModel->columnCount();
+    if (0 == rowCount || 0 == columnCount) {
+        log_error("zero row or column");
+        return;
+    }
+    log_info("table %d rows, %d columns", rowCount, columnCount);
+
+    int nRow, mCol;
+    for (nRow = 0; nRow < rowCount; nRow++) {
+        bool isNull = true;
+        QString rowString;
+        QStandardItem *dateItem = mItemModel->item(nRow, 0);
+        rowString.clear();
+        rowString.append(dateItem->text());
+        for (mCol = 1; mCol < columnCount; mCol ++) {
+            rowString.append(",");
+            QStandardItem *tmpItem = mItemModel->item(nRow, mCol);
+            if (tmpItem != NULL) {
+                isNull = false;
+                rowString.append(tmpItem->text());
+            } else {
+                rowString.append("");
+            }
+        }
+
+        if (!isNull) { // this row non null, save it
+            rowString.append("\r\n");
+            //log_debug("row %02d: %s", nRow, rowString.toUtf8().data());
+            tmpFile.write(rowString.toUtf8().data(), rowString.toUtf8().size());
+        }
+    }
+
+    // 2. clear table
+    clearTableItemAll();
+
+    // 3. fill table from the temp file data
+    log_info("tmpFile size: %d", tmpFile.size());
+    columnCount = mItemModel->columnCount();
+    tmpFile.seek(0);
+    nRow = 0;
+    while (!tmpFile.atEnd()) {
+        QString line = tmpFile.readLine();
+        QStringList tmpList = line.split(",");
+        if (columnCount == tmpList.size()) {
+            for (int i = 0; i < columnCount; i ++) {
+                if (!tmpList.at(i).isEmpty()) {
+                    QStandardItem *tmpItem = new QStandardItem(tmpList.at(i));
+                    mItemModel->setItem(nRow, i, tmpItem);
+                }
+            }
+        } else {
+            log_warn("tmpList: %d", tmpList.size());
+        }
+
+        nRow += 1;
+    }
+
+    tmpFile.close();
 }

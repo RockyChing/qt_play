@@ -46,10 +46,11 @@ private:
     int fileParserOne(QString filePath, QList<PoGItem>& items);
     int fileFillTable(int column, QList<PoGItem>& items);
 
-    void clearEmptyItem();
+    void clearTableItemAll();
 
 private slots:
     void onBtnOpenClicked();
+    void onBtnFilterClicked(); // 去除空行
 
 private:
     /* ui members */
