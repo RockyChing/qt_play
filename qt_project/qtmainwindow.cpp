@@ -2,6 +2,7 @@
 #include "log/Log.h"
 #include <QMessageBox>
 #include <QThread>
+#include <QTime>
 
 #include "qtmainwindow.h"
 #include "ui_qtmainwindow.h"
@@ -25,7 +26,7 @@ QtMainWindow::QtMainWindow(QWidget *parent) :
     setWindowTitle(AppSettings::APP_VERSION());
     init();
     initToolBar();
-    //initStatusBar();
+    initStatusBar();
 
     initUI();
     initSlots();
@@ -195,6 +196,11 @@ void QtMainWindow::setIcon()
     setWindowIcon(icon);
 }
 
+void QtMainWindow::updateStatusBar(QString &text)
+{
+    mStatusBar->showMessage(text, 0x7fffffff);
+}
+
 void QtMainWindow::onFileActionNewClicked()
 {
     log_info("file new");
@@ -278,6 +284,18 @@ void QtMainWindow::onBtnHttpsClientClicked()
 void QtMainWindow::onReminderTimeout()
 {
     showNotification();
+    QString text;
+    if (0 == mReminderRepeat) {
+        text.append("Reminder expires once.");
+    } else {
+        QTime now = QTime::currentTime();
+        QTime future = now.addSecs(mReminderTime * 60);
+        QString futureTimeString = future.toString("HH:mm:ss.zzz");
+
+        text.append("Reminder will expires at ");
+        text.append(futureTimeString);
+    }
+    updateStatusBar(text);
 }
 
 void QtMainWindow::onBtnReminderClicked()
@@ -293,10 +311,24 @@ void QtMainWindow::onBtnReminderClicked()
            mReminderTimer = new QTimer(this);
         }
 
-        mReminderTimer->setSingleShot((0 == mReminderRepeat) ? true : false);
-        mReminderTimer->setInterval(mReminderTime * 60000);
-        connect(mReminderTimer, SIGNAL(timeout()), this, SLOT(onReminderTimeout()));
-        mReminderTimer->start();
+        QString text;
+        if (0 == mReminderTime) {
+            text.append("Reminder disabled.");
+        } else {
+            mReminderTimer->setSingleShot((0 == mReminderRepeat) ? true : false);
+            mReminderTimer->setInterval(mReminderTime * 60000);
+            connect(mReminderTimer, SIGNAL(timeout()), this, SLOT(onReminderTimeout()));
+            mReminderTimer->start();
+
+            QTime now = QTime::currentTime();
+            QTime future = now.addSecs(mReminderTime * 60);
+            QString futureTimeString = future.toString("HH:mm:ss.zzz");
+
+            text.append("Reminder will expires at ");
+            text.append(futureTimeString);
+        }
+
+        updateStatusBar(text);
     }
 }
 

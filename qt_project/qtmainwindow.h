@@ -39,6 +39,7 @@ private:
     void createActions();   // 创建托盘右键菜单
     void createTrayIcon();  // 创建托盘对象
     void setIcon();         // 设置托盘图标
+    void updateStatusBar(QString &text);
 
 private slots:
     void onFileActionNewClicked();
