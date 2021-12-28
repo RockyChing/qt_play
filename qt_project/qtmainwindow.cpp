@@ -12,12 +12,14 @@
 #include "pog/PoGTableView.h"
 #include "picmerge/PicMergeView.h"
 #include "http/HttpClientView.h"
+#include "reminder/ReminderDlg.h"
 
 
 QtMainWindow::QtMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::QtMainWindow), mLogViewer(NULL),
-    mMenuBar(NULL), mToolBar(NULL), mStatusBar(NULL)
+    mMenuBar(NULL), mToolBar(NULL), mStatusBar(NULL),
+    mReminderTimer(NULL)
 {
     ui->setupUi(this);
     setWindowTitle(AppSettings::APP_VERSION());
@@ -42,6 +44,13 @@ void QtMainWindow::setVisible(bool visible)
     mMaxAction->setEnabled(!isMaximized());
     mRestoreAction->setEnabled(isMaximized() || !visible);
     QMainWindow::setVisible(visible);
+}
+
+void QtMainWindow::showNotification()
+{
+    QString info = QString("您已连续工作%1分钟，休息一下。").arg(mReminderTime, 0, 10);
+    mTrayIcon->showMessage(tr("定时时间到"), info,
+                           QSystemTrayIcon::Information, 0x7fffffff);
 }
 
 void QtMainWindow::closeEvent(QCloseEvent *event)
@@ -142,7 +151,7 @@ void QtMainWindow::initSlots()
     connect(ui->btnFinance, SIGNAL(clicked()), this, SLOT(onBtnFinanceClicked()));
     connect(ui->btnAccount, SIGNAL(clicked()), this, SLOT(onBtnAccountClicked()));
     connect(ui->btnHttpsClient, SIGNAL(clicked()), this, SLOT(onBtnHttpsClientClicked()));
-    connect(ui->btnWeb, SIGNAL(clicked()), this, SLOT(onBtnWebBrowerClicked()));
+    connect(ui->btnReminder, SIGNAL(clicked()), this, SLOT(onBtnReminderClicked()));
     connect(ui->btnPoG, SIGNAL(clicked()), this, SLOT(onBtnPoGClicked()));
     connect(ui->btnPicMerge, SIGNAL(clicked()), this, SLOT(onBtnPicMergeClicked()));
     connect(ui->btnExit, SIGNAL(clicked()), this, SLOT(onBtnExitClicked()));
@@ -266,9 +275,29 @@ void QtMainWindow::onBtnHttpsClientClicked()
     f->show();
 }
 
-void QtMainWindow::onBtnWebBrowerClicked()
+void QtMainWindow::onReminderTimeout()
 {
+    showNotification();
+}
 
+void QtMainWindow::onBtnReminderClicked()
+{
+    ReminderDlg *dlg = new ReminderDlg(this);
+    mReminderTime = 0;
+    mReminderRepeat = 0;
+    dlg->initTimeRepeat(&mReminderTime, &mReminderRepeat);
+    int res = dlg->exec(); // OK: 1, Cancel: 0
+    if (res) {
+        qDebug("timer: %d, repeat: %d", mReminderTime, mReminderRepeat);
+        if (NULL == mReminderTimer) {
+           mReminderTimer = new QTimer(this);
+        }
+
+        mReminderTimer->setSingleShot((0 == mReminderRepeat) ? true : false);
+        mReminderTimer->setInterval(mReminderTime * 60000);
+        connect(mReminderTimer, SIGNAL(timeout()), this, SLOT(onReminderTimeout()));
+        mReminderTimer->start();
+    }
 }
 
 void QtMainWindow::onBtnPoGClicked()

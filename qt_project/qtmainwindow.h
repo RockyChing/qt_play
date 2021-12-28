@@ -5,6 +5,7 @@
 #include <QMenu>
 #include <QSystemTrayIcon>
 #include <QAction>
+#include <QTimer>
 #include <QMessageBox>
 #include "finance/finance.h"
 #include "log/LogViewer.h"
@@ -22,6 +23,8 @@ public:
     ~QtMainWindow();
 
     void setVisible(bool visible) override;
+
+    void showNotification();
 
 protected:
     void closeEvent(QCloseEvent *event) override;
@@ -52,12 +55,13 @@ private slots:
     void onBtnFinanceClicked();
     void onBtnAccountClicked();
     void onBtnHttpsClientClicked();
-    void onBtnWebBrowerClicked();
+    void onBtnReminderClicked();
     void onBtnPoGClicked();
     void onBtnPicMergeClicked();
     void onBtnExitClicked();
 
     void onIconActivated(QSystemTrayIcon::ActivationReason reason);
+    void onReminderTimeout();
 
 private:
     Ui::QtMainWindow *ui;
@@ -69,11 +73,13 @@ private:
 
     QSystemTrayIcon *mTrayIcon;
     QMenu *mTrayIconMenu;
-
     QAction *mMinAction;
     QAction *mMaxAction;
     QAction *mRestoreAction;
     QAction *mQuitAction;
+    int mReminderTime; // minute
+    int mReminderRepeat;
+    QTimer *mReminderTimer;
 };
 
 #endif // QTMAINWINDOW_H
