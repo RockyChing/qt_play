@@ -36,10 +36,38 @@ QtMainWindow::~QtMainWindow()
     delete ui;
 }
 
+void QtMainWindow::setVisible(bool visible)
+{
+    mMinAction->setEnabled(visible);
+    mMaxAction->setEnabled(!isMaximized());
+    mRestoreAction->setEnabled(isMaximized() || !visible);
+    QMainWindow::setVisible(visible);
+}
+
 void QtMainWindow::closeEvent(QCloseEvent *event)
 {
-    if (mLogViewer) {
-        mLogViewer->close();
+    if (mTrayIcon->isVisible()) {
+        QMessageBox msgBox;
+        msgBox.setInformativeText(tr("后台运行？"));
+        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Discard);
+        msgBox.setDefaultButton(QMessageBox::Discard);
+        int res = msgBox.exec();
+        switch (res) {
+        case QMessageBox::Yes:
+            hide();
+            event->ignore();
+            break;
+        case QMessageBox::No:
+            if (mLogViewer) {
+                mLogViewer->close();
+            }
+            event->accept();
+            break;
+        case QMessageBox::Discard:
+            /* do nothing */
+            event->ignore();
+            break;
+        }
     }
 }
 
@@ -53,6 +81,10 @@ void QtMainWindow::init()
 
 void QtMainWindow::initUI()
 {
+    createActions();
+    createTrayIcon();
+    setIcon();
+    mTrayIcon->show();
 }
 
 void QtMainWindow::initToolBar()
@@ -114,6 +146,44 @@ void QtMainWindow::initSlots()
     connect(ui->btnPoG, SIGNAL(clicked()), this, SLOT(onBtnPoGClicked()));
     connect(ui->btnPicMerge, SIGNAL(clicked()), this, SLOT(onBtnPicMergeClicked()));
     connect(ui->btnExit, SIGNAL(clicked()), this, SLOT(onBtnExitClicked()));
+
+    connect(mTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this,
+                       SLOT(onIconActivated(QSystemTrayIcon::ActivationReason)));
+}
+
+void QtMainWindow::createActions()
+{
+    mMinAction = new QAction(tr("Mi&nimize"), this);
+    connect(mMinAction, &QAction::triggered, this, &QWidget::hide);
+
+    mMaxAction = new QAction(tr("Ma&ximize"), this);
+    connect(mMaxAction, &QAction::triggered, this, &QWidget::showMaximized);
+
+    mRestoreAction = new QAction(tr("&Restore"), this);
+    connect(mRestoreAction, &QAction::triggered, this, &QWidget::showNormal);
+
+    mQuitAction = new QAction(tr("&Quit"), this);
+    connect(mQuitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
+}
+
+void QtMainWindow::createTrayIcon()
+{
+    mTrayIconMenu = new QMenu(this);
+    mTrayIconMenu->addAction(mMinAction);
+    mTrayIconMenu->addAction(mMaxAction);
+    mTrayIconMenu->addAction(mRestoreAction);
+    mTrayIconMenu->addSeparator();
+    mTrayIconMenu->addAction(mQuitAction);
+
+    mTrayIcon = new QSystemTrayIcon(this);
+    mTrayIcon->setContextMenu(mTrayIconMenu);
+}
+
+void QtMainWindow::setIcon()
+{
+    QIcon icon(":/res/images/icon_play.png");
+    mTrayIcon->setIcon(icon);
+    setWindowIcon(icon);
 }
 
 void QtMainWindow::onFileActionNewClicked()
@@ -219,3 +289,16 @@ void QtMainWindow::onBtnExitClicked()
     this->close();
 }
 
+void QtMainWindow::onIconActivated(QSystemTrayIcon::ActivationReason reason)
+{
+    switch (reason) {
+    case QSystemTrayIcon::DoubleClick:
+        showNormal();
+        break;
+    case QSystemTrayIcon::Trigger:
+    case QSystemTrayIcon::MiddleClick:
+        break;
+    default:
+        break;
+    }
+}
