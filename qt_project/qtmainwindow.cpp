@@ -7,8 +7,9 @@
 #include "qtmainwindow.h"
 #include "ui_qtmainwindow.h"
 #include "config/appsettings.h"
-#include "nl_del/nl_del.h"
+#include "edit/nl_del.h"
 #include "edit/text2htmldlg.h"
+#include "edit/htmlfilenewdlg.h"
 #include "account/AccountView.h"
 #include "pog/PoGTableView.h"
 #include "picmerge/PicMergeView.h"
@@ -144,6 +145,7 @@ void QtMainWindow::initSlots()
 
     connect(ui->actionNewLine, SIGNAL(triggered(bool)), this, SLOT(onEditActionNewlineClicked()));
     connect(ui->actionText2Html, SIGNAL(triggered(bool)), this, SLOT(onEditActionText2HtmlClicked()));
+    connect(ui->actionHtmlFileNew, SIGNAL(triggered(bool)), this, SLOT(onEditActionHtmlFileNewClicked()));
     connect(ui->actionLog, SIGNAL(triggered(bool)), this, SLOT(onEditActionLogClicked()));
 
     connect(ui->actionAboutThis, SIGNAL(triggered(bool)), this, SLOT(aboutSlot()));
@@ -226,6 +228,13 @@ void QtMainWindow::onEditActionNewlineClicked()
 void QtMainWindow::onEditActionText2HtmlClicked()
 {
     Text2HtmlDlg *d = new Text2HtmlDlg(this);
+    d->setAttribute(Qt::WA_DeleteOnClose);
+    d->show();
+}
+
+void QtMainWindow::onEditActionHtmlFileNewClicked()
+{
+    HtmlFileNewDlg *d = new HtmlFileNewDlg(this);
     d->setAttribute(Qt::WA_DeleteOnClose);
     d->show();
 }

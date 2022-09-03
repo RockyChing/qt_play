@@ -17,7 +17,7 @@ SOURCES += main.cpp\
         qtmainwindow.cpp \
     usb/usb_util.cpp \
     finance/finance.cpp \
-    nl_del/nl_del.cpp \
+    edit/nl_del.cpp \
     config/appsettings.cpp \
     edit/text2htmldlg.cpp \
     crypto/qaes.cpp \
@@ -33,12 +33,13 @@ SOURCES += main.cpp\
     log/Log.cpp \
     http/HttpClient.cpp \
     http/HttpClientView.cpp \
-    reminder/ReminderDlg.cpp
+    reminder/ReminderDlg.cpp \
+    edit/htmlfilenewdlg.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
     finance/finance.h \
-    nl_del/nl_del.h \
+    edit/nl_del.h \
     config/appsettings.h \
     edit/text2htmldlg.h \
     crypto/qaes.h \
@@ -161,18 +162,20 @@ HEADERS  += qtmainwindow.h \
     log/Log.h \
     http/HttpClient.h \
     http/HttpClientView.h \
-    reminder/ReminderDlg.h
+    reminder/ReminderDlg.h \
+    edit/htmlfilenewdlg.h
 
 FORMS    += qtmainwindow.ui \
     finance/finance.ui \
-    nl_del/nl_del.ui \
+    edit/nl_del.ui \
     edit/text2htmldlg.ui \
     account/accountview.ui \
     pog/pogtableview.ui \
     picmerge/picmergeview.ui \
     log/logviewer.ui \
     http/httpclientview.ui \
-    reminder/reminderdlg.ui
+    reminder/reminderdlg.ui \
+    edit/htmlfilenewdlg.ui
 
 win32: LIBS += -L$$PWD/libs/ -llibusb-1.0 \
     -llibcrypto-1_1 -llibssl-1_1

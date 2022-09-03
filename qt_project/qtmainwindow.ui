@@ -171,7 +171,7 @@
      <x>0</x>
      <y>0</y>
      <width>396</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -189,7 +189,9 @@
      <string>编辑</string>
     </property>
     <addaction name="actionNewLine"/>
+    <addaction name="separator"/>
     <addaction name="actionText2Html"/>
+    <addaction name="actionHtmlFileNew"/>
     <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuAbout">
@@ -307,6 +309,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+L</string>
+   </property>
+  </action>
+  <action name="actionHtmlFileNew">
+   <property name="text">
+    <string>Html文件创建</string>
    </property>
   </action>
  </widget>

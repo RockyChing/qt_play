@@ -23,6 +23,9 @@ public:
     /* for POG path using */
     static const QString POG_PATH;
 
+    /* for HTML-File-Create path using */
+    static const QString HTML_DIR;
+
 public:
     AppSettings();
 

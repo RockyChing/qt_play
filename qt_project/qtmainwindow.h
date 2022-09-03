@@ -48,6 +48,7 @@ private slots:
 
     void onEditActionNewlineClicked();
     void onEditActionText2HtmlClicked();
+    void onEditActionHtmlFileNewClicked();
     void onEditActionLogClicked();
 
     void aboutSlot();
