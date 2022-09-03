@@ -42,7 +42,8 @@ void Text2HtmlDlg::onBtnTransformClicked()
     QTextStream in(&s);
 
     QString result;
-    result.append("<p>\r\n");
+    result.clear();
+    //result.append("<p class=\"indent-para\">");
 
     const int lineNum = ui->spinBoxNlineNum->value();
     while (!in.atEnd()) {
@@ -52,17 +53,24 @@ void Text2HtmlDlg::onBtnTransformClicked()
         }
         line.remove(QRegExp("\\s"));
 
-        if (1 == lineNum)
-            line.append("<br/>\r\n");
-        else if (2 == lineNum)
-            line.append("<br/><br/>\r\n\r\n");
-        else {}
+        result.append("<p>");
         result.append(line);
+        result.append("</p>");
+        if (1 == lineNum)
+            result.append("\r\n");
+        else if (2 == lineNum)
+            result.append("\r\n\r\n");
+        else {}
     }
 
-    result.append("&#160;</p>");
+    //result.append("</p>");
     mTextHtmlEdit->clear();
-    mTextHtmlEdit->setPlainText(result);
+    if (1 == lineNum)
+        mTextHtmlEdit->setPlainText(result.left(result.length()-2));
+    else if (2 == lineNum)
+        mTextHtmlEdit->setPlainText(result.left(result.length()-4));
+    else {}
+
     onBtnCopyClicked();
 }
 
