@@ -2,6 +2,11 @@
 #define HTMLFILERENAMEDLG_H
 
 #include <QDialog>
+#include <QString>
+#include <QDialog>
+#include <QPushButton>
+#include <QLineEdit>
+#include <QCheckBox>
 
 namespace Ui {
 class HtmlFileRenameDlg;
@@ -16,7 +21,26 @@ public:
     ~HtmlFileRenameDlg();
 
 private:
+    void initUI();
+    void initData();
+
+    void msgWarning(QString text);
+
+private slots:
+    void onBtnDirOpenClicked();
+    void onBtnRenameClicked();
+
+private:
     Ui::HtmlFileRenameDlg *ui;
+    QString mDirName;
+
+    QPushButton *mBtnDirOpen;
+    QPushButton *mBtnRename;
+
+    QLineEdit *mEditDirShow;
+    QLineEdit *mEditFilePrefix;
+
+    QCheckBox *mCBBackup;
 };
 
 #endif // HTMLFILERENAMEDLG_H

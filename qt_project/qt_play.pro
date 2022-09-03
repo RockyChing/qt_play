@@ -34,7 +34,9 @@ SOURCES += main.cpp\
     http/HttpClient.cpp \
     http/HttpClientView.cpp \
     reminder/ReminderDlg.cpp \
-    edit/htmlfilenewdlg.cpp
+    utils/rfileutil.cpp \
+    edit/htmlfilenewdlg.cpp \
+    edit/htmlfilerenamedlg.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
@@ -163,7 +165,9 @@ HEADERS  += qtmainwindow.h \
     http/HttpClient.h \
     http/HttpClientView.h \
     reminder/ReminderDlg.h \
-    edit/htmlfilenewdlg.h
+    edit/htmlfilenewdlg.h \
+    edit/htmlfilerenamedlg.h \
+    utils/rfileutil.h
 
 FORMS    += qtmainwindow.ui \
     finance/finance.ui \
@@ -175,7 +179,8 @@ FORMS    += qtmainwindow.ui \
     log/logviewer.ui \
     http/httpclientview.ui \
     reminder/reminderdlg.ui \
-    edit/htmlfilenewdlg.ui
+    edit/htmlfilenewdlg.ui \
+    edit/htmlfilerenamedlg.ui
 
 win32: LIBS += -L$$PWD/libs/ -llibusb-1.0 \
     -llibcrypto-1_1 -llibssl-1_1

@@ -192,6 +192,7 @@
     <addaction name="separator"/>
     <addaction name="actionText2Html"/>
     <addaction name="actionHtmlFileNew"/>
+    <addaction name="actionHtmlFileRename"/>
     <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuAbout">
@@ -314,6 +315,11 @@
   <action name="actionHtmlFileNew">
    <property name="text">
     <string>Html文件创建</string>
+   </property>
+  </action>
+  <action name="actionHtmlFileRename">
+   <property name="text">
+    <string>Html文件重命名</string>
    </property>
   </action>
  </widget>

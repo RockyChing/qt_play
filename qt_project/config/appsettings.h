@@ -26,6 +26,9 @@ public:
     /* for HTML-File-Create path using */
     static const QString HTML_DIR;
 
+    /* for HTML-File-Rename path using */
+    static const QString HTML_RDIR;
+
 public:
     AppSettings();
 
