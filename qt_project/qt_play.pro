@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     reminder/ReminderDlg.cpp \
     utils/rfileutil.cpp \
     edit/htmlfilenewdlg.cpp \
-    edit/htmlfilerenamedlg.cpp
+    edit/htmlfilerenamedlg.cpp \
+    utils/msgboxutil.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
@@ -167,7 +168,8 @@ HEADERS  += qtmainwindow.h \
     reminder/ReminderDlg.h \
     edit/htmlfilenewdlg.h \
     edit/htmlfilerenamedlg.h \
-    utils/rfileutil.h
+    utils/rfileutil.h \
+    utils/msgboxutil.h
 
 FORMS    += qtmainwindow.ui \
     finance/finance.ui \

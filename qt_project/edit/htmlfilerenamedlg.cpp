@@ -5,12 +5,12 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QFileInfoList>
-#include <QMessageBox>
 #include <QPalette>
 #include <QRegExp>
 #include "htmlfilerenamedlg.h"
 #include "ui_htmlfilerenamedlg.h"
 #include "config/appsettings.h"
+#include "utils/msgboxutil.h"
 #include "utils/rfileutil.h"
 
 HtmlFileRenameDlg::HtmlFileRenameDlg(QWidget *parent) :
@@ -59,11 +59,6 @@ void HtmlFileRenameDlg::initData()
     }
 }
 
-void HtmlFileRenameDlg::msgWarning(QString text)
-{
-    QMessageBox::warning(this, tr("警告"), text);
-}
-
 void HtmlFileRenameDlg::onBtnDirOpenClicked()
 {
     QString filePath = mEditDirShow->text();
@@ -89,19 +84,19 @@ void HtmlFileRenameDlg::onBtnRenameClicked()
 {
     // 1.check parameter
     if (mDirName.isEmpty()) {
-        msgWarning(tr("未指定目录！"));
+        MsgBoxUtil::warning(this, tr("未指定目录！"));
         return;
     }
 
     QDir dir(mDirName);
     if (!dir.exists()) {
-        msgWarning(tr("指定目录不存在！"));
+        MsgBoxUtil::warning(this, tr("指定目录不存在！"));
         return;
     }
 
     QString filePrefix = mEditFilePrefix->text();
     if (filePrefix.isEmpty()) {
-        msgWarning(tr("未指定文件前缀！"));
+        MsgBoxUtil::warning(this, tr("未指定文件前缀！"));
         return;
     }
 
@@ -161,4 +156,5 @@ void HtmlFileRenameDlg::onBtnRenameClicked()
     }
 
     dir.refresh();
+    MsgBoxUtil::information(this, tr("复制成功！"));
 }

@@ -25,7 +25,7 @@ const QString AppSettings::HTML_RDIR = "html_rdir";
 
 const QString AppSettings::QT_PLAY_MAJOR = "1";
 const QString AppSettings::QT_PLAY_MINOR = "9";
-const QString AppSettings::QT_PLAY_MICRO = "0";
+const QString AppSettings::QT_PLAY_MICRO = "1";
 
 
 AppSettings::AppSettings()

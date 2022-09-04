@@ -7,9 +7,6 @@
 #include <QLineEdit>
 
 
-
-
-
 namespace Ui {
 class HtmlFileNewDlg;
 }
@@ -25,8 +22,6 @@ public:
 private:
     void initUI();
     void initData();
-
-    void msgWarning(QString text);
 
 private slots:
     void onBtnDirOpenClicked();

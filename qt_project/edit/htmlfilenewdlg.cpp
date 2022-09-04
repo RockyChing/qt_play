@@ -5,12 +5,11 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QFileInfoList>
-#include <QMessageBox>
 #include <QPalette>
 #include "htmlfilenewdlg.h"
 #include "ui_htmlfilenewdlg.h"
 #include "config/appsettings.h"
-
+#include "utils/msgboxutil.h"
 
 
 HtmlFileNewDlg::HtmlFileNewDlg(QWidget *parent) :
@@ -76,11 +75,6 @@ void HtmlFileNewDlg::initData()
     mEditSrcFile->setText("demo.xhtml");
 }
 
-void HtmlFileNewDlg::msgWarning(QString text)
-{
-    QMessageBox::warning(this, tr("警告"), text);
-}
-
 void HtmlFileNewDlg::onBtnDirOpenClicked()
 {
     QString filePath = mEditDirShow->text();
@@ -106,13 +100,13 @@ void HtmlFileNewDlg::onBtnClearClicked()
 {
     // 1.check parameter
     if (mDirName.isEmpty()) {
-        msgWarning(tr("未指定目录！"));
+        MsgBoxUtil::warning(this, tr("未指定目录！"));
         return;
     }
 
     QDir dir(mDirName);
     if (!dir.exists()) {
-        msgWarning(tr("指定目录不存在！"));
+        MsgBoxUtil::warning(this, tr("指定目录不存在！"));
         return;
     }
 
@@ -140,25 +134,28 @@ void HtmlFileNewDlg::onBtnClearClicked()
             file.remove();
         }
     }
+
+    dir.refresh();
+    MsgBoxUtil::information(this, tr("清除成功！"));
 }
 
 void HtmlFileNewDlg::onBtnCreateClicked()
 {
     QString demoFileName = mEditSrcFile->text();
-    QString demoFilePath = mDirName + "\\" + demoFileName;
+    QString demoFilePath = mDirName + QDir::separator() + demoFileName;
     qDebug() << "demoFilePath: " << demoFilePath;
 
     // 1.check demo file
     QFile file(demoFilePath);
     if (!file.exists()) {
-        msgWarning(tr("demo文件不存在！"));
+        MsgBoxUtil::warning(this, tr("demo文件不存在！"));
         return;
     }
 
     // 2.check parameter
     QString strTotal = mEditTotal->text();
     if (strTotal.isEmpty()) {
-        msgWarning(tr("请输入生成文件个数！"));
+        MsgBoxUtil::warning(this, tr("请输入生成文件个数！"));
         return;
     }
 
@@ -166,12 +163,12 @@ void HtmlFileNewDlg::onBtnCreateClicked()
     bool ok;
     uint total = strTotal.toUInt(&ok, 10);
     if (!ok || 0 == total) {
-        msgWarning(tr("生成文件个数数据非法！"));
+        MsgBoxUtil::warning(this, tr("生成文件个数数据非法！"));
         return;
     }
 
     if (total >= 1000) {
-        msgWarning(tr("生成文件个数上限999！"));
+        MsgBoxUtil::warning(this, tr("生成文件个数上限999！"));
         return;
     }
 
@@ -182,7 +179,7 @@ void HtmlFileNewDlg::onBtnCreateClicked()
     } else {
         start = strStart.toUInt(&ok, 10);
         if (!ok || start < 1) {
-            msgWarning(tr("起始编号数据非法！"));
+            MsgBoxUtil::warning(this, tr("起始编号数据非法！"));
             return;
         }
     }
@@ -191,13 +188,13 @@ void HtmlFileNewDlg::onBtnCreateClicked()
     QStringList sl = demoFileName.split(".");
     QString strFilePostfix = sl.at(1);
     if (strFilePostfix.isEmpty()) {
-        msgWarning(tr("demo文件后缀异常！"));
+        MsgBoxUtil::warning(this, tr("demo文件后缀异常！"));
         return;
     }
 
     // 4.copy file
     total += start;
-    for (int i = start; i < total; i ++) {
+    for (uint i = start; i < total; i ++) {
         // 4.1 create file name
         QString fileName = strFilePrefix;
         if (i < 10) {
@@ -215,8 +212,10 @@ void HtmlFileNewDlg::onBtnCreateClicked()
         fileName.append(".");
         fileName.append(strFilePostfix);
 
-        QString filePath = mDirName + "\\" + fileName;
+        QString filePath = mDirName + QDir::separator() + fileName;
         qDebug() << filePath;
         QFile::copy(demoFilePath, filePath);
     }
+
+    MsgBoxUtil::information(this, tr("创建成功！"));
 }

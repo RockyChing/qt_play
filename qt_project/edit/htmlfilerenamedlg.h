@@ -24,8 +24,6 @@ private:
     void initUI();
     void initData();
 
-    void msgWarning(QString text);
-
 private slots:
     void onBtnDirOpenClicked();
     void onBtnRenameClicked();
