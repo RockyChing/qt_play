@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>HtmlFileNewDlg</class>
- <widget class="QDialog" name="HtmlFileNewDlg">
+ <class>FileNewDlg</class>
+ <widget class="QDialog" name="FileNewDlg">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Html文件复制</string>
+   <string>文件复制</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

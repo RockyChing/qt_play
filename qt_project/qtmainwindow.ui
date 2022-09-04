@@ -191,8 +191,8 @@
     <addaction name="actionNewLine"/>
     <addaction name="separator"/>
     <addaction name="actionText2Html"/>
-    <addaction name="actionHtmlFileNew"/>
-    <addaction name="actionHtmlFileRename"/>
+    <addaction name="actionFileNew"/>
+    <addaction name="actionFileRename"/>
     <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuAbout">
@@ -312,14 +312,20 @@
     <string>Ctrl+L</string>
    </property>
   </action>
-  <action name="actionHtmlFileNew">
+  <action name="actionFileNew">
    <property name="text">
-    <string>Html文件创建</string>
+    <string>文件创建(&amp;F)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
    </property>
   </action>
-  <action name="actionHtmlFileRename">
+  <action name="actionFileRename">
    <property name="text">
-    <string>Html文件重命名</string>
+    <string>文件重命名(&amp;R)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
    </property>
   </action>
  </widget>

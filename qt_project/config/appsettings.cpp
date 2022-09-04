@@ -20,12 +20,12 @@ const QString AppSettings::APP_SETTINGS_FILE = "configs.ini";
 const QString AppSettings::NL_PATH = "nlf_path";
 const QString AppSettings::ACCOUNT_PATH = "account_path";
 const QString AppSettings::POG_PATH = "pog_path";
-const QString AppSettings::HTML_DIR = "html_dir";
-const QString AppSettings::HTML_RDIR = "html_rdir";
+const QString AppSettings::FILE_CDIR = "file_cdir";
+const QString AppSettings::FILE_RDIR = "file_rdir";
 
 const QString AppSettings::QT_PLAY_MAJOR = "1";
 const QString AppSettings::QT_PLAY_MINOR = "9";
-const QString AppSettings::QT_PLAY_MICRO = "1";
+const QString AppSettings::QT_PLAY_MICRO = "2";
 
 
 AppSettings::AppSettings()

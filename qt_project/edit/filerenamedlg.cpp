@@ -7,15 +7,15 @@
 #include <QFileInfoList>
 #include <QPalette>
 #include <QRegExp>
-#include "htmlfilerenamedlg.h"
-#include "ui_htmlfilerenamedlg.h"
+#include "filerenamedlg.h"
+#include "ui_filerenamedlg.h"
 #include "config/appsettings.h"
 #include "utils/msgboxutil.h"
 #include "utils/rfileutil.h"
 
-HtmlFileRenameDlg::HtmlFileRenameDlg(QWidget *parent) :
+FileRenameDlg::FileRenameDlg(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::HtmlFileRenameDlg)
+    ui(new Ui::FileRenameDlg)
 {
     ui->setupUi(this);
 
@@ -29,12 +29,12 @@ HtmlFileRenameDlg::HtmlFileRenameDlg(QWidget *parent) :
     initData();
 }
 
-HtmlFileRenameDlg::~HtmlFileRenameDlg()
+FileRenameDlg::~FileRenameDlg()
 {
     delete ui;
 }
 
-void HtmlFileRenameDlg::initUI()
+void FileRenameDlg::initUI()
 {
     mBtnDirOpen = ui->btnDirOpen;
     mBtnRename = ui->btnRename;
@@ -48,10 +48,10 @@ void HtmlFileRenameDlg::initUI()
     connect(mBtnRename, SIGNAL(clicked()), this, SLOT(onBtnRenameClicked()));
 }
 
-void HtmlFileRenameDlg::initData()
+void FileRenameDlg::initData()
 {
     QSettings s(AppSettings::APP_SETTINGS_FILE, QSettings::IniFormat);
-    mDirName = s.value(AppSettings::HTML_RDIR).toString();
+    mDirName = s.value(AppSettings::FILE_RDIR).toString();
     if (!mDirName.isEmpty()) {
         mEditDirShow->setText(mDirName);
     } else {
@@ -59,7 +59,7 @@ void HtmlFileRenameDlg::initData()
     }
 }
 
-void HtmlFileRenameDlg::onBtnDirOpenClicked()
+void FileRenameDlg::onBtnDirOpenClicked()
 {
     QString filePath = mEditDirShow->text();
     if (filePath.isEmpty()) {
@@ -76,11 +76,11 @@ void HtmlFileRenameDlg::onBtnDirOpenClicked()
     } else {
         mEditDirShow->setText(mDirName);
         QSettings s(AppSettings::APP_SETTINGS_FILE, QSettings::IniFormat);
-        s.setValue(AppSettings::HTML_RDIR, mDirName);
+        s.setValue(AppSettings::FILE_RDIR, mDirName);
     }
 }
 
-void HtmlFileRenameDlg::onBtnRenameClicked()
+void FileRenameDlg::onBtnRenameClicked()
 {
     // 1.check parameter
     if (mDirName.isEmpty()) {
@@ -119,17 +119,8 @@ void HtmlFileRenameDlg::onBtnRenameClicked()
         QFileInfo fileInfo = fileInfoList.at(i);
         QString filePath = fileInfo.absoluteFilePath();
         QString fileName = fileInfo.fileName();
-
-        QString postFix("");
-        if (fileName.endsWith("xhtml")) {
-            postFix.append(".xhtml");
-        } else {
-            if (fileName.endsWith("html")) {
-                postFix.append(".html");
-            } else {
-                continue;
-            }
-        }
+        QString postFix = fileInfo.completeSuffix();
+        postFix.insert(0, QChar('.'));
         //qDebug() << fileName;
 
         QRegExp rx("\\d+");

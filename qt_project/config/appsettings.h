@@ -23,11 +23,11 @@ public:
     /* for POG path using */
     static const QString POG_PATH;
 
-    /* for HTML-File-Create path using */
-    static const QString HTML_DIR;
+    /* for File-Create path using */
+    static const QString FILE_CDIR;
 
-    /* for HTML-File-Rename path using */
-    static const QString HTML_RDIR;
+    /* for File-Rename path using */
+    static const QString FILE_RDIR;
 
 public:
     AppSettings();

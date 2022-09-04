@@ -1,5 +1,5 @@
-#ifndef HTMLFILERENAMEDLG_H
-#define HTMLFILERENAMEDLG_H
+#ifndef FILERENAMEDLG_H
+#define FILERENAMEDLG_H
 
 #include <QDialog>
 #include <QString>
@@ -9,16 +9,16 @@
 #include <QCheckBox>
 
 namespace Ui {
-class HtmlFileRenameDlg;
+class FileRenameDlg;
 }
 
-class HtmlFileRenameDlg : public QDialog
+class FileRenameDlg : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit HtmlFileRenameDlg(QWidget *parent = 0);
-    ~HtmlFileRenameDlg();
+    explicit FileRenameDlg(QWidget *parent = 0);
+    ~FileRenameDlg();
 
 private:
     void initUI();
@@ -29,7 +29,7 @@ private slots:
     void onBtnRenameClicked();
 
 private:
-    Ui::HtmlFileRenameDlg *ui;
+    Ui::FileRenameDlg *ui;
     QString mDirName;
 
     QPushButton *mBtnDirOpen;
@@ -41,4 +41,4 @@ private:
     QCheckBox *mCBBackup;
 };
 
-#endif // HTMLFILERENAMEDLG_H
+#endif // FILERENAMEDLG_H

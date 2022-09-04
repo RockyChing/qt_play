@@ -9,8 +9,8 @@
 #include "config/appsettings.h"
 #include "edit/nl_del.h"
 #include "edit/text2htmldlg.h"
-#include "edit/htmlfilenewdlg.h"
-#include "edit/htmlfilerenamedlg.h"
+#include "edit/filenewdlg.h"
+#include "edit/filerenamedlg.h"
 #include "account/AccountView.h"
 #include "pog/PoGTableView.h"
 #include "picmerge/PicMergeView.h"
@@ -129,6 +129,14 @@ void QtMainWindow::initMenu()
     QAction *actText2Html = menuEdit->addAction(tr("Text to Html"), this,
             SLOT(onText2HtmlClicked()), QKeySequence(tr("Ctrl+T")));
     actText2Html->setStatusTip(tr("Text to Html..."));
+	/* set Edit/FileCreate actions */
+    QAction *actFileCreate = menuEdit->addAction(tr("File Create"), this,
+            SLOT(onEditActionFileNewClicked()), QKeySequence(tr("Ctrl+F")));
+    actFileCreate->setStatusTip(tr("File Create..."));
+	/* set Edit/FileRename actions */
+    QAction *actFileCreate = menuEdit->addAction(tr("File Rename"), this,
+            SLOT(onEditActionFileRenameClicked()), QKeySequence(tr("Ctrl+R")));
+    actFileCreate->setStatusTip(tr("File Rename..."));
 }
 #endif
 
@@ -146,8 +154,8 @@ void QtMainWindow::initSlots()
 
     connect(ui->actionNewLine, SIGNAL(triggered(bool)), this, SLOT(onEditActionNewlineClicked()));
     connect(ui->actionText2Html, SIGNAL(triggered(bool)), this, SLOT(onEditActionText2HtmlClicked()));
-    connect(ui->actionHtmlFileNew, SIGNAL(triggered(bool)), this, SLOT(onEditActionHtmlFileNewClicked()));
-    connect(ui->actionHtmlFileRename, SIGNAL(triggered(bool)), this, SLOT(onEditActionHtmlFileRenameClicked()));
+    connect(ui->actionFileNew, SIGNAL(triggered(bool)), this, SLOT(onEditActionFileNewClicked()));
+    connect(ui->actionFileRename, SIGNAL(triggered(bool)), this, SLOT(onEditActionFileRenameClicked()));
     connect(ui->actionLog, SIGNAL(triggered(bool)), this, SLOT(onEditActionLogClicked()));
 
     connect(ui->actionAboutThis, SIGNAL(triggered(bool)), this, SLOT(aboutSlot()));
@@ -234,16 +242,16 @@ void QtMainWindow::onEditActionText2HtmlClicked()
     d->show();
 }
 
-void QtMainWindow::onEditActionHtmlFileNewClicked()
+void QtMainWindow::onEditActionFileNewClicked()
 {
-    HtmlFileNewDlg *d = new HtmlFileNewDlg(this);
+    FileNewDlg *d = new FileNewDlg(this);
     d->setAttribute(Qt::WA_DeleteOnClose);
     d->show();
 }
 
-void QtMainWindow::onEditActionHtmlFileRenameClicked()
+void QtMainWindow::onEditActionFileRenameClicked()
 {
-    HtmlFileRenameDlg *d = new HtmlFileRenameDlg(this);
+    FileRenameDlg *d = new FileRenameDlg(this);
     d->setAttribute(Qt::WA_DeleteOnClose);
     d->show();
 }

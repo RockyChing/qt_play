@@ -6,15 +6,15 @@
 #include <QFileInfo>
 #include <QFileInfoList>
 #include <QPalette>
-#include "htmlfilenewdlg.h"
-#include "ui_htmlfilenewdlg.h"
+#include "filenewdlg.h"
+#include "ui_filenewdlg.h"
 #include "config/appsettings.h"
 #include "utils/msgboxutil.h"
 
 
-HtmlFileNewDlg::HtmlFileNewDlg(QWidget *parent) :
+FileNewDlg::FileNewDlg(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::HtmlFileNewDlg)
+    ui(new Ui::FileNewDlg)
 {
     ui->setupUi(this);
 
@@ -28,12 +28,12 @@ HtmlFileNewDlg::HtmlFileNewDlg(QWidget *parent) :
     initData();
 }
 
-HtmlFileNewDlg::~HtmlFileNewDlg()
+FileNewDlg::~FileNewDlg()
 {
     delete ui;
 }
 
-void HtmlFileNewDlg::initUI()
+void FileNewDlg::initUI()
 {
     mBtnDirOpen = ui->btnDirOpen;
     mBtnClear = ui->btnClear;
@@ -62,10 +62,10 @@ void HtmlFileNewDlg::initUI()
     connect(mBtnCreate, SIGNAL(clicked()), this, SLOT(onBtnCreateClicked()));
 }
 
-void HtmlFileNewDlg::initData()
+void FileNewDlg::initData()
 {
     QSettings s(AppSettings::APP_SETTINGS_FILE, QSettings::IniFormat);
-    mDirName = s.value(AppSettings::HTML_DIR).toString();
+    mDirName = s.value(AppSettings::FILE_CDIR).toString();
     if (!mDirName.isEmpty()) {
         mEditDirShow->setText(mDirName);
     } else {
@@ -75,7 +75,7 @@ void HtmlFileNewDlg::initData()
     mEditSrcFile->setText("demo.xhtml");
 }
 
-void HtmlFileNewDlg::onBtnDirOpenClicked()
+void FileNewDlg::onBtnDirOpenClicked()
 {
     QString filePath = mEditDirShow->text();
     if (filePath.isEmpty()) {
@@ -92,11 +92,11 @@ void HtmlFileNewDlg::onBtnDirOpenClicked()
     } else {
         mEditDirShow->setText(mDirName);
         QSettings s(AppSettings::APP_SETTINGS_FILE, QSettings::IniFormat);
-        s.setValue(AppSettings::HTML_DIR, mDirName);
+        s.setValue(AppSettings::FILE_CDIR, mDirName);
     }
 }
 
-void HtmlFileNewDlg::onBtnClearClicked()
+void FileNewDlg::onBtnClearClicked()
 {
     // 1.check parameter
     if (mDirName.isEmpty()) {
@@ -139,7 +139,7 @@ void HtmlFileNewDlg::onBtnClearClicked()
     MsgBoxUtil::information(this, tr("清除成功！"));
 }
 
-void HtmlFileNewDlg::onBtnCreateClicked()
+void FileNewDlg::onBtnCreateClicked()
 {
     QString demoFileName = mEditSrcFile->text();
     QString demoFilePath = mDirName + QDir::separator() + demoFileName;
@@ -185,16 +185,15 @@ void HtmlFileNewDlg::onBtnCreateClicked()
     }
 
     QString strFilePrefix = mEditFilePrefix->text();
-    QStringList sl = demoFileName.split(".");
-    QString strFilePostfix = sl.at(1);
+    QFileInfo fi(demoFilePath);
+    QString strFilePostfix = fi.completeSuffix();
     if (strFilePostfix.isEmpty()) {
         MsgBoxUtil::warning(this, tr("demo文件后缀异常！"));
         return;
     }
 
     // 4.copy file
-    total += start;
-    for (uint i = start; i < total; i ++) {
+    for (uint i = start; i < (total + start); i ++) {
         // 4.1 create file name
         QString fileName = strFilePrefix;
         if (i < 10) {

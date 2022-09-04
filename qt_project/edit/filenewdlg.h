@@ -1,5 +1,5 @@
-#ifndef HTMLFILENEWDLG_H
-#define HTMLFILENEWDLG_H
+#ifndef FILENEWDLG_H
+#define FILENEWDLG_H
 
 #include <QString>
 #include <QDialog>
@@ -8,16 +8,16 @@
 
 
 namespace Ui {
-class HtmlFileNewDlg;
+class FileNewDlg;
 }
 
-class HtmlFileNewDlg : public QDialog
+class FileNewDlg : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit HtmlFileNewDlg(QWidget *parent = 0);
-    ~HtmlFileNewDlg();
+    explicit FileNewDlg(QWidget *parent = 0);
+    ~FileNewDlg();
 
 private:
     void initUI();
@@ -28,7 +28,7 @@ private slots:
     void onBtnClearClicked();
     void onBtnCreateClicked();
 private:
-    Ui::HtmlFileNewDlg *ui;
+    Ui::FileNewDlg *ui;
     QString mDirName;
 
     QPushButton *mBtnDirOpen;
@@ -42,4 +42,4 @@ private:
     QLineEdit *mEditTotal;
 };
 
-#endif // HTMLFILENEWDLG_H
+#endif // FILENEWDLG_H
