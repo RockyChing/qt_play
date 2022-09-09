@@ -18,11 +18,12 @@ public:
 
 private:
     void initUI();
+    void onBtnCopyClicked();
 
 private slots:
     void onBtnTransformClicked();
     void onBtnClearClicked();
-    void onBtnCopyClicked();
+
 
 private:
     Ui::Text2HtmlDlg *ui;

@@ -26,14 +26,12 @@ void Text2HtmlDlg::initUI()
     mTextHtmlEdit = ui->textHtmlEdit;
     mBtnTransform = ui->btnTransform;
     mBtnClear = ui->btnClear;
-    mBtnCopy = ui->btnCopy;
-    mBtnCopy->setVisible(false);
 
     ui->spinBoxNlineNum->setValue(1);
 
     connect(mBtnTransform, SIGNAL(clicked()), this, SLOT(onBtnTransformClicked()));
     connect(mBtnClear, SIGNAL(clicked()), this, SLOT(onBtnClearClicked()));
-    connect(mBtnCopy, SIGNAL(clicked()), this, SLOT(onBtnCopyClicked()));
+    //connect(mBtnCopy, SIGNAL(clicked()), this, SLOT(onBtnCopyClicked()));
 }
 
 void Text2HtmlDlg::onBtnTransformClicked()
@@ -51,11 +49,20 @@ void Text2HtmlDlg::onBtnTransformClicked()
         if (line.isEmpty()) {
             continue;
         }
-        line.remove(QRegExp("\\s"));
+
+        if (ui->cBoxDelSpace->isChecked()) {
+            line.remove(QRegExp("\\s"));
+        }
 
         result.append("<p>");
         result.append(line);
         result.append("</p>");
+
+        if (ui->cBoxNewLine->isChecked()) {
+            result.append("\r\n");
+            result.append("<p><br/></p>");
+        }
+
         if (1 == lineNum)
             result.append("\r\n");
         else if (2 == lineNum)
