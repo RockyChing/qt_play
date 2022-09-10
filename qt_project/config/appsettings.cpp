@@ -25,7 +25,7 @@ const QString AppSettings::FILE_RDIR = "file_rdir";
 
 const QString AppSettings::QT_PLAY_MAJOR = "1";
 const QString AppSettings::QT_PLAY_MINOR = "9";
-const QString AppSettings::QT_PLAY_MICRO = "3";
+const QString AppSettings::QT_PLAY_MICRO = "4";
 
 
 AppSettings::AppSettings()

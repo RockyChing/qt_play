@@ -114,20 +114,29 @@ void FileRenameDlg::onBtnRenameClicked()
 
     // 3.rename files
     int pos;
+    int fileIndex = 0;
     int fileCount = fileInfoList.size();
     for (int i = 0; i < fileCount; i ++) {
         QFileInfo fileInfo = fileInfoList.at(i);
         QString filePath = fileInfo.absoluteFilePath();
         QString fileName = fileInfo.fileName();
-        QString postFix = fileInfo.completeSuffix();
+        QString postFix = fileInfo.suffix();
+        postFix.toLower();
         postFix.insert(0, QChar('.'));
         //qDebug() << fileName;
 
-        QRegExp rx("\\d+");
-        pos = rx.indexIn(fileName, 0);
-        if (-1 == pos)
-            continue;
-        int index = rx.cap(0).toInt();
+        int index;
+        if (ui->checkBoxIndexAuto->isChecked()) {
+            index = fileIndex;
+            fileIndex += 1;
+        } else {
+            QRegExp rx("\\d+");
+            pos = rx.indexIn(fileName, 0);
+            if (-1 == pos)
+                continue;
+            index = rx.cap(0).toInt();
+        }
+
         QString strIndex;
         if (fileCount >= 100) {
             strIndex = strIndex.sprintf("%03d", index);
@@ -147,5 +156,5 @@ void FileRenameDlg::onBtnRenameClicked()
     }
 
     dir.refresh();
-    MsgBoxUtil::information(this, tr("复制成功！"));
+    MsgBoxUtil::information(this, tr("重命名成功！"));
 }
