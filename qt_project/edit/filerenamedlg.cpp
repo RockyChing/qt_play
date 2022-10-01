@@ -44,6 +44,7 @@ void FileRenameDlg::initUI()
 
     mCBBackup = ui->checkBoxBackup;
 
+    connect(ui->lineEditSeq, SIGNAL(textChanged(QString)), this, SLOT(onSeqTextChanged()));
     connect(mBtnDirOpen, SIGNAL(clicked()), this, SLOT(onBtnDirOpenClicked()));
     connect(mBtnRename, SIGNAL(clicked()), this, SLOT(onBtnRenameClicked()));
 }
@@ -57,6 +58,17 @@ void FileRenameDlg::initData()
     } else {
         mEditDirShow->setText(tr("未指定目录"));
     }
+}
+
+void FileRenameDlg::onSeqTextChanged()
+{
+    int seq = ui->lineEditSeq->text().toInt();
+    if (seq > 0) {
+        ui->checkBoxIndexAuto->setChecked(true);
+    } else {
+        ui->checkBoxIndexAuto->setChecked(false);
+    }
+    qWarning("起始序号发生改变");
 }
 
 void FileRenameDlg::onBtnDirOpenClicked()
@@ -114,8 +126,16 @@ void FileRenameDlg::onBtnRenameClicked()
 
     // 3.rename files
     int pos;
-    int fileIndex = 0;
+    int fileIndex = 1;
     int fileCount = fileInfoList.size();
+    int seqStart = ui->lineEditSeq->text().toInt();
+    if (seqStart > 0) {
+        fileIndex = seqStart;
+        if (!ui->checkBoxIndexAuto->isChecked()) {
+            ui->checkBoxIndexAuto->setChecked(true);
+        }
+    }
+
     for (int i = 0; i < fileCount; i ++) {
         QFileInfo fileInfo = fileInfoList.at(i);
         QString filePath = fileInfo.absoluteFilePath();

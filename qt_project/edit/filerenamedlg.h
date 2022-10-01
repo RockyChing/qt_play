@@ -25,6 +25,7 @@ private:
     void initData();
 
 private slots:
+    void onSeqTextChanged();
     void onBtnDirOpenClicked();
     void onBtnRenameClicked();
 
