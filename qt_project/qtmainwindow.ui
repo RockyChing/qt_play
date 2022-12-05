@@ -20,7 +20,7 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <widget class="QPushButton" name="btnCamera">
+     <widget class="QPushButton" name="btnRandom">
       <property name="minimumSize">
        <size>
         <width>0</width>
@@ -33,7 +33,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Camera</string>
+       <string>RandomSerials</string>
       </property>
      </widget>
     </item>
@@ -191,9 +191,10 @@
     <addaction name="actionNewLine"/>
     <addaction name="separator"/>
     <addaction name="actionText2Html"/>
+    <addaction name="separator"/>
     <addaction name="actionFileNew"/>
     <addaction name="actionFileRename"/>
-    <addaction name="separator"/>
+    <addaction name="actionFileSync"/>
    </widget>
    <widget class="QMenu" name="menuAbout">
     <property name="title">
@@ -326,6 +327,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionFileSync">
+   <property name="text">
+    <string>文件同步(&amp;C)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
    </property>
   </action>
  </widget>

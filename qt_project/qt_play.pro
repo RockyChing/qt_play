@@ -34,10 +34,12 @@ SOURCES += main.cpp\
     http/HttpClient.cpp \
     http/HttpClientView.cpp \
     reminder/ReminderDlg.cpp \
-    utils/rfileutil.cpp \
     edit/filenewdlg.cpp \
     edit/filerenamedlg.cpp \
-    utils/msgboxutil.cpp
+    utils/msgboxutil.cpp \
+    edit/filesyncdlg.cpp \
+    utils/fileutil.cpp \
+    randomserial/RandomSerialsDlg.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
@@ -168,8 +170,10 @@ HEADERS  += qtmainwindow.h \
     reminder/ReminderDlg.h \
     edit/filenewdlg.h \
     edit/filerenamedlg.h \
-    utils/rfileutil.h \
-    utils/msgboxutil.h
+    utils/msgboxutil.h \
+    edit/filesyncdlg.h \
+    utils/fileutil.h \
+    randomserial/RandomSerialsDlg.h
 
 FORMS    += qtmainwindow.ui \
     finance/finance.ui \
@@ -182,7 +186,9 @@ FORMS    += qtmainwindow.ui \
     http/httpclientview.ui \
     reminder/reminderdlg.ui \
     edit/filenewdlg.ui \
-    edit/filerenamedlg.ui
+    edit/filerenamedlg.ui \
+    edit/filesyncdlg.ui \
+    randomserial/randomserialsdlg.ui
 
 win32: LIBS += -L$$PWD/libs/ -llibusb-1.0 \
     -llibcrypto-1_1 -llibssl-1_1

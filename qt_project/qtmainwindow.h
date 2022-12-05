@@ -50,11 +50,13 @@ private slots:
     void onEditActionText2HtmlClicked();
     void onEditActionFileNewClicked();
     void onEditActionFileRenameClicked();
+    void onEditActionFileSyncClicked();
     void onEditActionLogClicked();
 
     void aboutSlot();
     void aboutQtSlot();
 
+    void onBtnRandomSerialsClicked();
     void onBtnFinanceClicked();
     void onBtnAccountClicked();
     void onBtnHttpsClientClicked();

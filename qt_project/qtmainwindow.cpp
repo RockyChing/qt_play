@@ -11,11 +11,13 @@
 #include "edit/text2htmldlg.h"
 #include "edit/filenewdlg.h"
 #include "edit/filerenamedlg.h"
+#include "edit/filesyncdlg.h"
 #include "account/AccountView.h"
 #include "pog/PoGTableView.h"
 #include "picmerge/PicMergeView.h"
 #include "http/HttpClientView.h"
 #include "reminder/ReminderDlg.h"
+#include "randomserial/RandomSerialsDlg.h"
 
 
 QtMainWindow::QtMainWindow(QWidget *parent) :
@@ -156,11 +158,13 @@ void QtMainWindow::initSlots()
     connect(ui->actionText2Html, SIGNAL(triggered(bool)), this, SLOT(onEditActionText2HtmlClicked()));
     connect(ui->actionFileNew, SIGNAL(triggered(bool)), this, SLOT(onEditActionFileNewClicked()));
     connect(ui->actionFileRename, SIGNAL(triggered(bool)), this, SLOT(onEditActionFileRenameClicked()));
+    connect(ui->actionFileSync, SIGNAL(triggered(bool)), this, SLOT(onEditActionFileSyncClicked()));
     connect(ui->actionLog, SIGNAL(triggered(bool)), this, SLOT(onEditActionLogClicked()));
 
     connect(ui->actionAboutThis, SIGNAL(triggered(bool)), this, SLOT(aboutSlot()));
     connect(ui->actionAboutQt, SIGNAL(triggered(bool)), this, SLOT(aboutQtSlot()));
 
+    connect(ui->btnRandom, SIGNAL(clicked()), this, SLOT(onBtnRandomSerialsClicked()));
     connect(ui->btnFinance, SIGNAL(clicked()), this, SLOT(onBtnFinanceClicked()));
     connect(ui->btnAccount, SIGNAL(clicked()), this, SLOT(onBtnAccountClicked()));
     connect(ui->btnHttpsClient, SIGNAL(clicked()), this, SLOT(onBtnHttpsClientClicked()));
@@ -256,6 +260,13 @@ void QtMainWindow::onEditActionFileRenameClicked()
     d->show();
 }
 
+void QtMainWindow::onEditActionFileSyncClicked()
+{
+    FileSyncDlg *d = new FileSyncDlg(this);
+    d->setAttribute(Qt::WA_DeleteOnClose);
+    d->show();
+}
+
 void QtMainWindow::onEditActionLogClicked()
 {
     if (NULL != mLogViewer && mLogViewer->isHidden()) {
@@ -287,6 +298,12 @@ void QtMainWindow::aboutSlot()
 void QtMainWindow::aboutQtSlot()
 {
     QMessageBox::aboutQt(this);
+}
+
+void QtMainWindow::onBtnRandomSerialsClicked()
+{
+    RandomSerialsDlg *d = new RandomSerialsDlg();
+    d->show();
 }
 
 void QtMainWindow::onBtnFinanceClicked()

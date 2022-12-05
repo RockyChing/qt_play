@@ -11,7 +11,7 @@
 #include "ui_filerenamedlg.h"
 #include "config/appsettings.h"
 #include "utils/msgboxutil.h"
-#include "utils/rfileutil.h"
+#include "utils/fileutil.h"
 
 FileRenameDlg::FileRenameDlg(QWidget *parent) :
     QDialog(parent),
@@ -120,7 +120,7 @@ void FileRenameDlg::onBtnRenameClicked()
     }
 
     if (mCBBackup->isChecked()) {
-        bool res = RFileUtil::copyDir(mDirName, mDirName + "bak", false);
+        bool res = FileUtil::copyDir(mDirName, mDirName + "bak", false);
         qDebug() << "copyDir result: " << res;
     }
 

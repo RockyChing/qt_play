@@ -29,6 +29,12 @@ public:
     /* for File-Rename path using */
     static const QString FILE_RDIR;
 
+    /* for Sync-Src path using */
+    static const QString SYNC_SDIR;
+
+    /* for Sync-Dst path using */
+    static const QString SYNC_DDIR;
+
 public:
     AppSettings();
 
