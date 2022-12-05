@@ -1,4 +1,4 @@
-#include "text2htmldlg.h"
+#include "Text2HtmlDlg.h"
 #include "ui_text2htmldlg.h"
 #include <QDebug>
 

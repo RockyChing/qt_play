@@ -47,16 +47,17 @@ private slots:
     void onFileActionSaveClicked();
 
     void onEditActionNewlineClicked();
-    void onEditActionText2HtmlClicked();
     void onEditActionFileNewClicked();
     void onEditActionFileRenameClicked();
     void onEditActionFileSyncClicked();
     void onEditActionLogClicked();
 
+    void onePubActionText2HtmlClicked();
+    void onePubActionIdGenClicked();
+
     void aboutSlot();
     void aboutQtSlot();
 
-    void onBtnRandomSerialsClicked();
     void onBtnFinanceClicked();
     void onBtnAccountClicked();
     void onBtnHttpsClientClicked();

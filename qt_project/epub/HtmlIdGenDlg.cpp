@@ -1,5 +1,5 @@
-#include "RandomSerialsDlg.h"
-#include "ui_randomserialsdlg.h"
+#include "HtmlIdGenDlg.h"
+#include "ui_HtmlIdGenDlg.h"
 
 #include <QString>
 #include <QLineEdit>
@@ -9,9 +9,9 @@
 #include <QClipboard>
 
 
-RandomSerialsDlg::RandomSerialsDlg(QWidget *parent) :
+HtmlIdGenDlg::HtmlIdGenDlg(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::RandomSerialsDlg)
+    ui(new Ui::HtmlIdGenDlg)
 {
     ui->setupUi(this);
     Qt::WindowFlags windowFlag = Qt::Dialog;
@@ -24,12 +24,12 @@ RandomSerialsDlg::RandomSerialsDlg(QWidget *parent) :
     initSlots();
 }
 
-RandomSerialsDlg::~RandomSerialsDlg()
+HtmlIdGenDlg::~HtmlIdGenDlg()
 {
     delete ui;
 }
 
-void RandomSerialsDlg::initUI()
+void HtmlIdGenDlg::initUI()
 {
     mResText = ui->plainTextEdit;
     mResText->setReadOnly(true);
@@ -37,13 +37,13 @@ void RandomSerialsDlg::initUI()
     ui->postLineEdit->setText(ui->postLineEdit->placeholderText());
 }
 
-void RandomSerialsDlg::initSlots()
+void HtmlIdGenDlg::initSlots()
 {
     connect(ui->btnOK, SIGNAL(clicked()), this, SLOT(onBtnOKClicked()));
     connect(ui->btnCancle, SIGNAL(clicked()), this, SLOT(onBtnCancleClicked()));
 }
 
-QString RandomSerialsDlg::getRandomSerials(int length)
+QString HtmlIdGenDlg::getRandomSerials(int length)
 {
     const char chars[] = "1234567890abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ";
     const int size = sizeof(chars);
@@ -60,7 +60,7 @@ QString RandomSerialsDlg::getRandomSerials(int length)
     return result;
 }
 
-void RandomSerialsDlg::onBtnOKClicked()
+void HtmlIdGenDlg::onBtnOKClicked()
 {
     QString preText = ui->prexLineEdit->text();
     QString postText = ui->postLineEdit->text();
@@ -121,7 +121,7 @@ void RandomSerialsDlg::onBtnOKClicked()
     mResText->copy();
 }
 
-void RandomSerialsDlg::onBtnCancleClicked()
+void HtmlIdGenDlg::onBtnCancleClicked()
 {
     this->close();
 }

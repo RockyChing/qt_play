@@ -19,7 +19,6 @@ SOURCES += main.cpp\
     finance/finance.cpp \
     edit/nl_del.cpp \
     config/appsettings.cpp \
-    edit/text2htmldlg.cpp \
     crypto/qaes.cpp \
     account/AccountJsonData.cpp \
     account/AccountView.cpp \
@@ -39,14 +38,14 @@ SOURCES += main.cpp\
     utils/msgboxutil.cpp \
     edit/filesyncdlg.cpp \
     utils/fileutil.cpp \
-    randomserial/RandomSerialsDlg.cpp
+    epub/Text2HtmlDlg.cpp \
+    epub/HtmlIdGenDlg.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
     finance/finance.h \
     edit/nl_del.h \
     config/appsettings.h \
-    edit/text2htmldlg.h \
     crypto/qaes.h \
     include/openssl/aes.h \
     include/openssl/asn1.h \
@@ -173,12 +172,12 @@ HEADERS  += qtmainwindow.h \
     utils/msgboxutil.h \
     edit/filesyncdlg.h \
     utils/fileutil.h \
-    randomserial/RandomSerialsDlg.h
+    epub/Text2HtmlDlg.h \
+    epub/HtmlIdGenDlg.h
 
 FORMS    += qtmainwindow.ui \
     finance/finance.ui \
     edit/nl_del.ui \
-    edit/text2htmldlg.ui \
     account/accountview.ui \
     pog/pogtableview.ui \
     picmerge/picmergeview.ui \
@@ -188,7 +187,8 @@ FORMS    += qtmainwindow.ui \
     edit/filenewdlg.ui \
     edit/filerenamedlg.ui \
     edit/filesyncdlg.ui \
-    randomserial/randomserialsdlg.ui
+    epub/text2htmldlg.ui \
+    epub/htmlidgendlg.ui
 
 win32: LIBS += -L$$PWD/libs/ -llibusb-1.0 \
     -llibcrypto-1_1 -llibssl-1_1

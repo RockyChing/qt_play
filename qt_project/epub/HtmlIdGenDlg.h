@@ -1,21 +1,21 @@
-#ifndef RANDOMSERIALSDLG_H
-#define RANDOMSERIALSDLG_H
+#ifndef HTML_ID_GEN_DLG_H
+#define HTML_ID_GEN_DLG_H
 
 #include <QDialog>
 #include <QPushButton>
 #include <QPlainTextEdit>
 
 namespace Ui {
-class RandomSerialsDlg;
+class HtmlIdGenDlg;
 }
 
-class RandomSerialsDlg : public QDialog
+class HtmlIdGenDlg : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit RandomSerialsDlg(QWidget *parent = 0);
-    ~RandomSerialsDlg();
+    explicit HtmlIdGenDlg(QWidget *parent = 0);
+    ~HtmlIdGenDlg();
 
 private:
     void initUI();
@@ -28,9 +28,9 @@ private slots:
     void onBtnCancleClicked();
 
 private:
-    Ui::RandomSerialsDlg *ui;
+    Ui::HtmlIdGenDlg *ui;
 
     QPlainTextEdit *mResText;
 };
 
-#endif // RANDOMSERIALSDLG_H
+#endif // HTML_ID_GEN_DLG_H

@@ -8,7 +8,6 @@
 #include "ui_qtmainwindow.h"
 #include "config/appsettings.h"
 #include "edit/nl_del.h"
-#include "edit/text2htmldlg.h"
 #include "edit/filenewdlg.h"
 #include "edit/filerenamedlg.h"
 #include "edit/filesyncdlg.h"
@@ -17,7 +16,8 @@
 #include "picmerge/PicMergeView.h"
 #include "http/HttpClientView.h"
 #include "reminder/ReminderDlg.h"
-#include "randomserial/RandomSerialsDlg.h"
+#include "epub/Text2HtmlDlg.h"
+#include "epub/HtmlIdGenDlg.h"
 
 
 QtMainWindow::QtMainWindow(QWidget *parent) :
@@ -155,16 +155,16 @@ void QtMainWindow::initSlots()
     connect(ui->actionExit, SIGNAL(triggered(bool)), this, SLOT(onBtnExitClicked()));
 
     connect(ui->actionNewLine, SIGNAL(triggered(bool)), this, SLOT(onEditActionNewlineClicked()));
-    connect(ui->actionText2Html, SIGNAL(triggered(bool)), this, SLOT(onEditActionText2HtmlClicked()));
     connect(ui->actionFileNew, SIGNAL(triggered(bool)), this, SLOT(onEditActionFileNewClicked()));
     connect(ui->actionFileRename, SIGNAL(triggered(bool)), this, SLOT(onEditActionFileRenameClicked()));
     connect(ui->actionFileSync, SIGNAL(triggered(bool)), this, SLOT(onEditActionFileSyncClicked()));
     connect(ui->actionLog, SIGNAL(triggered(bool)), this, SLOT(onEditActionLogClicked()));
+    connect(ui->actionText2Html, SIGNAL(triggered(bool)), this, SLOT(onePubActionText2HtmlClicked()));
+    connect(ui->actionIDGen, SIGNAL(triggered(bool)), this, SLOT(onePubActionIdGenClicked()));
 
     connect(ui->actionAboutThis, SIGNAL(triggered(bool)), this, SLOT(aboutSlot()));
     connect(ui->actionAboutQt, SIGNAL(triggered(bool)), this, SLOT(aboutQtSlot()));
 
-    connect(ui->btnRandom, SIGNAL(clicked()), this, SLOT(onBtnRandomSerialsClicked()));
     connect(ui->btnFinance, SIGNAL(clicked()), this, SLOT(onBtnFinanceClicked()));
     connect(ui->btnAccount, SIGNAL(clicked()), this, SLOT(onBtnAccountClicked()));
     connect(ui->btnHttpsClient, SIGNAL(clicked()), this, SLOT(onBtnHttpsClientClicked()));
@@ -239,13 +239,6 @@ void QtMainWindow::onEditActionNewlineClicked()
     d->show();
 }
 
-void QtMainWindow::onEditActionText2HtmlClicked()
-{
-    Text2HtmlDlg *d = new Text2HtmlDlg(this);
-    d->setAttribute(Qt::WA_DeleteOnClose);
-    d->show();
-}
-
 void QtMainWindow::onEditActionFileNewClicked()
 {
     FileNewDlg *d = new FileNewDlg(this);
@@ -275,6 +268,20 @@ void QtMainWindow::onEditActionLogClicked()
     }
 }
 
+void QtMainWindow::onePubActionText2HtmlClicked()
+{
+    Text2HtmlDlg *d = new Text2HtmlDlg(this);
+    d->setAttribute(Qt::WA_DeleteOnClose);
+    d->show();
+}
+
+void QtMainWindow::onePubActionIdGenClicked()
+{
+    HtmlIdGenDlg *d = new HtmlIdGenDlg();
+    d->setAttribute(Qt::WA_DeleteOnClose);
+    d->show();
+}
+
 void QtMainWindow::aboutSlot()
 {
     QString text = QString("<b>qt_play V%1.%2.%3</b><br/><br/>").arg(AppSettings::QT_PLAY_MAJOR).arg(AppSettings::QT_PLAY_MINOR).arg(AppSettings::QT_PLAY_MICRO);
@@ -298,12 +305,6 @@ void QtMainWindow::aboutSlot()
 void QtMainWindow::aboutQtSlot()
 {
     QMessageBox::aboutQt(this);
-}
-
-void QtMainWindow::onBtnRandomSerialsClicked()
-{
-    RandomSerialsDlg *d = new RandomSerialsDlg();
-    d->show();
 }
 
 void QtMainWindow::onBtnFinanceClicked()

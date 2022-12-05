@@ -190,8 +190,6 @@
     </property>
     <addaction name="actionNewLine"/>
     <addaction name="separator"/>
-    <addaction name="actionText2Html"/>
-    <addaction name="separator"/>
     <addaction name="actionFileNew"/>
     <addaction name="actionFileRename"/>
     <addaction name="actionFileSync"/>
@@ -209,8 +207,17 @@
     </property>
     <addaction name="actionLog"/>
    </widget>
+   <widget class="QMenu" name="menuePub">
+    <property name="title">
+     <string>ePub</string>
+    </property>
+    <addaction name="actionText2Html"/>
+    <addaction name="actionIDGen"/>
+    <addaction name="actionPdfNewlineRmver"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
+   <addaction name="menuePub"/>
    <addaction name="menuTool"/>
    <addaction name="menuAbout"/>
   </widget>
@@ -281,14 +288,6 @@
     <string>Ctrl+D</string>
    </property>
   </action>
-  <action name="actionText2Html">
-   <property name="text">
-    <string>Text转Html(&amp;T)</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+T</string>
-   </property>
-  </action>
   <action name="actionAboutThis">
    <property name="text">
     <string>关于软件(&amp;A)</string>
@@ -335,6 +334,24 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionText2Html">
+   <property name="text">
+    <string>Text转Html(&amp;T)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
+   </property>
+  </action>
+  <action name="actionPdfNewlineRmver">
+   <property name="text">
+    <string>pdf换行去除</string>
+   </property>
+  </action>
+  <action name="actionIDGen">
+   <property name="text">
+    <string>id生成</string>
    </property>
   </action>
  </widget>
