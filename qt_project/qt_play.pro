@@ -39,7 +39,8 @@ SOURCES += main.cpp\
     edit/filesyncdlg.cpp \
     utils/fileutil.cpp \
     epub/Text2HtmlDlg.cpp \
-    epub/HtmlIdGenDlg.cpp
+    epub/htmlrefgendlg.cpp \
+    epub/htmlidgendlg.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
@@ -173,7 +174,8 @@ HEADERS  += qtmainwindow.h \
     edit/filesyncdlg.h \
     utils/fileutil.h \
     epub/Text2HtmlDlg.h \
-    epub/HtmlIdGenDlg.h
+    epub/htmlrefgendlg.h \
+    epub/htmlidgendlg.h
 
 FORMS    += qtmainwindow.ui \
     finance/finance.ui \
@@ -188,7 +190,8 @@ FORMS    += qtmainwindow.ui \
     edit/filerenamedlg.ui \
     edit/filesyncdlg.ui \
     epub/text2htmldlg.ui \
-    epub/htmlidgendlg.ui
+    epub/htmlidgendlg.ui \
+    epub/htmlrefgendlg.ui
 
 win32: LIBS += -L$$PWD/libs/ -llibusb-1.0 \
     -llibcrypto-1_1 -llibssl-1_1

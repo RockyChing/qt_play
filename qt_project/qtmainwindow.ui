@@ -213,6 +213,7 @@
     </property>
     <addaction name="actionText2Html"/>
     <addaction name="actionIDGen"/>
+    <addaction name="actionRefGen"/>
     <addaction name="actionPdfNewlineRmver"/>
    </widget>
    <addaction name="menuFile"/>
@@ -352,6 +353,11 @@
   <action name="actionIDGen">
    <property name="text">
     <string>id生成</string>
+   </property>
+  </action>
+  <action name="actionRefGen">
+   <property name="text">
+    <string>ref生成</string>
    </property>
   </action>
  </widget>

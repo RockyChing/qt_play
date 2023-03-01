@@ -1,4 +1,4 @@
-#include "HtmlIdGenDlg.h"
+#include "htmlidgendlg.h"
 #include "ui_HtmlIdGenDlg.h"
 
 #include <QString>

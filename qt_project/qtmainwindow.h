@@ -54,6 +54,7 @@ private slots:
 
     void onePubActionText2HtmlClicked();
     void onePubActionIdGenClicked();
+    void onePubActionRefGenClicked();
 
     void aboutSlot();
     void aboutQtSlot();

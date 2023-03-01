@@ -17,7 +17,8 @@
 #include "http/HttpClientView.h"
 #include "reminder/ReminderDlg.h"
 #include "epub/Text2HtmlDlg.h"
-#include "epub/HtmlIdGenDlg.h"
+#include "epub/htmlidgendlg.h"
+#include "epub/htmlrefgendlg.h"
 
 
 QtMainWindow::QtMainWindow(QWidget *parent) :
@@ -161,6 +162,7 @@ void QtMainWindow::initSlots()
     connect(ui->actionLog, SIGNAL(triggered(bool)), this, SLOT(onEditActionLogClicked()));
     connect(ui->actionText2Html, SIGNAL(triggered(bool)), this, SLOT(onePubActionText2HtmlClicked()));
     connect(ui->actionIDGen, SIGNAL(triggered(bool)), this, SLOT(onePubActionIdGenClicked()));
+    connect(ui->actionRefGen, SIGNAL(triggered(bool)), this, SLOT(onePubActionRefGenClicked()));
 
     connect(ui->actionAboutThis, SIGNAL(triggered(bool)), this, SLOT(aboutSlot()));
     connect(ui->actionAboutQt, SIGNAL(triggered(bool)), this, SLOT(aboutQtSlot()));
@@ -278,6 +280,13 @@ void QtMainWindow::onePubActionText2HtmlClicked()
 void QtMainWindow::onePubActionIdGenClicked()
 {
     HtmlIdGenDlg *d = new HtmlIdGenDlg();
+    d->setAttribute(Qt::WA_DeleteOnClose);
+    d->show();
+}
+
+void QtMainWindow::onePubActionRefGenClicked()
+{
+    HtmlRefGenDlg *d = new HtmlRefGenDlg();
     d->setAttribute(Qt::WA_DeleteOnClose);
     d->show();
 }
