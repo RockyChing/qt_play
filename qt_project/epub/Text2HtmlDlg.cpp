@@ -1,5 +1,7 @@
 #include "Text2HtmlDlg.h"
 #include "ui_text2htmldlg.h"
+#include <QClipboard>
+#include <QMimeData>
 #include <QDebug>
 
 Text2HtmlDlg::Text2HtmlDlg(QWidget *parent) :
@@ -24,14 +26,37 @@ Text2HtmlDlg::~Text2HtmlDlg()
 void Text2HtmlDlg::initUI()
 {
     mTextHtmlEdit = ui->textHtmlEdit;
+    mBtnSrc = ui->btnSrc;
     mBtnTransform = ui->btnTransform;
     mBtnClear = ui->btnClear;
 
     ui->spinBoxNlineNum->setValue(1);
 
+    connect(mBtnSrc, SIGNAL(clicked()), this, SLOT(onBtnSrcClicked()));
     connect(mBtnTransform, SIGNAL(clicked()), this, SLOT(onBtnTransformClicked()));
     connect(mBtnClear, SIGNAL(clicked()), this, SLOT(onBtnClearClicked()));
     //connect(mBtnCopy, SIGNAL(clicked()), this, SLOT(onBtnCopyClicked()));
+}
+
+void Text2HtmlDlg::onBtnSrcClicked()
+{
+    mTextHtmlEdit->clear();
+
+    QClipboard *clipboard = QGuiApplication::clipboard();
+    const QMimeData *mimeData = clipboard->mimeData();
+    if (mimeData->hasImage()) {
+        qDebug() << "hasImage";
+    } else if (mimeData->hasHtml()) {
+        qDebug() << "hasHtml";
+        QString htmlString = mimeData->html();
+        mTextHtmlEdit->appendHtml(htmlString);
+        mTextHtmlEdit->appendPlainText("*** html code:");
+        mTextHtmlEdit->appendPlainText(htmlString);
+    } else if (mimeData->hasText()) {
+        qDebug() << "hasText";
+    } else {
+        qDebug() << "not support";
+    }
 }
 
 void Text2HtmlDlg::onBtnTransformClicked()
