@@ -44,6 +44,7 @@ void Text2HtmlDlg::onBtnTransformClicked()
     //result.append("<p class=\"indent-para\">");
 
     const int lineNum = ui->spinBoxNlineNum->value();
+    bool isNumZero = false;
     while (!in.atEnd()) {
         QString line = in.readLine();
         if (line.isEmpty()) {
@@ -54,9 +55,19 @@ void Text2HtmlDlg::onBtnTransformClicked()
             line.remove(QRegExp("\\s"));
         }
 
-        result.append("<p>");
+        if (!isNumZero) {
+            result.append("<p>");
+        }
         result.append(line);
-        result.append("</p>");
+
+        if (0 == lineNum) {
+            isNumZero = true;
+            continue;
+        }
+
+        if (!isNumZero) {
+            result.append("</p>");
+        }
 
         if (ui->cBoxNewLine->isChecked()) {
             result.append("\r\n");
@@ -72,11 +83,15 @@ void Text2HtmlDlg::onBtnTransformClicked()
 
     //result.append("</p>");
     mTextHtmlEdit->clear();
-    if (1 == lineNum)
+    if (0 == lineNum) {
+        result.append("</p>");
+        mTextHtmlEdit->setPlainText(result);
+    } if (1 == lineNum) {
         mTextHtmlEdit->setPlainText(result.left(result.length()-2));
-    else if (2 == lineNum)
+    } else if (2 == lineNum) {
         mTextHtmlEdit->setPlainText(result.left(result.length()-4));
-    else {}
+    } else {
+    }
 
     onBtnCopyClicked();
 }

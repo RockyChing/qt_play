@@ -17,8 +17,8 @@
    <iconset resource="../resources.qrc">
     <normaloff>:/res/images/icon_play.png</normaloff>:/res/images/icon_play.png</iconset>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
     <widget class="QPlainTextEdit" name="textHtmlEdit">
      <property name="minimumSize">
       <size>
@@ -33,8 +33,8 @@
      </property>
     </widget>
    </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QCheckBox" name="cBoxDelSpace">
        <property name="font">
@@ -64,8 +64,8 @@
      </item>
     </layout>
    </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+   <item row="2" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QPushButton" name="btnNlDelOpen_2">
        <property name="enabled">
@@ -119,8 +119,26 @@
      </item>
     </layout>
    </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <item row="3" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QPushButton" name="btnSrc">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>显示源码</string>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QPushButton" name="btnTransform">
        <property name="minimumSize">
