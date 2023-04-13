@@ -19,6 +19,7 @@
 #include "epub/Text2HtmlDlg.h"
 #include "epub/htmlidgendlg.h"
 #include "epub/htmlrefgendlg.h"
+#include "knote/knotemgr.h"
 
 
 QtMainWindow::QtMainWindow(QWidget *parent) :
@@ -167,6 +168,7 @@ void QtMainWindow::initSlots()
     connect(ui->actionAboutThis, SIGNAL(triggered(bool)), this, SLOT(aboutSlot()));
     connect(ui->actionAboutQt, SIGNAL(triggered(bool)), this, SLOT(aboutQtSlot()));
 
+    connect(ui->btnKnoteMgr, SIGNAL(clicked()), this, SLOT(onBtnKNoteClicked()));
     connect(ui->btnFinance, SIGNAL(clicked()), this, SLOT(onBtnFinanceClicked()));
     connect(ui->btnAccount, SIGNAL(clicked()), this, SLOT(onBtnAccountClicked()));
     connect(ui->btnHttpsClient, SIGNAL(clicked()), this, SLOT(onBtnHttpsClientClicked()));
@@ -314,6 +316,12 @@ void QtMainWindow::aboutSlot()
 void QtMainWindow::aboutQtSlot()
 {
     QMessageBox::aboutQt(this);
+}
+
+void QtMainWindow::onBtnKNoteClicked()
+{
+    KNoteMgr *f = new KNoteMgr();
+    f->show();
 }
 
 void QtMainWindow::onBtnFinanceClicked()

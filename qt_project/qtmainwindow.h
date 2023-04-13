@@ -59,6 +59,7 @@ private slots:
     void aboutSlot();
     void aboutQtSlot();
 
+    void onBtnKNoteClicked();
     void onBtnFinanceClicked();
     void onBtnAccountClicked();
     void onBtnHttpsClientClicked();

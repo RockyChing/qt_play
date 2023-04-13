@@ -40,7 +40,9 @@ SOURCES += main.cpp\
     utils/fileutil.cpp \
     epub/Text2HtmlDlg.cpp \
     epub/htmlrefgendlg.cpp \
-    epub/htmlidgendlg.cpp
+    epub/htmlidgendlg.cpp \
+    knote/knotemgr.cpp \
+    knote/knoteitem.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
@@ -175,7 +177,9 @@ HEADERS  += qtmainwindow.h \
     utils/fileutil.h \
     epub/Text2HtmlDlg.h \
     epub/htmlrefgendlg.h \
-    epub/htmlidgendlg.h
+    epub/htmlidgendlg.h \
+    knote/knotemgr.h \
+    knote/knoteitem.h
 
 FORMS    += qtmainwindow.ui \
     finance/finance.ui \
@@ -191,7 +195,8 @@ FORMS    += qtmainwindow.ui \
     edit/filesyncdlg.ui \
     epub/text2htmldlg.ui \
     epub/htmlidgendlg.ui \
-    epub/htmlrefgendlg.ui
+    epub/htmlrefgendlg.ui \
+    knote/knotemgr.ui
 
 win32: LIBS += -L$$PWD/libs/ -llibusb-1.0 \
     -llibcrypto-1_1 -llibssl-1_1

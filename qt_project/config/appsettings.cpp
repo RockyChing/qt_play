@@ -27,9 +27,12 @@ const QString AppSettings::FILE_RDIR = "file_rdir";
 const QString AppSettings::SYNC_SDIR = "sync_sdir";
 const QString AppSettings::SYNC_DDIR = "sync_ddir";
 
+const QString AppSettings::KNOTE_SDIR = "knote_sdir";
+const QString AppSettings::KNOTE_DDIR = "knote_ddir";
+
 const QString AppSettings::QT_PLAY_MAJOR = "1";
-const QString AppSettings::QT_PLAY_MINOR = "13";
-const QString AppSettings::QT_PLAY_MICRO = "2";
+const QString AppSettings::QT_PLAY_MINOR = "14";
+const QString AppSettings::QT_PLAY_MICRO = "0";
 
 
 AppSettings::AppSettings()

@@ -35,6 +35,11 @@ public:
     /* for Sync-Dst path using */
     static const QString SYNC_DDIR;
 
+    /* for Kindle note file path using */
+    static const QString KNOTE_SDIR;
+    /* for Kindle note save path using */
+    static const QString KNOTE_DDIR;
+
 public:
     AppSettings();
 
