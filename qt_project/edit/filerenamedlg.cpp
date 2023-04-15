@@ -60,6 +60,21 @@ void FileRenameDlg::initData()
     }
 }
 
+bool FileRenameDlg::isStringUpper(QString &s)
+{
+    const QString upper("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    bool res = false;
+    for (int i = 0; i < s.size(); i ++) {
+        QString tmp(s.at(i));
+        if (upper.contains(tmp)) {
+            res = true;
+            break;
+        }
+    }
+
+    return res;
+}
+
 void FileRenameDlg::onSeqTextChanged()
 {
     int seq = ui->lineEditSeq->text().toInt();
@@ -107,7 +122,7 @@ void FileRenameDlg::onBtnRenameClicked()
     }
 
     QString filePrefix = mEditFilePrefix->text();
-    if (filePrefix.isEmpty()) {
+    if (!ui->checkPostfixLow->isChecked() && filePrefix.isEmpty()) {
         MsgBoxUtil::warning(this, tr("未指定文件前缀！"));
         return;
     }
@@ -125,56 +140,82 @@ void FileRenameDlg::onBtnRenameClicked()
     }
 
     // 3.rename files
-    int pos;
-    int fileIndex = 1;
     int fileCount = fileInfoList.size();
-    int seqStart = ui->lineEditSeq->text().toInt();
-    if (seqStart > 0) {
-        fileIndex = seqStart;
-        if (!ui->checkBoxIndexAuto->isChecked()) {
-            ui->checkBoxIndexAuto->setChecked(true);
-        }
-    }
+    if (ui->checkPostfixLow->isChecked()) {
+        for (int i = 0; i < fileCount; i ++) {
+            QFileInfo fileInfo = fileInfoList.at(i);
+            QString filePath = fileInfo.absoluteFilePath();
+            //qDebug() << "filePath: " << filePath;
 
-    for (int i = 0; i < fileCount; i ++) {
-        QFileInfo fileInfo = fileInfoList.at(i);
-        QString filePath = fileInfo.absoluteFilePath();
-        QString fileName = fileInfo.fileName();
-        QString postFix = fileInfo.suffix();
-        postFix.toLower();
-        postFix.insert(0, QChar('.'));
-        //qDebug() << fileName;
-
-        int index;
-        if (ui->checkBoxIndexAuto->isChecked()) {
-            index = fileIndex;
-            fileIndex += 1;
-        } else {
-            QRegExp rx("\\d+");
-            pos = rx.indexIn(fileName, 0);
-            if (-1 == pos)
+            QString postFix = fileInfo.suffix();
+            if (!isStringUpper(postFix)) {
+                qDebug() << "not upper";
                 continue;
-            index = rx.cap(0).toInt();
+            }
+
+            QString lowPostfix = postFix.toLower();
+
+            QString newFilePath(filePath);
+            const int len = newFilePath.size();
+            const int lenFix = lowPostfix.size();
+            int pos = len - lenFix;
+            newFilePath.replace(pos, lenFix, lowPostfix);
+            qDebug() << "filePath: " << filePath;
+            qDebug() << "newFilePath: " << newFilePath;
+
+            bool res = QFile::rename(filePath, newFilePath);
+            qDebug() << res;
+        }
+    } else {
+        int pos;
+        int fileIndex = 1;
+        int seqStart = ui->lineEditSeq->text().toInt();
+        if (seqStart > 0) {
+            fileIndex = seqStart;
+            if (!ui->checkBoxIndexAuto->isChecked()) {
+                ui->checkBoxIndexAuto->setChecked(true);
+            }
         }
 
-        QString strIndex;
-        if (fileCount >= 100) {
-            strIndex = strIndex.sprintf("%03d", index);
-        } else {
-            strIndex = strIndex.sprintf("%02d", index);
+        for (int i = 0; i < fileCount; i ++) {
+            QFileInfo fileInfo = fileInfoList.at(i);
+            QString filePath = fileInfo.absoluteFilePath();
+            QString fileName = fileInfo.fileName();
+            QString postFix = fileInfo.suffix();
+            QString lowPostfix = postFix.toLower();
+            lowPostfix.insert(0, QChar('.'));
+            //qDebug() << fileName;
+
+            int index;
+            if (ui->checkBoxIndexAuto->isChecked()) {
+                index = fileIndex;
+                fileIndex += 1;
+            } else {
+                QRegExp rx("\\d+");
+                pos = rx.indexIn(fileName, 0);
+                if (-1 == pos)
+                    continue;
+                index = rx.cap(0).toInt();
+            }
+
+            QString strIndex;
+            if (fileCount >= 100) {
+                strIndex = strIndex.sprintf("%03d", index);
+            } else {
+                strIndex = strIndex.sprintf("%02d", index);
+            }
+            //qDebug() << strIndex;
+
+            // 3.1 build file path
+            QString newFileName = filePrefix + strIndex + postFix;
+            QString newFilePath = mDirName + QDir::separator() + newFileName;
+            //qDebug() << newFilePath;
+
+            // 3.2 rename file
+            bool res = QFile::rename(filePath, newFilePath);
+            qDebug() << res;
         }
-        //qDebug() << strIndex;
-
-        // 3.1 build file path
-        QString newFileName = filePrefix + strIndex + postFix;
-        QString newFilePath = mDirName + QDir::separator() + newFileName;
-        //qDebug() << newFilePath;
-
-        // 3.2 rename file
-        bool res = QFile::rename(filePath, newFilePath);
-        qDebug() << res;
     }
-
     dir.refresh();
-    MsgBoxUtil::information(this, tr("重命名成功！"));
+    MsgBoxUtil::information(this, tr("操作成功！"));
 }

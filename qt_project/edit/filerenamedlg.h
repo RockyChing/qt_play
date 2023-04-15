@@ -24,6 +24,8 @@ private:
     void initUI();
     void initData();
 
+    bool isStringUpper(QString &s);
+
 private slots:
     void onSeqTextChanged();
     void onBtnDirOpenClicked();
