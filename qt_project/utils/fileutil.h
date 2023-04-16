@@ -13,6 +13,6 @@ public:
     static bool copyRecursively(const QString &srcFilePath,
                                 const QString &tgtFilePath);
 
-    static bool fileRecursively(const QString &FilePath, QVector<QString> fileList);
+    static bool fileRecursive(const QString &filePath, QList<QString> &fileList);
 };
 #endif // FILEUTIL_H

@@ -81,7 +81,29 @@ bool FileUtil::copyRecursively(const QString &srcFilePath,
     return true;
 }
 
-bool FileUtil::fileRecursively(const QString &FilePath, QVector<QString> fileList)
+bool FileUtil::fileRecursive(const QString &filePath, QList<QString> &fileList)
 {
+    QDir dir(filePath);
+    if (!dir.exists())
+        return false;
+
+    /* find all fiels dirs, except . and .. */
+    dir.setFilter(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot);
+    dir.setSorting(QDir::DirsFirst);
+    QFileInfoList list = dir.entryInfoList();
+    if (list.size() < 1)
+        return false;
+
+    for (int i = 0; i < list.size(); i ++) {
+        QFileInfo info = list.at(i);
+        bool isDir = info.isDir();
+        if (isDir) {
+            fileRecursive(info.absoluteFilePath(), fileList);
+        } else {
+            //qDebug() << info.absoluteFilePath();
+            fileList.append(info.absoluteFilePath());
+        }
+    }
+
     return true;
 }

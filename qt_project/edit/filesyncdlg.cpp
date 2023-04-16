@@ -85,7 +85,7 @@ void FileSyncDlg::onBtnDirSrcClicked()
     }
 
     QList<QString> fileList;
-    //bool res = FileUtil::fileRecursively(mDirSrcName, fileList);
+    //bool res = FileUtil::fileRecursive(mDirSrcName, fileList);
     for (int i = 0; i < fileList.size(); i ++) {
         qDebug() << fileList.at(i);
     }

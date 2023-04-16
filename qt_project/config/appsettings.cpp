@@ -32,7 +32,7 @@ const QString AppSettings::KNOTE_DDIR = "knote_ddir";
 
 const QString AppSettings::QT_PLAY_MAJOR = "1";
 const QString AppSettings::QT_PLAY_MINOR = "14";
-const QString AppSettings::QT_PLAY_MICRO = "1";
+const QString AppSettings::QT_PLAY_MICRO = "2";
 
 
 AppSettings::AppSettings()

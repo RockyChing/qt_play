@@ -128,7 +128,7 @@ void FileRenameDlg::onBtnRenameClicked()
     }
 
     // 2.traverse files
-    QFileInfoList fileInfoList = dir.entryInfoList(QDir::Files | QDir::Readable, QDir::Name);
+    QFileInfoList fileInfoList = dir.entryInfoList(QDir::Dirs | QDir::Files | QDir::Readable, QDir::Name);
     if (fileInfoList.size() <= 0) {
         qWarning("目录下文件空");
         return;
@@ -142,14 +142,16 @@ void FileRenameDlg::onBtnRenameClicked()
     // 3.rename files
     int fileCount = fileInfoList.size();
     if (ui->checkPostfixLow->isChecked()) {
-        for (int i = 0; i < fileCount; i ++) {
-            QFileInfo fileInfo = fileInfoList.at(i);
-            QString filePath = fileInfo.absoluteFilePath();
-            //qDebug() << "filePath: " << filePath;
+        QList<QString> files;
+        FileUtil::fileRecursive(mDirName, files);
+        //qDebug() << "files count " << files.size();
+        for (int i = 0; i < files.size(); i ++) {
+            QString filePath = files.at(i);
 
+            QFileInfo fileInfo(filePath);
             QString postFix = fileInfo.suffix();
             if (!isStringUpper(postFix)) {
-                qDebug() << "not upper";
+                //qDebug() << "not upper";
                 continue;
             }
 
@@ -160,11 +162,9 @@ void FileRenameDlg::onBtnRenameClicked()
             const int lenFix = lowPostfix.size();
             int pos = len - lenFix;
             newFilePath.replace(pos, lenFix, lowPostfix);
-            qDebug() << "filePath: " << filePath;
-            qDebug() << "newFilePath: " << newFilePath;
-
-            bool res = QFile::rename(filePath, newFilePath);
-            qDebug() << res;
+            qDebug() << "src: " << filePath;
+            qDebug() << "dst: " << newFilePath;
+            QFile::rename(filePath, newFilePath);
         }
     } else {
         int pos;
