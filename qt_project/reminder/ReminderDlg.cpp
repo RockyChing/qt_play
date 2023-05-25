@@ -1,6 +1,7 @@
 #include <QString>
 #include "ReminderDlg.h"
 #include "ui_reminderdlg.h"
+#include "config/appsettings.h"
 
 ReminderDlg::ReminderDlg(QWidget *parent) :
     QDialog(parent),
@@ -18,8 +19,20 @@ ReminderDlg::~ReminderDlg()
 
 void ReminderDlg::initUI()
 {
-    ui->timeLineEdit->setText("45");
+    QSettings s(AppSettings::APP_SETTINGS_FILE, QSettings::IniFormat);
+    mReminderTime = s.value(AppSettings::R_TIMEROUT).toString();
+    if (mReminderTime.isEmpty() || mReminderTime.size() > 2) {
+        ui->timeLineEdit->setText("45");
+        mReminderTime.clear();
+        mReminderTime.append("45");
+    } else {
+        ui->timeLineEdit->setText(mReminderTime);
+    }
+
     ui->timeLineEdit->setValidator(new QIntValidator(0, 100, this));
+
+    isRepeat = s.value(AppSettings::R_REPEAT, false).toBool();
+    ui->reptCheckBox->setChecked(isRepeat);
 }
 
 void ReminderDlg::initSlots()
@@ -31,7 +44,7 @@ void ReminderDlg::initSlots()
 void ReminderDlg::initTimeRepeat(int *time, int *repeat)
 {
     pReminderTime = time;
-    *pReminderTime = 45; // default
+    *pReminderTime = mReminderTime.toInt(); // default
     pReminderRepeat = repeat;
 }
 
@@ -40,6 +53,14 @@ void ReminderDlg::updateTimeRepeat(void)
     QString text = ui->timeLineEdit->text();
     *pReminderTime = text.toInt();
     *pReminderRepeat = ui->reptCheckBox->isChecked() ? 1 : 0;
+
+    mReminderTime.clear();
+    mReminderTime.append(text);
+    isRepeat = ui->reptCheckBox->isChecked();
+
+    QSettings s(AppSettings::APP_SETTINGS_FILE, QSettings::IniFormat);
+    s.setValue(AppSettings::R_TIMEROUT, mReminderTime);
+    s.setValue(AppSettings::R_REPEAT, isRepeat);
 }
 
 void ReminderDlg::updateTimeRepeat(int time, int repeat)

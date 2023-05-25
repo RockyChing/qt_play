@@ -30,6 +30,8 @@ private slots:
 
 private:
     Ui::ReminderDlg *ui;
+    QString mReminderTime;
+    bool isRepeat;
 
     int *pReminderTime;
     int *pReminderRepeat;

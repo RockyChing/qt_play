@@ -40,6 +40,10 @@ public:
     /* for Kindle note save path using */
     static const QString KNOTE_DDIR;
 
+    /*for Reminder config using */
+    static const QString R_TIMEROUT;
+    static const QString R_REPEAT;
+
 public:
     AppSettings();
 
