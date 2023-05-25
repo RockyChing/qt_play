@@ -128,7 +128,8 @@ void FileRenameDlg::onBtnRenameClicked()
     }
 
     // 2.traverse files
-    QFileInfoList fileInfoList = dir.entryInfoList(QDir::Dirs | QDir::Files | QDir::Readable, QDir::Name);
+    QFileInfoList fileInfoList = dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot
+            | QDir::Files | QDir::Readable, QDir::Name);
     if (fileInfoList.size() <= 0) {
         qWarning("目录下文件空");
         return;
@@ -207,7 +208,7 @@ void FileRenameDlg::onBtnRenameClicked()
             //qDebug() << strIndex;
 
             // 3.1 build file path
-            QString newFileName = filePrefix + strIndex + postFix;
+            QString newFileName = filePrefix + strIndex + lowPostfix;
             QString newFilePath = mDirName + QDir::separator() + newFileName;
             //qDebug() << newFilePath;
 

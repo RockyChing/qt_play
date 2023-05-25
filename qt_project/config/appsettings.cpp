@@ -35,7 +35,7 @@ const QString AppSettings::R_REPEAT   = "reminder_repeat";
 
 const QString AppSettings::QT_PLAY_MAJOR = "1";
 const QString AppSettings::QT_PLAY_MINOR = "14";
-const QString AppSettings::QT_PLAY_MICRO = "3";
+const QString AppSettings::QT_PLAY_MICRO = "4";
 
 
 AppSettings::AppSettings()
