@@ -214,7 +214,9 @@
     <addaction name="actionText2Html"/>
     <addaction name="actionIDGen"/>
     <addaction name="actionRefGen"/>
+    <addaction name="separator"/>
     <addaction name="actionPdfNewlineRmver"/>
+    <addaction name="actionHtmlImgRename"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -358,6 +360,11 @@
   <action name="actionRefGen">
    <property name="text">
     <string>ref生成</string>
+   </property>
+  </action>
+  <action name="actionHtmlImgRename">
+   <property name="text">
+    <string>html中图片重命名</string>
    </property>
   </action>
  </widget>

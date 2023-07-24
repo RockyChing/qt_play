@@ -44,6 +44,9 @@ public:
     static const QString R_TIMEROUT;
     static const QString R_REPEAT;
 
+    /*for HtmlImgRenameDlg config using */
+    static const QString HTML_PATH;
+
 public:
     AppSettings();
 

@@ -97,6 +97,13 @@ void NewlineDelete::onBtnProcessClicked()
                     else if (3 == lineNum)
                         out << "\r\n\r\n\r\n";
                     else {}
+
+#if 0
+                    if (line.contains(QRegExp("[a-zA-Z]"))) {
+                        qDebug() << line;
+                        break;
+                    }
+#endif
                 }
 
                 out.flush();

@@ -55,6 +55,7 @@ private slots:
     void onePubActionText2HtmlClicked();
     void onePubActionIdGenClicked();
     void onePubActionRefGenClicked();
+    void onePubActionHtmlImgRenameClicked();
 
     void aboutSlot();
     void aboutQtSlot();

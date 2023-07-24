@@ -19,6 +19,7 @@
 #include "epub/Text2HtmlDlg.h"
 #include "epub/htmlidgendlg.h"
 #include "epub/htmlrefgendlg.h"
+#include "epub/htmlimgrenamedlg.h"
 #include "knote/knotemgr.h"
 
 
@@ -62,6 +63,8 @@ void QtMainWindow::showNotification()
 
 void QtMainWindow::closeEvent(QCloseEvent *event)
 {
+    event->accept();
+#if 0
     if (mTrayIcon->isVisible()) {
         QMessageBox msgBox;
         msgBox.setInformativeText(tr("后台运行？"));
@@ -85,6 +88,7 @@ void QtMainWindow::closeEvent(QCloseEvent *event)
             break;
         }
     }
+#endif
 }
 
 void QtMainWindow::init()
@@ -164,7 +168,8 @@ void QtMainWindow::initSlots()
     connect(ui->actionText2Html, SIGNAL(triggered(bool)), this, SLOT(onePubActionText2HtmlClicked()));
     connect(ui->actionIDGen, SIGNAL(triggered(bool)), this, SLOT(onePubActionIdGenClicked()));
     connect(ui->actionRefGen, SIGNAL(triggered(bool)), this, SLOT(onePubActionRefGenClicked()));
-
+    connect(ui->actionHtmlImgRename, SIGNAL(triggered(bool)), this, SLOT(onePubActionHtmlImgRenameClicked()));
+    
     connect(ui->actionAboutThis, SIGNAL(triggered(bool)), this, SLOT(aboutSlot()));
     connect(ui->actionAboutQt, SIGNAL(triggered(bool)), this, SLOT(aboutQtSlot()));
 
@@ -289,6 +294,13 @@ void QtMainWindow::onePubActionIdGenClicked()
 void QtMainWindow::onePubActionRefGenClicked()
 {
     HtmlRefGenDlg *d = new HtmlRefGenDlg();
+    d->setAttribute(Qt::WA_DeleteOnClose);
+    d->show();
+}
+
+void QtMainWindow::onePubActionHtmlImgRenameClicked()
+{
+    HtmlImgRenameDlg *d = new HtmlImgRenameDlg();
     d->setAttribute(Qt::WA_DeleteOnClose);
     d->show();
 }
