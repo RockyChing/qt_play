@@ -91,7 +91,19 @@ void HtmlRefGenDlg::onBtnOKClicked()
         tmp.append(style);
         tmp.append("</sup></a></span>");
         ui->textRef->appendPlainText(tmp);
+    }
 
+    ui->textRef->appendPlainText("");
+    for (int i = 1; i <= mItemCnt; i ++) {
+        QString refID("");
+
+        if (mItemCnt >= 100) {
+            refID.sprintf("zhu%03d", i);
+        } else {
+            refID.sprintf("zhu%02d", i);
+        }
+
+        QString tmp("");
         //<p><a id="zhu01_b" href="#zhu01_a">①</a></p>
         tmp.clear();
         tmp.append("<p><a id=\"");
@@ -99,14 +111,20 @@ void HtmlRefGenDlg::onBtnOKClicked()
         tmp.append("_b\" href=\"#");
         tmp.append(refID);
         tmp.append("_a\">");
-        tmp.append(style);
-        tmp.append("</a></p>");
-        ui->textRef->appendPlainText(tmp);
 
-        ui->textRef->appendPlainText("");
-        ui->textRef->selectAll();
-        ui->textRef->copy();
+        QString style("");
+        if (0 == mIndexStyle) {
+            style.append(mStyleDefaultString.at(i-1));
+        } else {
+            style.sprintf("[%d]", i);
+        }
+        tmp.append(style);
+        tmp.append("</a>&nbsp;</p>");
+        ui->textRef->appendPlainText(tmp);
     }
+
+    ui->textRef->selectAll();
+    ui->textRef->copy();
 }
 
 void HtmlRefGenDlg::onBtnCancleClicked()
