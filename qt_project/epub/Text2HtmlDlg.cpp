@@ -84,7 +84,7 @@ void Text2HtmlDlg::onBtnTransformClicked()
             result.append("<p>");
         }
 
-        do {
+        if (ui->cBoxNote->isChecked()) {
             int pos = -1;
             int len = -1;
             QString tmp("");
@@ -446,7 +446,7 @@ void Text2HtmlDlg::onBtnTransformClicked()
                 line = line.right(len - pos - 1);
             } else { break; }
 #endif
-        } while (0);
+        }
         result.append(line);
 
         if (0 == lineNum) {

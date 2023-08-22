@@ -62,6 +62,18 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QCheckBox" name="cBoxNote">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>注释转换</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item row="2" column="0">

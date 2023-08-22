@@ -113,6 +113,11 @@ void HtmlImgRenameDlg::onBtnProcessClicked()
                 break;
             }
             qDebug() << "srcImgName: " << srcImgName;
+
+            if (srcImgFileInfo.size() < 500) {
+                QFile::remove(srcImgName);
+                continue;
+            }
             QString suffix = srcImgFileInfo.suffix();
             qDebug() << "suffix: " << suffix;
 
@@ -135,7 +140,8 @@ void HtmlImgRenameDlg::onBtnProcessClicked()
             QString dstImgPath = ddirName + QDir::separator() + dstImgName + "." + suffix;
             qDebug() << "dstImgPath: " << dstImgPath;
 
-            bool res = QFile::rename(srcImgName, dstImgPath);
+            bool res = false;
+            res = QFile::rename(srcImgName, dstImgPath);
             if (!res) {
                 QMessageBox::warning(this, tr("Warning"), tr("rename err!!!"));
                 break;
