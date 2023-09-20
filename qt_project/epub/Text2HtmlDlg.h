@@ -18,13 +18,14 @@ public:
 
 private:
     void initUI();
+    void initData();
     void onBtnCopyClicked();
 
 private slots:
     void onBtnSrcClicked();
     void onBtnTransformClicked();
     void onBtnClearClicked();
-
+    void onClassIndexChanged(int index);
 
 private:
     Ui::Text2HtmlDlg *ui;
@@ -34,6 +35,8 @@ private:
     QPushButton *mBtnTransform;
     QPushButton *mBtnClear;
     QPushButton *mBtnCopy;
+
+    QString mClassString;
 };
 
 #endif // TEXT2HTMLDLG_H
