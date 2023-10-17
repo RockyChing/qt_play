@@ -27,7 +27,7 @@ QtMainWindow::QtMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::QtMainWindow), mLogViewer(NULL),
     mMenuBar(NULL), mToolBar(NULL), mStatusBar(NULL),
-    mReminderTimer(NULL)
+    mReminderTimer(NULL), mPlayer(NULL)
 {
     ui->setupUi(this);
     setWindowTitle(AppSettings::APP_VERSION());
@@ -43,6 +43,8 @@ QtMainWindow::~QtMainWindow()
 {
     delete mLogViewer;
     mLogViewer = NULL;
+    delete mPlayer;
+    mPlayer = NULL;
     delete ui;
 }
 
@@ -97,6 +99,7 @@ void QtMainWindow::init()
     mToolBar = ui->toolBar;
     mStatusBar = ui->statusBar;
     mLogViewer = new LogViewer();
+    mPlayer = new QMediaPlayer;
 }
 
 void QtMainWindow::initUI()
@@ -224,6 +227,17 @@ void QtMainWindow::setIcon()
 void QtMainWindow::updateStatusBar(QString &text)
 {
     mStatusBar->showMessage(text, 0x7fffffff);
+}
+
+void QtMainWindow::play()
+{
+    mPlayer->pause();
+    mPlayer->stop();
+
+    qDebug() << "sound: " << mSndFilePath;
+    mPlayer->setMedia(QUrl::fromLocalFile(mSndFilePath));
+    mPlayer->setVolume(50);
+    mPlayer->play();
 }
 
 void QtMainWindow::onFileActionNewClicked()
@@ -369,14 +383,17 @@ void QtMainWindow::onReminderTimeout()
         text.append(futureTimeString);
     }
     updateStatusBar(text);
+    play();
 }
 
 void QtMainWindow::onBtnReminderClicked()
 {
+    mPlayer->pause();
+    mPlayer->stop();
     ReminderDlg *dlg = new ReminderDlg(this);
     mReminderTime = 0;
     mReminderRepeat = 0;
-    dlg->initTimeRepeat(&mReminderTime, &mReminderRepeat);
+    dlg->initTimeRepeat(&mReminderTime, &mReminderRepeat, mSndFilePath);
     int res = dlg->exec(); // OK: 1, Cancel: 0
     if (res) {
         qDebug("timer: %d, repeat: %d", mReminderTime, mReminderRepeat);

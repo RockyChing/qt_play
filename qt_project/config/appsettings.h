@@ -43,6 +43,7 @@ public:
     /*for Reminder config using */
     static const QString R_TIMEROUT;
     static const QString R_REPEAT;
+    static const QString R_SND_FILE;
 
     /*for HtmlImgRenameDlg config using */
     static const QString HTML_PATH;

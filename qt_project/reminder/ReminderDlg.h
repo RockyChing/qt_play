@@ -16,10 +16,12 @@ public:
     ~ReminderDlg();
 
     void initTimeRepeat(int *time, int *repeat);
+    void initTimeRepeat(int *time, int *repeat, QString &sndFile);
+
 
 private:
     void initUI();
-    void initSlots();
+    void initData();
 
     void updateTimeRepeat();
     void updateTimeRepeat(int time, int repeat);
@@ -27,9 +29,11 @@ private:
 private slots:
     void onTimeCfgChanged(const QString &text);
     void onRepeatCfgChanged(int state);
+    void onBtnOpenClicked();
 
 private:
     Ui::ReminderDlg *ui;
+    QString mSndFilePath;
     QString mReminderTime;
     bool isRepeat;
 

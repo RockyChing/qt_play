@@ -1,4 +1,11 @@
 #include <QString>
+#include <QSettings>
+#include <QDebug>
+#include <QIntValidator>
+#include <QFile>
+#include <QFileDialog>
+#include <QFileInfo>
+#include <QFileInfoList>
 #include "ReminderDlg.h"
 #include "ui_reminderdlg.h"
 #include "config/appsettings.h"
@@ -9,7 +16,7 @@ ReminderDlg::ReminderDlg(QWidget *parent) :
 {
     ui->setupUi(this);
     initUI();
-    initSlots();
+    initData();
 }
 
 ReminderDlg::~ReminderDlg()
@@ -33,12 +40,21 @@ void ReminderDlg::initUI()
 
     isRepeat = s.value(AppSettings::R_REPEAT, false).toBool();
     ui->reptCheckBox->setChecked(isRepeat);
+
+    mSndFilePath.clear();
+    mSndFilePath = s.value(AppSettings::R_SND_FILE).toString();
+    if (!mSndFilePath.isEmpty()) {
+        ui->lineEditDirShow->setText(mSndFilePath);
+    } else {
+        ui->lineEditDirShow->setText(tr("未指定目录"));
+    }
 }
 
-void ReminderDlg::initSlots()
+void ReminderDlg::initData()
 {
     connect(ui->timeLineEdit, SIGNAL(textChanged(QString)), this, SLOT(onTimeCfgChanged(QString)));
     connect(ui->reptCheckBox, SIGNAL(stateChanged(int)), this, SLOT(onRepeatCfgChanged(int)));
+    connect(ui->btnDirOpen, SIGNAL(clicked()), this, SLOT(onBtnOpenClicked()));
 }
 
 void ReminderDlg::initTimeRepeat(int *time, int *repeat)
@@ -46,6 +62,13 @@ void ReminderDlg::initTimeRepeat(int *time, int *repeat)
     pReminderTime = time;
     *pReminderTime = mReminderTime.toInt(); // default
     pReminderRepeat = repeat;
+}
+
+void ReminderDlg::initTimeRepeat(int *time, int *repeat, QString &sndFile)
+{
+    initTimeRepeat(time, repeat);
+    sndFile.clear();
+    sndFile.append(mSndFilePath);
 }
 
 void ReminderDlg::updateTimeRepeat(void)
@@ -77,4 +100,25 @@ void ReminderDlg::onTimeCfgChanged(const QString &text)
 void ReminderDlg::onRepeatCfgChanged(int state)
 {
     updateTimeRepeat();
+}
+
+void ReminderDlg::onBtnOpenClicked()
+{
+    QString filePath = ui->lineEditDirShow->text();
+    if (filePath.isEmpty()) {
+        /* load file from currentPath */
+        filePath = QDir::currentPath();
+    }
+
+    /* getOpenFileName() returns an existing file selected by the user */
+    mSndFilePath = QFileDialog::getOpenFileName(this, tr("Open file"), filePath, tr("*.mp3 *.wav"));
+    mSndFilePath = QDir::toNativeSeparators(mSndFilePath);
+    qDebug() << mSndFilePath;
+    if (mSndFilePath.isEmpty()) {
+        ui->lineEditDirShow->setText(tr("未指定目录"));
+    } else {
+        ui->lineEditDirShow->setText(mSndFilePath);
+        QSettings s(AppSettings::APP_SETTINGS_FILE, QSettings::IniFormat);
+        s.setValue(AppSettings::R_SND_FILE, mSndFilePath);
+    }
 }

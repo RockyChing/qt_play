@@ -7,6 +7,7 @@
 #include <QAction>
 #include <QTimer>
 #include <QMessageBox>
+#include <QMediaPlayer>
 #include "finance/finance.h"
 #include "log/LogViewer.h"
 
@@ -40,6 +41,7 @@ private:
     void createTrayIcon();  // 创建托盘对象
     void setIcon();         // 设置托盘图标
     void updateStatusBar(QString &text);
+    void play();
 
 private slots:
     void onFileActionNewClicked();
@@ -89,6 +91,8 @@ private:
     int mReminderTime; // minute
     int mReminderRepeat;
     QTimer *mReminderTimer;
+    QString mSndFilePath;
+    QMediaPlayer *mPlayer;
 };
 
 #endif // QTMAINWINDOW_H
