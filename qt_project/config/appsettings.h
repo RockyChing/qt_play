@@ -48,6 +48,8 @@ public:
     /*for HtmlImgRenameDlg config using */
     static const QString HTML_PATH;
 
+    /*for Text2HtmlDlg config using */
+    static const QString HTML_CLS;
 public:
     AppSettings();
 

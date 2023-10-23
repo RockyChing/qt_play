@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>416</width>
+    <width>426</width>
     <height>581</height>
    </rect>
   </property>
@@ -136,7 +136,7 @@
      <item>
       <widget class="QPushButton" name="btnClass">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="minimumSize">
         <size>
@@ -156,7 +156,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Class</string>
+        <string>新增Class</string>
        </property>
       </widget>
      </item>
@@ -173,41 +173,6 @@
          <pointsize>12</pointsize>
         </font>
        </property>
-       <item>
-        <property name="text">
-         <string>none</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Kaiti</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>left_Kaiti</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>right_KaiTi</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>left</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>center</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>right</string>
-        </property>
-       </item>
       </widget>
      </item>
     </layout>

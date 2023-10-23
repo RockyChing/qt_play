@@ -1,8 +1,11 @@
-#include "Text2HtmlDlg.h"
-#include "ui_text2htmldlg.h"
 #include <QClipboard>
 #include <QMimeData>
 #include <QDebug>
+#include <QStringList>
+#include "Text2HtmlDlg.h"
+#include "ui_text2htmldlg.h"
+#include "config/appsettings.h"
+
 
 Text2HtmlDlg::Text2HtmlDlg(QWidget *parent) :
     QDialog(parent), mClassString(""),
@@ -35,12 +38,52 @@ void Text2HtmlDlg::initUI()
     connect(mBtnTransform, SIGNAL(clicked()), this, SLOT(onBtnTransformClicked()));
     connect(mBtnClear, SIGNAL(clicked()), this, SLOT(onBtnClearClicked()));
     //connect(mBtnCopy, SIGNAL(clicked()), this, SLOT(onBtnCopyClicked()));
+    connect(ui->btnClass, SIGNAL(clicked()), this, SLOT(onBtnAddClsClicked()));
     connect(ui->cBoxClass, SIGNAL(currentIndexChanged(int)), this, SLOT(onClassIndexChanged(int)));
 }
 
 void Text2HtmlDlg::initData()
 {
     ui->spinBoxNlineNum->setValue(1);
+
+    QSettings s(AppSettings::APP_SETTINGS_FILE, QSettings::IniFormat);
+    QStringList listItems = s.value(AppSettings::HTML_CLS).toStringList();
+    if (listItems.size() > 0) {
+        ui->cBoxClass->clear();
+        ui->cBoxClass->addItems(listItems);
+    }
+}
+
+void Text2HtmlDlg::addClsItem(QString& items)
+{
+    if (!items.isEmpty()){
+        QStringList listItems = items.split(",", QString::SkipEmptyParts);
+        int itemCnt = listItems.size();
+        for (int i = 0; i < itemCnt; i ++) {
+            QString item = listItems.at(i);
+            if (-1 == ui->cBoxClass->findText(item)) {
+                ui->cBoxClass->addItem(item);
+            }
+        }
+
+        updateCfg();
+    }
+}
+
+void Text2HtmlDlg::updateCfg()
+{
+    int itemCnt = ui->cBoxClass->count();
+    if (itemCnt > 0) {
+        QStringList listItems;
+        listItems.clear();
+        for (int i = 0; i < itemCnt; i ++) {
+            QString item = ui->cBoxClass->itemText(i);
+            listItems.append(item);
+            qDebug() << "item " << i << ": " << item;
+        }
+        QSettings s(AppSettings::APP_SETTINGS_FILE, QSettings::IniFormat);
+        s.setValue(AppSettings::HTML_CLS, listItems);
+    }
 }
 
 void Text2HtmlDlg::onBtnSrcClicked()
@@ -506,6 +549,12 @@ void Text2HtmlDlg::onBtnCopyClicked()
 {
     mTextHtmlEdit->selectAll();
     mTextHtmlEdit->copy();
+}
+
+void Text2HtmlDlg::onBtnAddClsClicked()
+{
+    QString items = ui->textHtmlEdit->toPlainText();
+    addClsItem(items);
 }
 
 void Text2HtmlDlg::onClassIndexChanged(int index)

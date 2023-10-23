@@ -20,11 +20,14 @@ private:
     void initUI();
     void initData();
     void onBtnCopyClicked();
+    void addClsItem(QString& items);
+    void updateCfg();
 
 private slots:
     void onBtnSrcClicked();
     void onBtnTransformClicked();
     void onBtnClearClicked();
+    void onBtnAddClsClicked();
     void onClassIndexChanged(int index);
 
 private:

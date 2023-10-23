@@ -35,10 +35,11 @@ const QString AppSettings::R_REPEAT   = "reminder_repeat";
 const QString AppSettings::R_SND_FILE = "reminder_snd_file";
 
 const QString AppSettings::HTML_PATH  = "html_path";
+const QString AppSettings::HTML_CLS  = "html_class";
 
 const QString AppSettings::QT_PLAY_MAJOR = "1";
 const QString AppSettings::QT_PLAY_MINOR = "15";
-const QString AppSettings::QT_PLAY_MICRO = "5";
+const QString AppSettings::QT_PLAY_MICRO = "6";
 
 
 AppSettings::AppSettings()
