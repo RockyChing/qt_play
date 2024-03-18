@@ -129,11 +129,10 @@ void Text2HtmlDlg::onBtnTransformClicked()
         }
 
         if (!isNumZero) {
-            result.append("<p");
             if (mClassString.isEmpty()) {
-                result.append(">");
+                result.append("<p>");
             } else {
-                result.append(" class=\"");
+                result.append("<span class=\"");
                 result.append(mClassString);
                 result.append("\">");
             }
@@ -493,14 +492,6 @@ void Text2HtmlDlg::onBtnTransformClicked()
                 len = line.length();
                 line = line.right(len - pos - 1);
             }
-#if 0
-            if ((pos = line.indexOf("")) != -1) {
-                result.append(line.left(pos));
-                result.append("");
-                len = line.length();
-                line = line.right(len - pos - 1);
-            }
-#endif
         }
         result.append(line);
 
@@ -510,7 +501,11 @@ void Text2HtmlDlg::onBtnTransformClicked()
         }
 
         if (!isNumZero) {
-            result.append("</p>");
+            if (mClassString.isEmpty()) {
+                result.append("</p>");
+            } else {
+                result.append("</span>");
+            }
         }
 
         if (ui->cBoxNewLine->isChecked()) {
