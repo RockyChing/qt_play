@@ -18,6 +18,7 @@ public:
 private:
     void initUI();
     void initSlots();
+    void initData();
 
 private slots:
     void onRefStyleChanged(int index);
@@ -30,6 +31,7 @@ private:
 
     int mIndexStyle;
     int mItemCnt;
+    int mItemCurCnt;
 };
 
 #endif // HTMLREFGENDLG_H
