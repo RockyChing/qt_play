@@ -38,8 +38,8 @@ const QString AppSettings::HTML_PATH  = "html_path";
 const QString AppSettings::HTML_CLS  = "html_class";
 
 const QString AppSettings::QT_PLAY_MAJOR = "1";
-const QString AppSettings::QT_PLAY_MINOR = "15";
-const QString AppSettings::QT_PLAY_MICRO = "8";
+const QString AppSettings::QT_PLAY_MINOR = "16";
+const QString AppSettings::QT_PLAY_MICRO = "0";
 
 
 AppSettings::AppSettings()

@@ -20,6 +20,7 @@
 #include "epub/htmlidgendlg.h"
 #include "epub/htmlrefgendlg.h"
 #include "epub/htmlimgrenamedlg.h"
+#include "epub/pdfnewlineremove.h"
 #include "knote/knotemgr.h"
 
 
@@ -171,6 +172,7 @@ void QtMainWindow::initSlots()
     connect(ui->actionText2Html, SIGNAL(triggered(bool)), this, SLOT(onePubActionText2HtmlClicked()));
     connect(ui->actionIDGen, SIGNAL(triggered(bool)), this, SLOT(onePubActionIdGenClicked()));
     connect(ui->actionRefGen, SIGNAL(triggered(bool)), this, SLOT(onePubActionRefGenClicked()));
+    connect(ui->actionPdfNewlineRmver, SIGNAL(triggered(bool)), this, SLOT(onePubActionPdfNewlineRemoveClicked()));
     connect(ui->actionHtmlImgRename, SIGNAL(triggered(bool)), this, SLOT(onePubActionHtmlImgRenameClicked()));
     
     connect(ui->actionAboutThis, SIGNAL(triggered(bool)), this, SLOT(aboutSlot()));
@@ -308,6 +310,13 @@ void QtMainWindow::onePubActionIdGenClicked()
 void QtMainWindow::onePubActionRefGenClicked()
 {
     HtmlRefGenDlg *d = new HtmlRefGenDlg();
+    d->setAttribute(Qt::WA_DeleteOnClose);
+    d->show();
+}
+
+void QtMainWindow::onePubActionPdfNewlineRemoveClicked()
+{
+    pdfnewlineremove *d = new pdfnewlineremove();
     d->setAttribute(Qt::WA_DeleteOnClose);
     d->show();
 }
