@@ -50,6 +50,9 @@ public:
 
     /*for Text2HtmlDlg config using */
     static const QString HTML_CLS;
+
+    /*for PdfImgCrop config using */
+    static const QString IMG_CROP_PATH;
 public:
     AppSettings();
 

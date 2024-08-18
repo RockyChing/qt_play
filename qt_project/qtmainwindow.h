@@ -58,6 +58,7 @@ private slots:
     void onePubActionIdGenClicked();
     void onePubActionRefGenClicked();
     void onePubActionPdfNewlineRemoveClicked();
+    void onePubActionPdfImgCropClicked();
     void onePubActionHtmlImgRenameClicked();
 
     void aboutSlot();

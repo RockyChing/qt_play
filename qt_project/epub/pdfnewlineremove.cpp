@@ -127,6 +127,14 @@ void pdfnewlineremove::onBtnProcessClicked()
                 }
                 out << newLine;
                 isNewLine = true;
+            } else if (line.startsWith("作者")) {
+                if (ui->checkBoxToHtml->isChecked()) {
+                    out << "</p>";
+                }
+                out << "\n";
+                isNewLine = true;
+            } else {
+
             }
         }
         file.close();

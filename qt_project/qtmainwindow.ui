@@ -216,6 +216,8 @@
     <addaction name="actionRefGen"/>
     <addaction name="separator"/>
     <addaction name="actionPdfNewlineRmver"/>
+    <addaction name="actionPdfImgCrop"/>
+    <addaction name="separator"/>
     <addaction name="actionHtmlImgRename"/>
    </widget>
    <addaction name="menuFile"/>
@@ -365,6 +367,11 @@
   <action name="actionHtmlImgRename">
    <property name="text">
     <string>html中图片重命名</string>
+   </property>
+  </action>
+  <action name="actionPdfImgCrop">
+   <property name="text">
+    <string>pdf图片裁剪</string>
    </property>
   </action>
  </widget>
