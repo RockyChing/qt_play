@@ -28,6 +28,7 @@ private:
 
 private slots:
     void onSeqTextChanged();
+    void onCBReplaceChanged(int i);
     void onBtnDirOpenClicked();
     void onBtnRenameClicked();
 

@@ -41,7 +41,7 @@ const QString AppSettings::IMG_CROP_PATH  = "crop_path";
 
 const QString AppSettings::QT_PLAY_MAJOR = "1";
 const QString AppSettings::QT_PLAY_MINOR = "17";
-const QString AppSettings::QT_PLAY_MICRO = "0";
+const QString AppSettings::QT_PLAY_MICRO = "1";
 
 
 AppSettings::AppSettings()

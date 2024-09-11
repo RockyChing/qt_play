@@ -182,14 +182,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkPostfixLow">
+      <widget class="QCheckBox" name="checkPartReplace">
        <property name="font">
         <font>
          <pointsize>12</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>后缀转小写</string>
+        <string>部分替换</string>
        </property>
        <property name="checked">
         <bool>false</bool>

@@ -45,6 +45,7 @@ void FileRenameDlg::initUI()
     mCBBackup = ui->checkBoxBackup;
 
     connect(ui->lineEditSeq, SIGNAL(textChanged(QString)), this, SLOT(onSeqTextChanged()));
+    connect(ui->checkPartReplace, SIGNAL(stateChanged(int)), this, SLOT(onCBReplaceChanged(int)));
     connect(mBtnDirOpen, SIGNAL(clicked()), this, SLOT(onBtnDirOpenClicked()));
     connect(mBtnRename, SIGNAL(clicked()), this, SLOT(onBtnRenameClicked()));
 }
@@ -86,6 +87,18 @@ void FileRenameDlg::onSeqTextChanged()
     qWarning("起始序号发生改变");
 }
 
+void FileRenameDlg::onCBReplaceChanged(int i)
+{
+    ui->lineEditFilePrefix->clear();
+    if (ui->checkPartReplace->isChecked()) {
+        ui->lineEditSeq->setEnabled(false);
+        ui->lineEditFilePrefix->setPlaceholderText("before,after");
+    } else {
+        ui->lineEditSeq->setEnabled(true);
+        ui->lineEditFilePrefix->setPlaceholderText("必填");
+    }
+}
+
 void FileRenameDlg::onBtnDirOpenClicked()
 {
     QString filePath = mEditDirShow->text();
@@ -122,7 +135,7 @@ void FileRenameDlg::onBtnRenameClicked()
     }
 
     QString filePrefix = mEditFilePrefix->text();
-    if (!ui->checkPostfixLow->isChecked() && filePrefix.isEmpty()) {
+    if (!ui->checkPartReplace->isChecked() && filePrefix.isEmpty()) {
         MsgBoxUtil::warning(this, tr("未指定文件前缀！"));
         return;
     }
@@ -142,27 +155,20 @@ void FileRenameDlg::onBtnRenameClicked()
 
     // 3.rename files
     int fileCount = fileInfoList.size();
-    if (ui->checkPostfixLow->isChecked()) {
-        QList<QString> files;
-        FileUtil::fileRecursive(mDirName, files);
-        //qDebug() << "files count " << files.size();
-        for (int i = 0; i < files.size(); i ++) {
-            QString filePath = files.at(i);
-
-            QFileInfo fileInfo(filePath);
-            QString postFix = fileInfo.suffix();
-            if (!isStringUpper(postFix)) {
-                //qDebug() << "not upper";
-                continue;
-            }
-
-            QString lowPostfix = postFix.toLower();
+    if (ui->checkPartReplace->isChecked()) {
+        QStringList strParams = ui->lineEditFilePrefix->text().split(",");
+        QString before = strParams.at(0);
+        QString after = strParams.at(1);
+        for (int i = 0; i < fileCount; i ++) {
+            QFileInfo fileInfo = fileInfoList.at(i);
+            QString filePath = fileInfo.absoluteFilePath();
 
             QString newFilePath(filePath);
-            const int len = newFilePath.size();
-            const int lenFix = lowPostfix.size();
-            int pos = len - lenFix;
-            newFilePath.replace(pos, lenFix, lowPostfix);
+            newFilePath.replace(before, after);
+            if (0 == filePath.compare(newFilePath)) {
+                qDebug() << "no change!";
+                continue;
+            }
             qDebug() << "src: " << filePath;
             qDebug() << "dst: " << newFilePath;
             QFile::rename(filePath, newFilePath);
