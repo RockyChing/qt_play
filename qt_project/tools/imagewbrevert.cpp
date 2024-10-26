@@ -15,12 +15,13 @@
 
 #include "config/appsettings.h"
 #include "utils/msgboxutil.h"
-#include "pdfimgcrop.h"
-#include "ui_pdfimgcrop.h"
 
-PdfImgCrop::PdfImgCrop(QWidget *parent) :
+#include "imagewbrevert.h"
+#include "ui_imagewbrevert.h"
+
+ImageWBRevert::ImageWBRevert(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::PdfImgCrop), mCropRect(NULL)
+    ui(new Ui::ImageWBRevert)
 {
     ui->setupUi(this);
     Qt::WindowFlags windowFlag = Qt::Dialog;
@@ -33,26 +34,21 @@ PdfImgCrop::PdfImgCrop(QWidget *parent) :
     initData();
 }
 
-PdfImgCrop::~PdfImgCrop()
+ImageWBRevert::~ImageWBRevert()
 {
     delete ui;
 }
 
-void PdfImgCrop::initUI()
+void ImageWBRevert::initUI()
 {
-    mBtnOpen = ui->btnOpen;
-    mBtnProcess = ui->btnProcess;
-
-    //mFilePath = ui->lineEditFilePath;
-
-    connect(mBtnOpen, SIGNAL(clicked()), this, SLOT(onBtnOpenClicked()));
-    connect(mBtnProcess, SIGNAL(clicked()), this, SLOT(onBtnProcessClicked()));
+    connect(ui->btnOpen, SIGNAL(clicked()), this, SLOT(onBtnOpenClicked()));
+    connect(ui->btnProcess, SIGNAL(clicked()), this, SLOT(onBtnProcessClicked()));
 }
 
-void PdfImgCrop::initData()
+void ImageWBRevert::initData()
 {
     QSettings s(AppSettings::APP_SETTINGS_FILE, QSettings::IniFormat);
-    mDirName = s.value(AppSettings::IMG_CROP_PATH).toString();
+    mDirName = s.value(AppSettings::IMG_REVT_PATH).toString();
     if (!mDirName.isEmpty()) {
         ui->lineEditFilePath->setText(mDirName);
     } else {
@@ -60,43 +56,7 @@ void PdfImgCrop::initData()
     }
 }
 
-bool PdfImgCrop::getCropParam()
-{
-    QString paramText = ui->lineEditParam->text();
-    qDebug() << "paramText: " << paramText;
-    QStringList strParams = paramText.split(",");
-    if (strParams.size() != 4) {
-        return false;
-    }
-
-    QString xStr = strParams.at(0);
-    QString yStr = strParams.at(1);
-    QString wStr = strParams.at(2);
-    QString hStr = strParams.at(3);
-
-    QString params("");
-    params.append(xStr);
-    params.append(",");
-    params.append(yStr);
-    params.append(",");
-    params.append(wStr);
-    params.append(",");
-    params.append(hStr);
-    qDebug() << "params: " << params;
-
-    if (NULL == mCropRect) {
-        mCropRect = new QRect();
-    }
-
-    mCropRect->setX(xStr.toInt());
-    mCropRect->setY(yStr.toInt());
-    mCropRect->setWidth(wStr.toInt());
-    mCropRect->setHeight(hStr.toInt());
-
-    return true;
-}
-
-void PdfImgCrop::onBtnOpenClicked()
+void ImageWBRevert::onBtnOpenClicked()
 {
     QString filePath = ui->lineEditFilePath->text();
     if (filePath.isEmpty()) {
@@ -113,11 +73,11 @@ void PdfImgCrop::onBtnOpenClicked()
     } else {
         ui->lineEditFilePath->setText(mDirName);
         QSettings s(AppSettings::APP_SETTINGS_FILE, QSettings::IniFormat);
-        s.setValue(AppSettings::IMG_CROP_PATH, mDirName);
+        s.setValue(AppSettings::IMG_REVT_PATH, mDirName);
     }
 }
 
-void PdfImgCrop::onBtnProcessClicked()
+void ImageWBRevert::onBtnProcessClicked()
 {
     // 1.check parameter
     if (mDirName.isEmpty()) {
@@ -129,11 +89,6 @@ void PdfImgCrop::onBtnProcessClicked()
     QDir dir(mDirName);
     if (!dir.exists()) {
         MsgBoxUtil::warning(this, tr("指定目录不存在！"));
-        return;
-    }
-
-    if (!getCropParam()) {
-        MsgBoxUtil::warning(this, tr("未设定裁剪参数！"));
         return;
     }
 
@@ -172,18 +127,26 @@ void PdfImgCrop::onBtnProcessClicked()
         }
 
         QImage img(filePath);
-        qDebug() << "img width: " << img.width();
-        qDebug() << "img height: " << img.height();
-        QImage newImg = img.copy(*mCropRect);
+        int width = img.width();
+        int height = img.height();
+        QImage::Format fmt = img.format();
+        qDebug() << "img width: " << width;
+        qDebug() << "img height: " << height;
+        QImage newImg(width, height, fmt);
+
+        for (int w = 0; w < width; w ++) {
+            for (int h = 0; h < height; h ++) {
+                QColor rgb = img.pixel(w, h);
+                rgb.setRgb(255-rgb.red(), 255-rgb.green(), 255-rgb.blue());
+                newImg.setPixel(w, h, rgb.rgba());
+            }
+        }
+
         QString newImgFilePath(dirNewStr);
         newImgFilePath.append("/");
         newImgFilePath.append(fileName);
         qDebug() << "newImgFilePath: " << newImgFilePath;
         newImg.save(newImgFilePath);
-
-        if (ui->checkParamsAdjust->isChecked()) {
-            break;
-        }
     }
 
     QString result("处理结束！");

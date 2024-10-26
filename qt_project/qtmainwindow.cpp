@@ -23,6 +23,7 @@
 #include "epub/pdfnewlineremove.h"
 #include "epub/pdfimgcrop.h"
 #include "knote/knotemgr.h"
+#include "tools/imagewbrevert.h"
 
 
 QtMainWindow::QtMainWindow(QWidget *parent) :
@@ -170,6 +171,7 @@ void QtMainWindow::initSlots()
     connect(ui->actionFileRename, SIGNAL(triggered(bool)), this, SLOT(onEditActionFileRenameClicked()));
     connect(ui->actionFileSync, SIGNAL(triggered(bool)), this, SLOT(onEditActionFileSyncClicked()));
     connect(ui->actionLog, SIGNAL(triggered(bool)), this, SLOT(onEditActionLogClicked()));
+    connect(ui->actionImageWBRevert, SIGNAL(triggered(bool)), this, SLOT(onToolActionImageWBRvtClicked()));
     connect(ui->actionText2Html, SIGNAL(triggered(bool)), this, SLOT(onePubActionText2HtmlClicked()));
     connect(ui->actionIDGen, SIGNAL(triggered(bool)), this, SLOT(onePubActionIdGenClicked()));
     connect(ui->actionRefGen, SIGNAL(triggered(bool)), this, SLOT(onePubActionRefGenClicked()));
@@ -283,6 +285,13 @@ void QtMainWindow::onEditActionFileRenameClicked()
 void QtMainWindow::onEditActionFileSyncClicked()
 {
     FileSyncDlg *d = new FileSyncDlg(this);
+    d->setAttribute(Qt::WA_DeleteOnClose);
+    d->show();
+}
+
+void QtMainWindow::onToolActionImageWBRvtClicked()
+{
+    ImageWBRevert *d = new ImageWBRevert(this);
     d->setAttribute(Qt::WA_DeleteOnClose);
     d->show();
 }

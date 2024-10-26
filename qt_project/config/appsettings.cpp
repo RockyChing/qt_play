@@ -38,9 +38,10 @@ const QString AppSettings::HTML_PATH  = "html_path";
 const QString AppSettings::HTML_CLS  = "html_class";
 
 const QString AppSettings::IMG_CROP_PATH  = "crop_path";
+const QString AppSettings::IMG_REVT_PATH  = "revt_path";
 
 const QString AppSettings::QT_PLAY_MAJOR = "1";
-const QString AppSettings::QT_PLAY_MINOR = "17";
+const QString AppSettings::QT_PLAY_MINOR = "18";
 const QString AppSettings::QT_PLAY_MICRO = "1";
 
 

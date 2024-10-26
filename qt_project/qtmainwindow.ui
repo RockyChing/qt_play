@@ -205,6 +205,7 @@
     <property name="title">
      <string>工具</string>
     </property>
+    <addaction name="actionImageWBRevert"/>
     <addaction name="actionLog"/>
    </widget>
    <widget class="QMenu" name="menuePub">
@@ -372,6 +373,11 @@
   <action name="actionPdfImgCrop">
    <property name="text">
     <string>pdf图片裁剪</string>
+   </property>
+  </action>
+  <action name="actionImageWBRevert">
+   <property name="text">
+    <string>黑白图片反色</string>
    </property>
   </action>
  </widget>

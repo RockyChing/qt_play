@@ -61,6 +61,8 @@ private slots:
     void onePubActionPdfImgCropClicked();
     void onePubActionHtmlImgRenameClicked();
 
+    void onToolActionImageWBRvtClicked();
+
     void aboutSlot();
     void aboutQtSlot();
 

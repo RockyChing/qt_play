@@ -46,7 +46,8 @@ SOURCES += main.cpp\
     knote/knoteitem.cpp \
     epub/htmlimgrenamedlg.cpp \
     epub/pdfnewlineremove.cpp \
-    epub/pdfimgcrop.cpp
+    epub/pdfimgcrop.cpp \
+    tools/imagewbrevert.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
@@ -186,7 +187,8 @@ HEADERS  += qtmainwindow.h \
     knote/knoteitem.h \
     epub/htmlimgrenamedlg.h \
     epub/pdfnewlineremove.h \
-    epub/pdfimgcrop.h
+    epub/pdfimgcrop.h \
+    tools/imagewbrevert.h
 
 FORMS    += qtmainwindow.ui \
     finance/finance.ui \
@@ -206,7 +208,8 @@ FORMS    += qtmainwindow.ui \
     knote/knotemgr.ui \
     epub/htmlimgrenamedlg.ui \
     epub/pdfnewlineremove.ui \
-    epub/pdfimgcrop.ui
+    epub/pdfimgcrop.ui \
+    tools/imagewbrevert.ui
 
 win32: LIBS += -L$$PWD/libs/ -llibusb-1.0 \
     -llibcrypto-1_1 -llibssl-1_1

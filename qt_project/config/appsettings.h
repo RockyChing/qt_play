@@ -53,6 +53,9 @@ public:
 
     /*for PdfImgCrop config using */
     static const QString IMG_CROP_PATH;
+
+    /*for ImageWBRevert config using */
+    static const QString IMG_REVT_PATH;
 public:
     AppSettings();
 
