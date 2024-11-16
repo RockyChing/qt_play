@@ -47,7 +47,8 @@ SOURCES += main.cpp\
     epub/htmlimgrenamedlg.cpp \
     epub/pdfnewlineremove.cpp \
     epub/pdfimgcrop.cpp \
-    tools/imagewbrevert.cpp
+    tools/imagewbrevert.cpp \
+    utils/toast.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
@@ -188,7 +189,8 @@ HEADERS  += qtmainwindow.h \
     epub/htmlimgrenamedlg.h \
     epub/pdfnewlineremove.h \
     epub/pdfimgcrop.h \
-    tools/imagewbrevert.h
+    tools/imagewbrevert.h \
+    utils/toast.h
 
 FORMS    += qtmainwindow.ui \
     finance/finance.ui \
@@ -209,7 +211,8 @@ FORMS    += qtmainwindow.ui \
     epub/htmlimgrenamedlg.ui \
     epub/pdfnewlineremove.ui \
     epub/pdfimgcrop.ui \
-    tools/imagewbrevert.ui
+    tools/imagewbrevert.ui \
+    utils/toast.ui
 
 win32: LIBS += -L$$PWD/libs/ -llibusb-1.0 \
     -llibcrypto-1_1 -llibssl-1_1

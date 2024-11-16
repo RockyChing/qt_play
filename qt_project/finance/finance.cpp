@@ -1,3 +1,5 @@
+#include <QWidget>
+#include "utils/toast.h"
 #include "finance.h"
 #include "ui_finance.h"
 #include <QDebug>
@@ -43,8 +45,13 @@ void Finance::initUI()
     mFuliDest->setValidator(new QDoubleValidator(mFuliDest));
     mFuliRate->setValidator(new QDoubleValidator(mFuliRate));
 
+    ui->inputFirst->setValidator(new QIntValidator(ui->inputFirst));
+    ui->inputIncrease->setValidator(new QIntValidator(ui->inputIncrease));
+    ui->inputCnt->setValidator(new QIntValidator(ui->inputCnt));
+
     connect(mBtnInputCalc, SIGNAL(clicked()), this, SLOT(onInputCalClicked()));
     connect(mBtnFuliCalc, SIGNAL(clicked()), this, SLOT(onFuliCalClicked()));
+    connect(ui->btnTotalMoney, SIGNAL(clicked()), this, SLOT(onTotalMoneyClicked()));
 }
 
 void Finance::onInputCalClicked()
@@ -79,4 +86,31 @@ void Finance::onFuliCalClicked()
 
     QString text = QString::number(tmp, 'f', 2);
     mFuliDest->setText(text);
+}
+
+void Finance::onTotalMoneyClicked()
+{
+    int firstMoney = ui->inputFirst->text().toInt();
+    int increaseMoney = ui->inputIncrease->text().toInt();
+    int cnt = ui->inputCnt->text().toInt();
+
+    if ((firstMoney <= 0) || (increaseMoney <= 0) || (cnt <= 0)) {
+        Toast::display(tr("输入数据错误！"), nullptr);
+        return;
+    }
+
+    ui->textMoney->clear();
+    for (int i = 0; i < cnt; i ++) {
+        int need = firstMoney + increaseMoney * i;
+        QString needStr = QString::number(need);
+        QString iStr = QString::number(i + 1);
+        QString tmp = iStr + "：" + needStr;
+        ui->textMoney->append(tmp);
+    }
+
+    int totalMoney = (cnt * firstMoney) + (((cnt * (cnt - 1)) * increaseMoney) / 2);
+    QString result = QString::number(totalMoney);
+    QString text(tr("资金总量："));
+    text.append(result);
+    ui->textMoney->append(text);
 }

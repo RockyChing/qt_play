@@ -23,6 +23,7 @@ private:
 private slots:
     void onInputCalClicked();
     void onFuliCalClicked();
+    void onTotalMoneyClicked();
 
 public:
     enum {
