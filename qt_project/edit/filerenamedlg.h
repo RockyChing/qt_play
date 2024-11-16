@@ -36,13 +36,10 @@ private:
     Ui::FileRenameDlg *ui;
     QString mDirName;
 
-    QPushButton *mBtnDirOpen;
-    QPushButton *mBtnRename;
+    QString mSrcNamePart;
+    QString mNewNamePart;
 
-    QLineEdit *mEditDirShow;
-    QLineEdit *mEditFilePrefix;
-
-    QCheckBox *mCBBackup;
+    int mFileIndex;
 };
 
 #endif // FILERENAMEDLG_H

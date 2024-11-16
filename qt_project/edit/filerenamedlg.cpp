@@ -7,6 +7,8 @@
 #include <QFileInfoList>
 #include <QPalette>
 #include <QRegExp>
+#include <QRadioButton>
+#include <QButtonGroup>
 #include "filerenamedlg.h"
 #include "ui_filerenamedlg.h"
 #include "config/appsettings.h"
@@ -14,7 +16,7 @@
 #include "utils/fileutil.h"
 
 FileRenameDlg::FileRenameDlg(QWidget *parent) :
-    QDialog(parent),
+    QDialog(parent), mFileIndex(-1),
     ui(new Ui::FileRenameDlg)
 {
     ui->setupUi(this);
@@ -36,18 +38,18 @@ FileRenameDlg::~FileRenameDlg()
 
 void FileRenameDlg::initUI()
 {
-    mBtnDirOpen = ui->btnDirOpen;
-    mBtnRename = ui->btnRename;
-
-    mEditDirShow = ui->lineEditDirShow;
-    mEditFilePrefix = ui->lineEditFilePrefix;
-
-    mCBBackup = ui->checkBoxBackup;
+    // QRadioButton setExclusive
+    QButtonGroup *btnBox = new QButtonGroup;
+    btnBox->setExclusive(true);
+    btnBox->addButton(ui->rBtnPostfix);
+    btnBox->addButton(ui->rBtnNamePart);
+    btnBox->addButton(ui->rBtnIndexAuto);
+    ui->rBtnPostfix->setChecked(true);
 
     connect(ui->lineEditSeq, SIGNAL(textChanged(QString)), this, SLOT(onSeqTextChanged()));
-    connect(ui->checkPartReplace, SIGNAL(stateChanged(int)), this, SLOT(onCBReplaceChanged(int)));
-    connect(mBtnDirOpen, SIGNAL(clicked()), this, SLOT(onBtnDirOpenClicked()));
-    connect(mBtnRename, SIGNAL(clicked()), this, SLOT(onBtnRenameClicked()));
+    //connect(ui->checkPartReplace, SIGNAL(stateChanged(int)), this, SLOT(onCBReplaceChanged(int)));
+    connect(ui->btnDirOpen, SIGNAL(clicked()), this, SLOT(onBtnDirOpenClicked()));
+    connect(ui->btnRename, SIGNAL(clicked()), this, SLOT(onBtnRenameClicked()));
 }
 
 void FileRenameDlg::initData()
@@ -55,9 +57,9 @@ void FileRenameDlg::initData()
     QSettings s(AppSettings::APP_SETTINGS_FILE, QSettings::IniFormat);
     mDirName = s.value(AppSettings::FILE_RDIR).toString();
     if (!mDirName.isEmpty()) {
-        mEditDirShow->setText(mDirName);
+        ui->lineEditDirShow->setText(mDirName);
     } else {
-        mEditDirShow->setText(tr("未指定目录"));
+        ui->lineEditDirShow->setText(tr("未指定目录"));
     }
 }
 
@@ -78,30 +80,22 @@ bool FileRenameDlg::isStringUpper(QString &s)
 
 void FileRenameDlg::onSeqTextChanged()
 {
-    int seq = ui->lineEditSeq->text().toInt();
-    if (seq > 0) {
-        ui->checkBoxIndexAuto->setChecked(true);
+    int index = ui->lineEditSeq->text().toInt();
+    if (index < 0) {
+        MsgBoxUtil::warning(this, tr("输入序号错误！"));
     } else {
-        ui->checkBoxIndexAuto->setChecked(false);
+        mFileIndex = index;
     }
-    qWarning("起始序号发生改变");
 }
 
 void FileRenameDlg::onCBReplaceChanged(int i)
 {
     ui->lineEditFilePrefix->clear();
-    if (ui->checkPartReplace->isChecked()) {
-        ui->lineEditSeq->setEnabled(false);
-        ui->lineEditFilePrefix->setPlaceholderText("before,after");
-    } else {
-        ui->lineEditSeq->setEnabled(true);
-        ui->lineEditFilePrefix->setPlaceholderText("必填");
-    }
 }
 
 void FileRenameDlg::onBtnDirOpenClicked()
 {
-    QString filePath = mEditDirShow->text();
+    QString filePath = ui->lineEditDirShow->text();
     if (filePath.isEmpty()) {
         /* load file from currentPath */
         filePath = QDir::currentPath();
@@ -112,9 +106,9 @@ void FileRenameDlg::onBtnDirOpenClicked()
     mDirName = QDir::toNativeSeparators(mDirName);
     qDebug() << mDirName;
     if (mDirName.isEmpty()) {
-        mEditDirShow->setText(tr("未指定目录"));
+        ui->lineEditDirShow->setText(tr("未指定目录"));
     } else {
-        mEditDirShow->setText(mDirName);
+        ui->lineEditDirShow->setText(mDirName);
         QSettings s(AppSettings::APP_SETTINGS_FILE, QSettings::IniFormat);
         s.setValue(AppSettings::FILE_RDIR, mDirName);
     }
@@ -134,95 +128,92 @@ void FileRenameDlg::onBtnRenameClicked()
         return;
     }
 
-    QString filePrefix = mEditFilePrefix->text();
-    if (!ui->checkPartReplace->isChecked() && filePrefix.isEmpty()) {
-        MsgBoxUtil::warning(this, tr("未指定文件前缀！"));
-        return;
+    if (ui->rBtnNamePart->isChecked()) {
+        mNewNamePart = ui->lineEditAfter->text();
+        mSrcNamePart = ui->lineEditBefore->text();
+        if (mSrcNamePart.isEmpty()) {
+            MsgBoxUtil::warning(this, tr("未输入待替字段！"));
+            return;
+        }
+    }
+
+    if (ui->rBtnIndexAuto->isChecked()) {
+        if (ui->lineEditSeq->text().isEmpty()) {
+            MsgBoxUtil::warning(this, tr("未输入序号！"));
+            return;
+        }
+
+        mFileIndex = ui->lineEditSeq->text().toInt();
     }
 
     // 2.traverse files
     QFileInfoList fileInfoList = dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot
             | QDir::Files | QDir::Readable, QDir::Name);
-    if (fileInfoList.size() <= 0) {
+    int fileCount = fileInfoList.size();
+    if (fileCount <= 0) {
         qWarning("目录下文件空");
         return;
     }
 
-    if (mCBBackup->isChecked()) {
-        bool res = FileUtil::copyDir(mDirName, mDirName + "bak", false);
+    if (ui->checkBoxBackup->isChecked()) {
+        bool res = false;
+        res = FileUtil::copyDir(mDirName, mDirName + "_bak", false);
         qDebug() << "copyDir result: " << res;
     }
 
     // 3.rename files
-    int fileCount = fileInfoList.size();
-    if (ui->checkPartReplace->isChecked()) {
-        QStringList strParams = ui->lineEditFilePrefix->text().split(",");
-        QString before = strParams.at(0);
-        QString after = strParams.at(1);
-        for (int i = 0; i < fileCount; i ++) {
-            QFileInfo fileInfo = fileInfoList.at(i);
-            QString filePath = fileInfo.absoluteFilePath();
+    for (int i = 0; i < fileCount; i ++) {
+        QFileInfo fileInfo = fileInfoList.at(i);
+        QString filePath = fileInfo.absoluteFilePath();
+        qDebug() << "srcFilePath: " << filePath;
+        QString baseName = fileInfo.baseName();
+        QString postfix = fileInfo.suffix();
+        QString absolutePath = fileInfo.absolutePath();
+        QString newFilePath = absolutePath + "/";
+        if (ui->rBtnPostfix->isChecked()) {
+            QString newPostfix = ui->lineEditNewPostfix->text();
+            if (newPostfix.isEmpty()) {
+                MsgBoxUtil::warning(this, tr("未输入新后缀！"));
+                return;
+            }
 
-            QString newFilePath(filePath);
-            newFilePath.replace(before, after);
-            if (0 == filePath.compare(newFilePath)) {
-                qDebug() << "no change!";
+            newFilePath.append(baseName);
+            newFilePath.append(".");
+            newFilePath.append(newPostfix);
+        } else if (ui->rBtnNamePart->isChecked()) {
+            baseName.replace(mSrcNamePart, mNewNamePart);
+            if (baseName.isEmpty()) {
                 continue;
             }
-            qDebug() << "src: " << filePath;
-            qDebug() << "dst: " << newFilePath;
-            QFile::rename(filePath, newFilePath);
-        }
-    } else {
-        int pos;
-        int fileIndex = 1;
-        int seqStart = ui->lineEditSeq->text().toInt();
-        if (seqStart > 0) {
-            fileIndex = seqStart;
-            if (!ui->checkBoxIndexAuto->isChecked()) {
-                ui->checkBoxIndexAuto->setChecked(true);
-            }
-        }
 
-        for (int i = 0; i < fileCount; i ++) {
-            QFileInfo fileInfo = fileInfoList.at(i);
-            QString filePath = fileInfo.absoluteFilePath();
-            QString fileName = fileInfo.fileName();
-            QString postFix = fileInfo.suffix();
-            QString lowPostfix = postFix.toLower();
-            lowPostfix.insert(0, QChar('.'));
-            //qDebug() << fileName;
-
-            int index;
-            if (ui->checkBoxIndexAuto->isChecked()) {
-                index = fileIndex;
-                fileIndex += 1;
-            } else {
-                QRegExp rx("\\d+");
-                pos = rx.indexIn(fileName, 0);
-                if (-1 == pos)
-                    continue;
-                index = rx.cap(0).toInt();
-            }
-
+            newFilePath.append(baseName);
+            newFilePath.append(".");
+            newFilePath.append(postfix);
+        } else if (ui->rBtnIndexAuto->isChecked()) {
+            mFileIndex += 1;
             QString strIndex;
-            if (fileCount >= 100) {
-                strIndex = strIndex.sprintf("%03d", index);
+            if ((mFileIndex + fileCount - i) >= 100) {
+                strIndex = strIndex.sprintf("%03d", mFileIndex);
             } else {
-                strIndex = strIndex.sprintf("%02d", index);
+                strIndex = strIndex.sprintf("%02d", mFileIndex);
             }
-            //qDebug() << strIndex;
 
-            // 3.1 build file path
-            QString newFileName = filePrefix + strIndex + lowPostfix;
-            QString newFilePath = mDirName + QDir::separator() + newFileName;
-            //qDebug() << newFilePath;
-
-            // 3.2 rename file
-            bool res = QFile::rename(filePath, newFilePath);
-            qDebug() << res;
+            newFilePath.append(ui->lineEditFilePrefix->text());
+            newFilePath.append(strIndex);
+            newFilePath.append(".");
+            newFilePath.append(postfix);
+        } else {
+            MsgBoxUtil::warning(this, tr("未指定操作！"));
+            return;
         }
+
+        qDebug() << "newFilePath: " << newFilePath;
+        if (0 == filePath.compare(newFilePath)) {
+            continue;
+        }
+        QFile::rename(filePath, newFilePath);
     }
+
     dir.refresh();
     MsgBoxUtil::information(this, tr("操作成功！"));
 }
