@@ -10,8 +10,13 @@
     <height>153</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>12</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>html中图片重命名</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">

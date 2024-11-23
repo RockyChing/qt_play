@@ -24,6 +24,9 @@ private slots:
     void onBtnProcessClicked();
 
 private:
+    QString getImageName(QString& line);
+
+private:
     Ui::HtmlImgRenameDlg *ui;
     QPushButton *mBtnOpen;
     QPushButton *mBtnProcess;

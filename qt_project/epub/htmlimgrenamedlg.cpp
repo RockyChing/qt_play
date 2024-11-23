@@ -52,6 +52,34 @@ void HtmlImgRenameDlg::initData()
     }
 }
 
+QString HtmlImgRenameDlg::getImageName(QString& line)
+{
+    /* line format:
+     * <p class="calibre1"><a id="calibre_link-1"></a><img src="images/000076.jpg" alt="Image 1" class="calibre2" /></p>
+     * */
+    int idx0 = line.indexOf("<img");
+    if (-1 == idx0) {
+        return "";
+    }
+
+    QString imgElement = line.mid(idx0);
+    //qDebug() << "imgElement: " << imgElement;
+    int idx1 = imgElement.indexOf("images/");
+    if (-1 == idx1) {
+        return "";
+    }
+
+    QString tmp = imgElement.mid(idx1);
+    //qDebug() << "tmp: " << tmp;
+    int idx2 = tmp.indexOf("\"");
+    if (-1 == idx2) {
+        return "";
+    }
+
+    QString result = tmp.mid(7, idx2 - 7);
+    return result;
+}
+
 void HtmlImgRenameDlg::onBtnOpenClicked()
 {
     QString filePath = mFilePath->text();
@@ -74,81 +102,65 @@ void HtmlImgRenameDlg::onBtnOpenClicked()
 
 void HtmlImgRenameDlg::onBtnProcessClicked()
 {
-    do {
-        QFile htmlFile(mFileAbsPath);
-        if (!htmlFile.exists()) {
-            QMessageBox::warning(this, tr("Warning"), tr("No file!!!"));
-            break;
+    QFile htmlFile(mFileAbsPath);
+    if (!htmlFile.exists()) {
+        QMessageBox::warning(this, tr("Warning"), tr("No file!!!"));
+        return;
+    }
+
+    if (!htmlFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QMessageBox::warning(this, tr("Warning"), tr("Open file!!!"));
+        return;
+    }
+
+    QFileInfo htmlFileInfo(htmlFile);
+    QString base = htmlFileInfo.absolutePath();
+    QString srcImgDir = base +"/images";
+    QString dstImgDir = base +"/dst";
+    qDebug() << "srcImgDir: " << srcImgDir;
+    qDebug() << "dstImgDir: " << dstImgDir;
+
+    QDir ddir(dstImgDir);
+    if (!ddir.exists()) {
+        ddir.mkdir(dstImgDir);
+        if (!ddir.exists()) {
+            QMessageBox::warning(this, tr("Warning"), tr("´´½¨dstÄ¿Â¼Ê§°Ü£¡"));
+            return;
+        }
+    }
+
+    QTextStream in(&htmlFile);
+    int lineCnt = 1;
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        QString imageName = getImageName(line);
+        if (imageName.isEmpty()) {
+            continue;
         }
 
-        QFileInfo htmlFileInfo(htmlFile);
-        QString base = htmlFileInfo.absolutePath();
-        qDebug() << "base: " << base;
-
-        if (!htmlFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            QMessageBox::warning(this, tr("Warning"), tr("Open file!!!"));
-            break;
+        QString srcImgPath = srcImgDir + "/" + imageName;
+        qDebug() << "srcImgPath: " << srcImgPath;
+        QFileInfo srcImgFileInfo(srcImgPath);
+        if (!srcImgFileInfo.exists()) {
+            qDebug() << srcImgPath << "not exist!";
+            continue;
         }
 
-        QTextStream in(&htmlFile);
-        int lineCnt = 0;
-        while (!in.atEnd()) {
-            QString line = in.readLine();
-            //qDebug() << line;
+        QString suffix = srcImgFileInfo.suffix();
+        QString dstImgName("");
+        dstImgName = QString::asprintf("%04d", lineCnt);
+        QString dstImgPath = dstImgDir + "/" + dstImgName + "." + suffix;
+        qDebug() << "dstImgPath: " << dstImgPath;
 
-            /* line format:
-             * <p id="1" class="3"><img src="images/00717.jpeg" alt="00526.jpg"/></p>
-             * */
-            int n = line.indexOf("images");
-            QString tmp = line.mid(n);
-
-            int m = tmp.indexOf("\"");
-            QString tmp2 = tmp.mid(0, m);
-            //qDebug() << tmp2;
-
-            QString srcImgName = base + QDir::separator() + tmp2;
-            QFileInfo srcImgFileInfo(srcImgName);
-            if (!srcImgFileInfo.exists()) {
-                QMessageBox::warning(this, tr("Warning"), tr("no src img!!!"));
-                break;
-            }
-            qDebug() << "srcImgName: " << srcImgName;
-
-            if (srcImgFileInfo.size() < 500) {
-                QFile::remove(srcImgName);
-                continue;
-            }
-            QString suffix = srcImgFileInfo.suffix();
-            qDebug() << "suffix: " << suffix;
-
-            QString ddirName = base + QDir::separator() + "dst";
-            //qDebug() << ddirName;
-            QDir ddir(ddirName);
-            if (!ddir.exists()) {
-                ddir.mkdir(ddirName);
-                if (!ddir.exists()) {
-                    QMessageBox::warning(this, tr("Warning"), tr("mkdir!!!"));
-                    break;
-                }
-            }
-
-            lineCnt += 1;
-            QString dstImgName("");
-            dstImgName = QString::asprintf("%04d", lineCnt);
-            //qDebug() << newImgName;
-
-            QString dstImgPath = ddirName + QDir::separator() + dstImgName + "." + suffix;
-            qDebug() << "dstImgPath: " << dstImgPath;
-
-            bool res = false;
-            res = QFile::rename(srcImgName, dstImgPath);
-            if (!res) {
-                QMessageBox::warning(this, tr("Warning"), tr("rename err!!!"));
-                break;
-            }
+        bool res = false;
+        res = QFile::rename(srcImgPath, dstImgPath);
+        if (!res) {
+            qDebug() << srcImgPath << "rename err!!!";
         }
 
-        htmlFile.close();
-        QMessageBox::information(this, "Info", tr("Work done!"));
-    } while (0);
+        lineCnt += 1;
+    }
+
+    htmlFile.close();
+    QMessageBox::information(this, "Info", tr("Work done!"));
 }
