@@ -35,14 +35,18 @@ const QString AppSettings::R_REPEAT   = "reminder_repeat";
 const QString AppSettings::R_SND_FILE = "reminder_snd_file";
 
 const QString AppSettings::HTML_PATH  = "html_path";
-const QString AppSettings::HTML_CLS  = "html_class";
+const QString AppSettings::HTML_CLS   = "html_class";
 
 const QString AppSettings::IMG_CROP_PATH  = "crop_path";
 const QString AppSettings::IMG_REVT_PATH  = "revt_path";
 
+const QString AppSettings::FAV_LIST_PATH  = "fav_list_path";
+const QString AppSettings::FAV_SDIR       = "fav_sdir";
+const QString AppSettings::FAV_DDIR       = "fav_ddir";
+
 const QString AppSettings::QT_PLAY_MAJOR = "1";
-const QString AppSettings::QT_PLAY_MINOR = "18";
-const QString AppSettings::QT_PLAY_MICRO = "3";
+const QString AppSettings::QT_PLAY_MINOR = "19";
+const QString AppSettings::QT_PLAY_MICRO = "0";
 
 
 AppSettings::AppSettings()

@@ -11,6 +11,7 @@
 #include "edit/filenewdlg.h"
 #include "edit/filerenamedlg.h"
 #include "edit/filesyncdlg.h"
+#include "edit/filepickdlg.h"
 #include "account/AccountView.h"
 #include "pog/PoGTableView.h"
 #include "picmerge/PicMergeView.h"
@@ -170,6 +171,7 @@ void QtMainWindow::initSlots()
     connect(ui->actionFileNew, SIGNAL(triggered(bool)), this, SLOT(onEditActionFileNewClicked()));
     connect(ui->actionFileRename, SIGNAL(triggered(bool)), this, SLOT(onEditActionFileRenameClicked()));
     connect(ui->actionFileSync, SIGNAL(triggered(bool)), this, SLOT(onEditActionFileSyncClicked()));
+    connect(ui->actionFilePick, SIGNAL(triggered(bool)), this, SLOT(onEditActionFilePickClicked()));
     connect(ui->actionLog, SIGNAL(triggered(bool)), this, SLOT(onEditActionLogClicked()));
     connect(ui->actionImageWBRevert, SIGNAL(triggered(bool)), this, SLOT(onToolActionImageWBRvtClicked()));
     connect(ui->actionText2Html, SIGNAL(triggered(bool)), this, SLOT(onePubActionText2HtmlClicked()));
@@ -285,6 +287,13 @@ void QtMainWindow::onEditActionFileRenameClicked()
 void QtMainWindow::onEditActionFileSyncClicked()
 {
     FileSyncDlg *d = new FileSyncDlg(this);
+    d->setAttribute(Qt::WA_DeleteOnClose);
+    d->show();
+}
+
+void QtMainWindow::onEditActionFilePickClicked()
+{
+    FilePickDlg *d = new FilePickDlg(this);
     d->setAttribute(Qt::WA_DeleteOnClose);
     d->show();
 }

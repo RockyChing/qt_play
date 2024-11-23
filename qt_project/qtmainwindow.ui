@@ -193,6 +193,7 @@
     <addaction name="actionFileNew"/>
     <addaction name="actionFileRename"/>
     <addaction name="actionFileSync"/>
+    <addaction name="actionFilePick"/>
    </widget>
    <widget class="QMenu" name="menuAbout">
     <property name="title">
@@ -378,6 +379,11 @@
   <action name="actionImageWBRevert">
    <property name="text">
     <string>黑白图片反色</string>
+   </property>
+  </action>
+  <action name="actionFilePick">
+   <property name="text">
+    <string>文件挑选(&amp;P)</string>
    </property>
   </action>
  </widget>

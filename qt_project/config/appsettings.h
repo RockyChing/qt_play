@@ -56,6 +56,11 @@ public:
 
     /*for ImageWBRevert config using */
     static const QString IMG_REVT_PATH;
+
+    /*for FavFilePick config using */
+    static const QString FAV_LIST_PATH;
+    static const QString FAV_SDIR;
+    static const QString FAV_DDIR;
 public:
     AppSettings();
 

@@ -52,6 +52,7 @@ private slots:
     void onEditActionFileNewClicked();
     void onEditActionFileRenameClicked();
     void onEditActionFileSyncClicked();
+    void onEditActionFilePickClicked();
     void onEditActionLogClicked();
 
     void onePubActionText2HtmlClicked();
