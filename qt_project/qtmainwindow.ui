@@ -222,8 +222,18 @@
     <addaction name="separator"/>
     <addaction name="actionHtmlImgRename"/>
    </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>投资</string>
+    </property>
+    <addaction name="actionReturnCal"/>
+    <addaction name="actionTradeArithmeticSeauence"/>
+    <addaction name="actionTradeGrid"/>
+    <addaction name="actionTradeBasedOnReturnRate"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
+   <addaction name="menu"/>
    <addaction name="menuePub"/>
    <addaction name="menuTool"/>
    <addaction name="menuAbout"/>
@@ -384,6 +394,26 @@
   <action name="actionFilePick">
    <property name="text">
     <string>文件挑选(&amp;P)</string>
+   </property>
+  </action>
+  <action name="actionReturnCal">
+   <property name="text">
+    <string>收益计算器</string>
+   </property>
+  </action>
+  <action name="actionTradeArithmeticSeauence">
+   <property name="text">
+    <string>等差交易法</string>
+   </property>
+  </action>
+  <action name="actionTradeGrid">
+   <property name="text">
+    <string>网格交易法</string>
+   </property>
+  </action>
+  <action name="actionTradeBasedOnReturnRate">
+   <property name="text">
+    <string>盈亏比交易法</string>
    </property>
   </action>
  </widget>

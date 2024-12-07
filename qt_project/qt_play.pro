@@ -17,7 +17,6 @@ TEMPLATE = app
 SOURCES += main.cpp\
         qtmainwindow.cpp \
     usb/usb_util.cpp \
-    finance/finance.cpp \
     edit/nl_del.cpp \
     config/appsettings.cpp \
     crypto/qaes.cpp \
@@ -49,11 +48,12 @@ SOURCES += main.cpp\
     epub/pdfimgcrop.cpp \
     tools/imagewbrevert.cpp \
     utils/toast.cpp \
-    edit/filepickdlg.cpp
+    edit/filepickdlg.cpp \
+    finance/returncal.cpp \
+    finance/tradearithmeticsequence.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
-    finance/finance.h \
     edit/nl_del.h \
     config/appsettings.h \
     crypto/qaes.h \
@@ -192,10 +192,11 @@ HEADERS  += qtmainwindow.h \
     epub/pdfimgcrop.h \
     tools/imagewbrevert.h \
     utils/toast.h \
-    edit/filepickdlg.h
+    edit/filepickdlg.h \
+    finance/returncal.h \
+    finance/tradearithmeticsequence.h
 
 FORMS    += qtmainwindow.ui \
-    finance/finance.ui \
     edit/nl_del.ui \
     account/accountview.ui \
     pog/pogtableview.ui \
@@ -215,7 +216,9 @@ FORMS    += qtmainwindow.ui \
     epub/pdfimgcrop.ui \
     tools/imagewbrevert.ui \
     utils/toast.ui \
-    edit/filepickdlg.ui
+    edit/filepickdlg.ui \
+    finance/returncal.ui \
+    finance/tradearithmeticsequence.ui
 
 win32: LIBS += -L$$PWD/libs/ -llibusb-1.0 \
     -llibcrypto-1_1 -llibssl-1_1

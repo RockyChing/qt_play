@@ -7,6 +7,8 @@
 #include "qtmainwindow.h"
 #include "ui_qtmainwindow.h"
 #include "config/appsettings.h"
+#include "finance/returncal.h"
+#include "finance/tradearithmeticsequence.h"
 #include "edit/nl_del.h"
 #include "edit/filenewdlg.h"
 #include "edit/filerenamedlg.h"
@@ -173,6 +175,12 @@ void QtMainWindow::initSlots()
     connect(ui->actionFileSync, SIGNAL(triggered(bool)), this, SLOT(onEditActionFileSyncClicked()));
     connect(ui->actionFilePick, SIGNAL(triggered(bool)), this, SLOT(onEditActionFilePickClicked()));
     connect(ui->actionLog, SIGNAL(triggered(bool)), this, SLOT(onEditActionLogClicked()));
+
+    connect(ui->actionReturnCal, SIGNAL(triggered(bool)), this, SLOT(onInvestmentReturnCalClicked()));
+    connect(ui->actionTradeArithmeticSeauence, SIGNAL(triggered(bool)), this, SLOT(onInvestmentTradeArithmeticSeauenceClicked()));
+    connect(ui->actionTradeGrid, SIGNAL(triggered(bool)), this, SLOT(onInvestmentTradeGridClicked()));
+    connect(ui->actionTradeBasedOnReturnRate, SIGNAL(triggered(bool)), this, SLOT(onInvestmentBasedOnReturnRateClicked()));
+
     connect(ui->actionImageWBRevert, SIGNAL(triggered(bool)), this, SLOT(onToolActionImageWBRvtClicked()));
     connect(ui->actionText2Html, SIGNAL(triggered(bool)), this, SLOT(onePubActionText2HtmlClicked()));
     connect(ui->actionIDGen, SIGNAL(triggered(bool)), this, SLOT(onePubActionIdGenClicked()));
@@ -312,6 +320,30 @@ void QtMainWindow::onEditActionLogClicked()
         log_info("logd started\r\n");
     }
 }
+
+void QtMainWindow::onInvestmentReturnCalClicked()
+{
+    ReturnCal *d = new ReturnCal(this);
+    d->setAttribute(Qt::WA_DeleteOnClose);
+    d->show();
+}
+
+void QtMainWindow::onInvestmentTradeArithmeticSeauenceClicked()
+{
+    TradeArithmeticSequence *d = new TradeArithmeticSequence(this);
+    d->setAttribute(Qt::WA_DeleteOnClose);
+    d->show();
+}
+
+void QtMainWindow::onInvestmentTradeGridClicked()
+{
+
+}
+
+void QtMainWindow::onInvestmentBasedOnReturnRateClicked(){
+
+}
+
 
 void QtMainWindow::onePubActionText2HtmlClicked()
 {

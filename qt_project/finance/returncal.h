@@ -1,21 +1,21 @@
-#ifndef FINANCE_H
-#define FINANCE_H
+#ifndef RETURNCAL_H
+#define RETURNCAL_H
 
-#include <QWidget>
+#include <QDialog>
 #include <QLineEdit>
 #include <QPushButton>
 
 namespace Ui {
-class Finance;
+class ReturnCal;
 }
 
-class Finance : public QWidget
+class ReturnCal : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit Finance(QWidget *parent = 0);
-    ~Finance();
+    explicit ReturnCal(QWidget *parent = 0);
+    ~ReturnCal();
 
 private:
     void initUI();
@@ -23,7 +23,6 @@ private:
 private slots:
     void onInputCalClicked();
     void onFuliCalClicked();
-    void onTotalMoneyClicked();
 
 public:
     enum {
@@ -32,7 +31,7 @@ public:
     };
 
 private:
-    Ui::Finance *ui;
+    Ui::ReturnCal *ui;
 
     QLineEdit *mInputSrc;
     QLineEdit *mInputTime;
@@ -48,4 +47,4 @@ private:
     QPushButton *mBtnFuliCalc;
 };
 
-#endif // FINANCE_H
+#endif // RETURNCAL_H

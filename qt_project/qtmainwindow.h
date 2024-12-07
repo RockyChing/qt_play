@@ -55,6 +55,11 @@ private slots:
     void onEditActionFilePickClicked();
     void onEditActionLogClicked();
 
+    void onInvestmentReturnCalClicked();
+    void onInvestmentTradeArithmeticSeauenceClicked();
+    void onInvestmentTradeGridClicked();
+    void onInvestmentBasedOnReturnRateClicked();
+
     void onePubActionText2HtmlClicked();
     void onePubActionIdGenClicked();
     void onePubActionRefGenClicked();
