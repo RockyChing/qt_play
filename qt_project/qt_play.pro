@@ -50,7 +50,8 @@ SOURCES += main.cpp\
     utils/toast.cpp \
     edit/filepickdlg.cpp \
     finance/returncal.cpp \
-    finance/tradearithmeticsequence.cpp
+    finance/tradearithmeticsequence.cpp \
+    finance/tradegrid.cpp
 
 HEADERS  += qtmainwindow.h \
     usb/usb_util.h \
@@ -194,7 +195,8 @@ HEADERS  += qtmainwindow.h \
     utils/toast.h \
     edit/filepickdlg.h \
     finance/returncal.h \
-    finance/tradearithmeticsequence.h
+    finance/tradearithmeticsequence.h \
+    finance/tradegrid.h
 
 FORMS    += qtmainwindow.ui \
     edit/nl_del.ui \
@@ -218,7 +220,8 @@ FORMS    += qtmainwindow.ui \
     utils/toast.ui \
     edit/filepickdlg.ui \
     finance/returncal.ui \
-    finance/tradearithmeticsequence.ui
+    finance/tradearithmeticsequence.ui \
+    finance/tradegrid.ui
 
 win32: LIBS += -L$$PWD/libs/ -llibusb-1.0 \
     -llibcrypto-1_1 -llibssl-1_1

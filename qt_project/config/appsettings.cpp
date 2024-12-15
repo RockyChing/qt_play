@@ -45,7 +45,7 @@ const QString AppSettings::FAV_SDIR       = "fav_sdir";
 const QString AppSettings::FAV_DDIR       = "fav_ddir";
 
 const QString AppSettings::QT_PLAY_MAJOR = "1";
-const QString AppSettings::QT_PLAY_MINOR = "20";
+const QString AppSettings::QT_PLAY_MINOR = "21";
 const QString AppSettings::QT_PLAY_MICRO = "0";
 
 

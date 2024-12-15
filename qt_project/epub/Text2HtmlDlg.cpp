@@ -124,6 +124,22 @@ void Text2HtmlDlg::onBtnTransformClicked()
             continue;
         }
 
+        if (line.startsWith("<h2")) {
+            result.append(line);
+            result.append("\r\n");
+            continue;
+        }
+        if (line.startsWith("<h3")) {
+            result.append(line);
+            result.append("\r\n");
+            continue;
+        }
+
+        if (line.startsWith("<p class")) {
+            result.append(line);
+            result.append("\r\n");
+            continue;
+        }
         if (ui->cBoxDelSpace->isChecked()) {
             line.remove(QRegExp("\\s"));
         }

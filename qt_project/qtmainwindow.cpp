@@ -9,6 +9,7 @@
 #include "config/appsettings.h"
 #include "finance/returncal.h"
 #include "finance/tradearithmeticsequence.h"
+#include "finance/tradegrid.h"
 #include "edit/nl_del.h"
 #include "edit/filenewdlg.h"
 #include "edit/filerenamedlg.h"
@@ -193,13 +194,11 @@ void QtMainWindow::initSlots()
     connect(ui->actionAboutQt, SIGNAL(triggered(bool)), this, SLOT(aboutQtSlot()));
 
     connect(ui->btnKnoteMgr, SIGNAL(clicked()), this, SLOT(onBtnKNoteClicked()));
-    connect(ui->btnFinance, SIGNAL(clicked()), this, SLOT(onBtnFinanceClicked()));
     connect(ui->btnAccount, SIGNAL(clicked()), this, SLOT(onBtnAccountClicked()));
     connect(ui->btnHttpsClient, SIGNAL(clicked()), this, SLOT(onBtnHttpsClientClicked()));
     connect(ui->btnReminder, SIGNAL(clicked()), this, SLOT(onBtnReminderClicked()));
     connect(ui->btnPoG, SIGNAL(clicked()), this, SLOT(onBtnPoGClicked()));
     connect(ui->btnPicMerge, SIGNAL(clicked()), this, SLOT(onBtnPicMergeClicked()));
-    connect(ui->btnExit, SIGNAL(clicked()), this, SLOT(onBtnExitClicked()));
 
     connect(mTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this,
                        SLOT(onIconActivated(QSystemTrayIcon::ActivationReason)));
@@ -337,7 +336,9 @@ void QtMainWindow::onInvestmentTradeArithmeticSeauenceClicked()
 
 void QtMainWindow::onInvestmentTradeGridClicked()
 {
-
+    TradeGrid *d = new TradeGrid(this);
+    d->setAttribute(Qt::WA_DeleteOnClose);
+    d->show();
 }
 
 void QtMainWindow::onInvestmentBasedOnReturnRateClicked(){
@@ -420,8 +421,7 @@ void QtMainWindow::onBtnKNoteClicked()
 
 void QtMainWindow::onBtnFinanceClicked()
 {
-    Finance *f = new Finance();
-    f->show();
+
 }
 
 void QtMainWindow::onBtnAccountClicked()

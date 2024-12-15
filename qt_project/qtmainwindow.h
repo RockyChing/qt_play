@@ -8,7 +8,6 @@
 #include <QTimer>
 #include <QMessageBox>
 #include <QMediaPlayer>
-#include "finance/finance.h"
 #include "log/LogViewer.h"
 
 namespace Ui {

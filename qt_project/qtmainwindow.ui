@@ -55,24 +55,6 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="0">
-     <widget class="QPushButton" name="btnFinance">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>30</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Finance</string>
-      </property>
-     </widget>
-    </item>
     <item row="1" column="1">
      <widget class="QPushButton" name="btnPoG">
       <property name="minimumSize">
@@ -88,24 +70,6 @@
       </property>
       <property name="text">
        <string>PoG</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QPushButton" name="btnAccount">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>30</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Account</string>
       </property>
      </widget>
     </item>
@@ -127,7 +91,25 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="0">
+    <item row="1" column="0">
+     <widget class="QPushButton" name="btnAccount">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Account</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
      <widget class="QPushButton" name="btnHttpsClient">
       <property name="minimumSize">
        <size>
@@ -142,24 +124,6 @@
       </property>
       <property name="text">
        <string>Https</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QPushButton" name="btnExit">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>30</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Exit</string>
       </property>
      </widget>
     </item>

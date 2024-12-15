@@ -16,7 +16,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>等差加仓法</string>
+   <string>等差交易法</string>
   </property>
   <widget class="QGroupBox" name="groupBox_4">
    <property name="geometry">
