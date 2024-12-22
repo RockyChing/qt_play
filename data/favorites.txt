@@ -1,4 +1,4 @@
-﻿# 说明：#号后为注释
+# 说明：#号后为注释
 # 国语
 阿桑 - 寂寞在唱歌.mp3
 阿桑 - 温柔的慈悲.mp3
@@ -29,6 +29,18 @@
 动画城 - 快点告诉你.mp3
 方十贰 - 山下.mp3
 
+房东的猫 - 爱你就像爱生命.mp3
+房东的猫 - 白.mp3
+房东的猫 - 斑马斑马.mp3
+房东的猫 - 不知归期的故人.mp3
+房东的猫 - 春风十里[Live].mp3
+房东的猫 - 美好事物.mp3
+房东的猫 - 秋酿.mp3
+房东的猫 - 如常.mp3
+房东的猫 - 下一站，茶山刘.mp3
+房东的猫 - 银河迪厅Single Version.mp3
+房东的猫 - 云烟成雨.mp3
+
 凤凰传奇 - 奢香夫人.mp3
 凤凰传奇 - 自由飞翔.mp3
 凤凰传奇 - 荷塘月色.mp3
@@ -37,12 +49,25 @@
 顾莉雅 - 这片海.mp3
 韩磊 - 千百年后谁还记得谁（汉武大帝）.mp3
 
+红楼梦 - 陈力 - 聪明累.mp3
+红楼梦 - 郑绪岚 - 晴雯歌.mp3
+红楼梦 - 陈力 - 秋窗风雨夕.mp3
 红楼梦 - 郑绪岚 - 秋窗风雨夕.mp3
+红楼梦 - 陈力 - 叹香菱.mp3
+红楼梦 - 郑绪岚 - 叹香菱.mp3
+红楼梦 - 陈力 - 枉凝眉.mp3
 红楼梦 - 郑绪岚 - 题帕三绝.mp3
+红楼梦 - 陈力 - 序曲.mp3
+红楼梦 - 郑绪岚 - 枉凝眉.mp3
+红楼梦 - 陈力 - 葬花吟.mp3
+红楼梦 - 郑绪岚 - 序曲.mp3
+红楼梦 - 陈力 - 紫菱洲歌.mp3
+红楼梦 - 郑绪岚 - 引子.mp3
+红楼梦 - 电影原声 - 晴雯歌.mp3
 红楼梦 - 郑绪岚 - 葬花吟.mp3
+红楼梦 - 郑绪岚 - 聪明累.mp3
 红楼梦 - 郑绪岚 - 紫菱洲歌.mp3
-红楼梦 - 枉凝眉.mp3
-红楼梦 - 葬花吟.mp3
+红楼梦 - 郑绪岚 - 分骨肉.mp3
 红楼梦 - 主题曲.mp3
 
 胡夏、郁可唯 - 知否知否.flac
@@ -67,8 +92,22 @@ Kawa - Puer Man.mp3
 李锐 - 姐姐今夜我在德令哈.mp3
 李锐 - 姐姐今夜我在德令哈（2018版）.mp3
 
-梁咏琪 - 凹凸.mp3
+梁静茹 - 爱久见人心.ape
+梁静茹 - 崇拜.mp3
+梁静茹 - 分手快乐.mp3
+梁静茹 - 会呼吸的痛.ape
+梁静茹 - 可惜不是你.mp3
+梁静茹 - 暖暖.ape
+梁静茹 - 偶阵雨.mp3
+梁静茹 - 情歌.ape
+梁静茹 - 三寸日光.mp3
+梁静茹 - 属于.mp3
+梁静茹 - 丝路.ape
+梁静茹 - 问.ape
+
 梁雁翊 - 情长路更长.mp3
+梁咏琪 - 凹凸.mp3
+
 廖国钺 - 满·月已霜.mp3
 林忆莲 - 失踪.mp3
 
@@ -86,6 +125,7 @@ Kawa - Puer Man.mp3
 
 旅行团 - 逝去的歌.mp3
 
+毛阿敏 - 爱上张无忌.mp3
 毛阿敏 - 相思.mp3
 
 孟庭苇 - 冬季到台北来看雨.mp3
@@ -98,20 +138,20 @@ Kawa - Puer Man.mp3
 孟庭苇 - 往事.mp3
 孟庭苇 - 羞答答的玫瑰静悄悄地开.mp3
 
-
 莫文蔚 - 爱.mp3
 莫文蔚 - 爱情.mp3
 莫文蔚 - 阴天.mp3
-莫文蔚 - 如果没有你.mp3
 
 任素汐 - 大儿歌.mp3
-任素汐 - 岁岁.mp3
-任素汐 - 王招君.mp3
 任素汐 - 等一等.mp3
 任素汐 - 胡广生.mp3
-
+任素汐 - 莫怕莫怕.mp3
+任素汐 - 岁岁.mp3
+任素汐 - 王招君.mp3
+任素汐 - 枕着光的她.mp3
 
 任贤齐 - 把悲伤留给自己（1999红磡演唱会）.mp3
+任贤齐 - 少年游.mp3
 任贤齐 - 天涯.mp3
 
 SHE - Remember.mp3
@@ -124,6 +164,8 @@ SHE - 我爱雨夜花.mp3
 苏打绿 - 我好想你.mp3
 苏打绿 - 我最亲爱的.mp3
 苏打绿 - 小情歌.mp3
+
+苏运莹 - 野子.mp3
 
 谭维维 - 飞.mp3
 谭维维 - 假行僧.ape
@@ -148,6 +190,16 @@ SHE - 我爱雨夜花.mp3
 西游记 - 何必西天万里遥.mp3
 西游记 - 相见难别亦难.mp3
 
+谢春花 - 11887.mp3
+谢春花 - 茶酒伴.mp3
+谢春花 - 荒岛[大事发声].mp3
+谢春花 - 借我.mp3
+谢春花 - 借我[大事发声].mp3
+谢春花 - 理想三旬[live].mp3
+谢春花 - 崎途.mp3
+谢春花 - 俗人言.mp3
+谢春花 - 我从崖边跌落.mp3
+谢春花 - 我一定会爱上你.mp3
 
 新白 - 不羡天仙比翼鸟.mp3
 新白 - 九重天上好时辰.mp3
@@ -161,6 +213,10 @@ SHE - 我爱雨夜花.mp3
 越剧 - 十八相送.mp3
 
 张宇 - 大女人.mp3
+张宇 - 给你们.mp3
+张宇 - 一言难尽.mp3
+张宇 - 雨一直下.mp3
+张宇 - 月亮惹的祸.mp3
 
 郑智化 - 麻花辫.mp3
 郑智化 - 星星点灯dj.mp3
@@ -178,11 +234,106 @@ SHE - 我爱雨夜花.mp3
 
 周云蓬 - 九月.mp3
 
+# 周杰伦快歌
+周杰伦 - 半岛铁盒.mp3
+周杰伦 - 半兽人.mp3
+周杰伦 - 本草纲目.mp3
+周杰伦 - 超跑女神.mp3
+周杰伦 - 公公偏头痛.mp3
+周杰伦 - 霍元甲.mp3
+周杰伦 - 将军.mp3
+周杰伦 - 困兽之斗.mp3
+周杰伦 - 龙战骑士.mp3
+周杰伦 - 乱舞春秋.mp3
+周杰伦 - 米兰的小铁匠.mp3
+周杰伦 - 逆鳞.mp3
+周杰伦 - 娘子.mp3
+周杰伦 - 懦夫.mp3
+周杰伦 - 皮影戏.mp3
+周杰伦 - 乔克叔叔.mp3
+周杰伦 - 忍者.mp3
+周杰伦 - 三年二班.mp3
+周杰伦 - 上海1943.mp3
+周杰伦 - 蛇舞.mp3
+周杰伦 - 时光机.mp3
+周杰伦 - 双截棍.mp3
+周杰伦 - 四面楚歌.mp3
+周杰伦 - 梯田.mp3
+周杰伦 - 梯田-爸我回来了.mp3
+周杰伦 - 威廉古堡.mp3
+周杰伦 - 我的地盘.mp3
+周杰伦 - 夜的第七章.mp3
+周杰伦 - 以父之名.mp3
+周杰伦 - 以父之名-Live.mp3
+周杰伦 - 印第安老斑鸠.mp3
+周杰伦 - 止战之殇.mp3
+周杰伦 - 最后的战役.mp3
 
+# 周杰伦抒情
+周杰伦 - 爱你没差.mp3
+周杰伦 - 爱情悬崖.mp3
+周杰伦 - 爱我别走.mp3
+周杰伦 - 爱在西元前.mp3
+周杰伦 - 爸我回来了.mp3
+周杰伦 - 不能说的秘密.mp3
+周杰伦 - 彩虹.mp3
+周杰伦 - 稻香.mp3
+周杰伦 - 东风破.mp3
+周杰伦 - 发如雪.mp3
+周杰伦 - 枫.mp3
+周杰伦 - 搁浅.mp3
+周杰伦 - 给我一首歌的时间.mp3
+周杰伦 - 给我一首歌的时间[2010超时代演唱会].mp3
+周杰伦 - 红尘客栈.mp3
+周杰伦 - 简单爱.mp3
+周杰伦 - 菊花台.mp3
+周杰伦 - 开不了口.mp3
+周杰伦 - 开不了口[Live].mp3
+周杰伦 - 兰亭序.mp3
+周杰伦 - 龙卷风.mp3
+周杰伦 - 龙卷风[Live].mp3
+周杰伦 - 迷迭香.mp3
+周杰伦 - 明明就.mp3
+周杰伦 - 蒲公英的约定.mp3
+周杰伦 - 七里香.mp3
+周杰伦 - 千里之外.mp3
+周杰伦 - 青花瓷.mp3
+周杰伦 - 晴天.mp3
+周杰伦 - 三年二班.mp3
+周杰伦 - 时光机.mp3
+周杰伦 - 说好的幸福呢.mp3
+周杰伦 - 梯田.mp3
+周杰伦 - 梯田-爸我回来了.mp3
+周杰伦 - 甜甜的.mp3
+周杰伦 - 听妈妈的话.mp3
+周杰伦 - 外婆.mp3
+周杰伦 - 蜗牛.mp3
+周杰伦 - 星晴.mp3
+周杰伦 - 烟花易冷.mp3
+周杰伦 - 烟花易冷[Live].mp3
+周杰伦 - 夜曲.mp3
+周杰伦 - 雨下一整晚.mp3
+周杰伦 - 雨下一整晚[Live].mp3
+周杰伦 - 园游会.mp3
+周杰伦 - 最后的战役.mp3
+周杰伦 -开不了口[Live].mp3
+周杰伦- 说好的幸福呢[Live].mp3
+周杰伦- 听妈妈的话.mp3
 
-
-
-
+# 好歌曲
+陈云 - 你做妈妈，我做爸爸.mp3
+杭盖乐队 - 杭盖.mp3
+黄洋 - 冒牌专家.mp3
+霍尊 - 卷珠帘.mp3
+雷雨心 - 记·念.mp3
+刘胡轶 - 从前慢.mp3
+刘润洁 - 情歌2.mp3
+裸儿 - 会飞的野马.mp3
+莫西子诗 - 要死就一定要死在你手里.mp3
+苏运莹 - 野子.mp3
+苏运莹、田馥甄 - 野子.mp3
+赵牧阳 - 侠客行.mp3
+赵照 - 当你老了.mp3
 
 # 吾粤
 Beyond - 不再犹豫.mp3
@@ -202,15 +353,79 @@ Beyond - 真的爱你.mp3
 
 Mr. - 暗涌.mp3
 
+陈慧娴 - 千千阕歌.mp3
+陈慧娴 - 月亮.mp3
+陈淑桦 - 做个真的我.flac
+
+陈奕迅 - K歌之王.ape
+陈奕迅 - 白玫瑰.ape
+陈奕迅 - 不如不见.ape
+陈奕迅 - 单车.ape
+陈奕迅 - 浮夸.flac
+陈奕迅 - 富士山下.ape
+陈奕迅 - 富士山下[live].mp3
+陈奕迅 - 黑择明.mp3
+陈奕迅 - 禁色.ape
+陈奕迅 - 禁色[live].mp3
+陈奕迅 - 落花流水.flac
+陈奕迅 - 落花流水[live].mp3
+陈奕迅 - 明年今日.ape
+陈奕迅 - 裙下之臣.flac
+陈奕迅 - 裙下之臣[live].mp3
+陈奕迅 - 人来人往.ape
+陈奕迅 - 失忆蝴蝶.mp3
+陈奕迅 - 天下无双.mp3
+陈奕迅 - 稳稳的幸福.mp3
+陈奕迅 - 夕阳无限好.flac
+陈奕迅 - 遥远的她.flac
+陈奕迅 - 一丝不挂.ape
+陈奕迅 - 一丝不挂[live].mp3
+陈奕迅 - 约定[live].mp3
+陈奕迅 - 约定.ape
+陈奕迅 - 最佳损友.flac
+
+高少华 - 让一切随风.mp3
+
+黄耀明 - 暗涌.mp3
+黄耀明 - 四季歌.mp3
+
 李克勤 - 爱你不需要理由.mp3
 李克勤 - 富士山下.mp3
 
+林嘉欣 - 恋之风景.mp3
+梅艳芳 - 富士山下.mp3
+梅艳芳 - 夕阳之歌.mp3
+梅艳芳 - 夕阳之歌 - 2003告别演唱会.mp3
+
+邰正宵 - 爱的传说.mp3
 天空之城 - 粤语版.mp3
+
+王菲 - 暗涌.mp3
+王菲 - 暧昧.ape
+王菲 - 当时的月亮.mp3
+王菲 - 给自己的情书.mp3
+王菲 - 流年.mp3
+王菲 - 闷.mp3
+王菲 - 笑忘书.mp3
+王菲 - 约定.ape
+
+谢安琪 - 年度之歌.mp3
+谢安琪 - 喜帖街.mp3
+谢安琪 - 钟无艳.mp3
+谢安琪 - 祝英台.mp3
+
+杨千嬅 - 再见二丁目.ape
 
 叶丽仪 - 上海滩.mp3
 叶倩文 - 伤痛.mp3
 
 张国荣 - 倩女幽魂.ape
+
+甄妮、罗文 - 世间始终你好.ape
+甄妮、罗文 - 桃花开.ape
+甄妮、罗文 - 铁血丹心.ape
+罗文 - 激光中.mp3
+罗文 - 满江红.ape
 
 周华健 - 刀剑若梦.mp3
 周华健、齐豫 - 神话情话.ape
@@ -220,21 +435,277 @@ Mr. - 暗涌.mp3
 
 # 台语
 蔡秋凤 - 金包银.mp3
+蔡秋凤 - 什麼樂.mp3
 陈雷 - 欢喜就好.mp3
 陈小云 - 情字这条路.mp3
 
 # Esongs
+500 miles.mp3
+A.R. Rahman - Ishq Shava.mp3
+Adam Levine - Lost Stars.mp3
+Alan Jackson - Remember When.mp3
+Avril Lavigne - Innocence.ape
+Avril Lavigne - When You're Gone.mp3
+Bigbang - If You.mp3
+Bryan Adams - Here I Am.mp3
+Can You Feel The Love Tonight.mp3
+Carpenters - Yesterday Once More.mp3
+Celine Dion - My Heart Will Go On.mp3
+Dana Winner - Moonlight Shadow.mp3
+Eagles - California Hotel.ape
+Emilia Rydberg - Big Big World.mp3
+Eric Clapton - Wonderful Tonight (Live).mp3
+Groove Coverage - Moonlight Shadow.mp3
+Groove Coverage - She.mp3
+Guns N' Roses - Don't Cry.ape
+Guns N' Roses - Don't Cry - Album Version (Alternate Lyrics)
+Guns N' Roses - November Rain.mp3
+K - CAS.mp3
+K. D. Lang - Sexuality.mp3
+Landing Guy.mp3
+Lenka - Trouble Is A Friend.mp3
+Leo Sayer - More Than I Can Say.mp3
+Leonard Cohen - Hallelujah.mp3
+Mariangela - Ninna Nanna.mp3
+Michael Cramtu - Big Big World.mp3
+Michael Cretu - Moonlight Flower.mp3
+Michael Jackson - Bad.mp3
+Michael Jackson - Beat It [live].mp3
+Michael Jackson - Billie Jean.mp3
+Michael Jackson - Dangerous.mp3
+Michael Jackson - Earth Song.mp3
+Michael Jackson - Smooth Criminal.mp3
+Michael Jackson - You Are Not Alone.mp3
+齐豫 - Moonlight Flower.mp3
+Natasha Thomas - Sunshine After Rain.mp3
+Paul Simon - Scarborough Fair.mp3
+Part Of The Game.mp3
+Right Here Waiting.mp3
+Rihanna - Stay.mp3
+Rod Stewart - Sailing.flac
+Sarah Brightman - Hijo de La Luna.ape
+Sarah Brightman - Scarborough Fair.mp3
+Sinead O'Connor - A Perfect Indian.ape
+T - Ara - Day By Day.mp3
+T - Ara - Sexy Love.mp3
+Take Me Home, Country Roads - J.Fla.mp3
+Take Me Home, Country Roads - Lana Del Rey.mp3
+Taylor Swift - Enchanted.mp3
+Taylor Swift - Love Story [live].mp3
+Taylor Swift - Sparks Fly.mp3
+Taylor Swift - Untouchable.mp3
+Tell Me Why.mp3
+The Beatles - Let It Be.mp3
+The Beatles - Norwegian Wood.mp3
+The Cranberries - Never Grow Old.mp3
+Twins - Long Long Ago.mp3
+Whitney Houston - Saving All My Love for You.mp3
+Wonder Girl - Nobody.mp3
+蔡妍 - 两个人.mp3
+铃芽之旅主题曲.mp3
+夕颜.mp3
 
 
 # 纯音乐
-K. Williams - 夜的钢琴曲.mp3
+Yanni - With An Orchid.mp3
 Yanni - 河西走廊之梦.mp3
 Yanni - 夜莺.mp3
+班得瑞 - 安妮的仙境 - 国外经典轻音乐.wav
+班得瑞 - 晨光.mp3
+班得瑞 - 初雪.mp3
+班得瑞 - 春野.mp3
+班得瑞 - 寂静山林寂静之音.mp3
+班得瑞 - 静静的雪.mp3
+班得瑞 - 蓝色天际 - 世界名曲 印度人的梦想.mp3
+班得瑞 - 琉璃湖畔.mp3
+班得瑞 - 清晨 - 轻音乐.mp3
+班得瑞 - 人间天上.mp3
+班得瑞 - 日落.mp3
+班得瑞 - 森林中的一夜.mp3
+班得瑞 - 天堂的眼泪轻音乐.mp3
+班得瑞 - 童年.mp3
+班得瑞 - 微风山谷 - 轻音乐.mp3
+班得瑞 - 雪之梦 - 班德瑞专辑之大自然情诗.mp3
+班得瑞 - 一杯淡水.mp3
+班得瑞 - 月光.mp3
+班得瑞 - 真爱.mp3
+班得瑞 - 紫蝴蝶.mp3
+悲伤的西班牙.mp3
+洞箫 - 谭炎健 - 红楼梦 - 秋窗风雨夕.mp3
+洞箫 - 谭炎健 - 红楼梦 - 叹香菱.mp3
+洞箫 - 谭炎健 - 红楼梦 - 题帕三绝.mp3
+洞箫 - 谭炎健 - 红楼梦 - 枉凝眉.mp3
+洞箫 - 谭炎健 - 红楼梦 - 引子.mp3
+洞箫 - 谭炎健 - 红楼梦 - 葬花吟.mp3
+洞箫 - 谭炎健 - 军港之夜.mp3
+洞箫 - 谭炎健 - 芦笙恋歌.mp3
+洞箫 - 谭炎健 - 山歌好比春江水.mp3
+洞箫 - 谭炎健 - 弯弯的月亮.mp3
+洞箫 - 谭炎健 - 瑶族舞曲.mp3
+钢琴曲 - kiss the rain.mp3
+钢琴曲 - The Truth That You Leave.mp3
+钢琴曲 - 克罗地亚狂想曲.mp3
+钢琴曲 - 蓝色的爱.mp3
+钢琴曲 - 天空之城.mp3
+葫芦丝 - 哏德全 - .mp3
+葫芦丝 - 哏德全 - 蝴蝶泉边.mp3
+葫芦丝 - 哏德全 - 有一个美丽的地方.mp3
+葫芦丝 - 蝴蝶泉边.mp3
+葫芦丝 - 花楼恋歌 - 云南贰.mp3
+葫芦丝 - 康定情歌.mp3
+葫芦丝 - 山寨情歌.mp3
+葫芦丝 - 月夜.mp3
+葫芦丝 - 竹林深处.mp3
 口琴 - 乌兰巴托的夜.mp3
+理查得克莱德曼 - 献给爱丽丝.mp3
+理查德克莱德曼 - 梦中的婚礼.mp3
+梁祝 - 二胡.mp3
+梁祝 - 二胡独奏.mp3
+梁祝 - 钢琴.mp3
+梁祝 - 古筝独奏.mp3
+梁祝 - 吉他独奏.mp3
+梁祝 - 口琴独奏.mp3
+梁祝 - 口哨.mp3
+梁祝 - 琵琶独奏.mp3
+梁祝 - 轻音乐.mp3
+梁祝 - 萨克斯.mp3
+梁祝 - 双电子琴独奏.mp3
+梁祝 - 箫奏.mp3
+梁祝 - 小提琴.mp3
+梁祝 - 扬琴独奏.mp3
+梁祝 - 俞丽拿小提琴独奏.mp3
+梁祝 - 竹笛.mp3
+秦时明月 - 空山鸟语.mp3
 雪千寻.mp3
+忧伤还是快乐.mp3
 宗次郎 - 故乡的原风景.mp3
 
-# 器乐
+# 夜的钢琴曲
+K. Williams - 夜的钢琴曲.mp3
+石进 - 夜的钢琴曲01.mp3
+石进 - 夜的钢琴曲02.mp3
+石进 - 夜的钢琴曲03.mp3
+石进 - 夜的钢琴曲04.mp3
+石进 - 夜的钢琴曲05.mp3
+石进 - 夜的钢琴曲06.mp3
+石进 - 夜的钢琴曲07.mp3
+石进 - 夜的钢琴曲08.mp3
+石进 - 夜的钢琴曲09.mp3
+石进 - 夜的钢琴曲10.mp3
+石进 - 夜的钢琴曲11.mp3
+石进 - 夜的钢琴曲12.mp3
+石进 - 夜的钢琴曲13.mp3
+石进 - 夜的钢琴曲14.mp3
+石进 - 夜的钢琴曲15.mp3
+石进 - 夜的钢琴曲16.mp3
+石进 - 夜的钢琴曲17.mp3
+石进 - 夜的钢琴曲18.mp3
+石进 - 夜的钢琴曲19.mp3
+石进 - 夜的钢琴曲20.mp3
+石进 - 夜的钢琴曲21.mp3
+石进 - 夜的钢琴曲22.mp3
+石进 - 夜的钢琴曲23.mp3
+石进 - 夜的钢琴曲24.mp3
+石进 - 夜的钢琴曲25.mp3
+石进 - 夜的钢琴曲26.mp3
+石进 - 夜的钢琴曲27.mp3
+石进 - 夜的钢琴曲28.mp3
+石进 - 夜的钢琴曲29.mp3
+石进 - 夜的钢琴曲30.mp3
+石进 - 夜的钢琴曲31.mp3
+
+# 器乐歌曲
+伴奏 - Faidherbe square.mp3
+伴奏 - Lemon tree.mp3
+伴奏 - 陈奕迅 - 阿牛.mp3
+伴奏 - 陈奕迅 - 白玫瑰.mp3
+伴奏 - 陈奕迅 - 床头床尾.mp3
+伴奏 - 陈奕迅 - 今日.mp3
+伴奏 - 陈奕迅 - 落花流水.mp3
+伴奏 - 陈奕迅 - 明年今日（十年）.mp3
+伴奏 - 陈奕迅 - 人来人往.mp3
+伴奏 - 陈奕迅 - 信心花舍.mp3
+伴奏 - 陈奕迅 - 一丝不挂.mp3
+伴奏 - 陈奕迅 - 最冷一天.mp3
+伴奏 - 韩磊 - 千百年后谁又记得谁.mp3
+伴奏 - 后弦 - 昆明湖.mp3
+伴奏 - 寂寞在唱歌.mp3
+伴奏 - 任素汐 - 大儿歌.mp3
+伴奏 - 任素汐 - 胡广生.mp3
+伴奏 - 任素汐 - 岁岁.mp3
+伴奏 - 任素汐 - 王招君.mp3
+伴奏 - 神话.mp3
+伴奏 - 五月天 - 知足.mp3
+钢琴 - E8r - 贝加尔湖畔.mp3
+钢琴 - E8r - 一直很安静.mp3
+钢琴 - E8r - 知足.mp3
+钢琴 - See You Again.mp3
+钢琴 - The Sound of Silence - 贵族乐团.mp3
+钢琴 - 阿桑 - 叶子.mp3
+钢琴 - 悲情面具.mp3
+钢琴 - 陈奕迅 - K歌之王.mp3
+钢琴 - 陈奕迅 - Shall We Talk.mp3
+钢琴 - 陈奕迅 - 单车.mp3
+钢琴 - 陈奕迅 - 富士山下.mp3
+钢琴 - 陈奕迅 - 黑夜不再来.mp3
+钢琴 - 陈奕迅 - 明年今日（十年） .mp3
+钢琴 - 陈奕迅 - 七百年后.mp3
+钢琴 - 陈奕迅 - 裙下之臣.mp3
+钢琴 - 陈奕迅 - 稳稳的幸福 .mp3
+钢琴 - 陈奕迅 - 夕阳无限好.mp3
+钢琴 - 陈奕迅 - 一丝不挂.mp3
+钢琴 - 陈奕迅 - 因为爱情.mp3
+钢琴 - 陈奕迅 - 最佳损友.mp3
+钢琴 - 戴荃 - 悟空.mp3
+钢琴 - 荷塘月色.mp3
+钢琴 - 胡夏 - 那些年.mp3
+钢琴 - 黄昌平 - 斯卡布罗集市.mp3
+钢琴 - 寂寞在唱歌.mp3
+钢琴 - 假如爱有天意1.mp3
+钢琴 - 假如爱有天意2.mp3
+钢琴 - 李劲锋 - 向天再借五百年.mp3
+钢琴 - 梁静茹 - Fly Away.mp3
+钢琴 - 梁静茹 - 分手快乐.mp3
+钢琴 - 梁静茹 - 宁夏.mp3
+钢琴 - 梁静茹 - 暖暖.mp3
+钢琴 - 梁静茹 - 情歌.mp3
+钢琴 - 梁静茹 - 勇气.mp3
+钢琴 - 模特.mp3
+钢琴 - 墨明棋妙 - 故梦.mp3
+钢琴 - 你是我心内的一首歌.mp3
+钢琴 - 钱半仙 - 星月神话.mp3
+钢琴 - 王菲 - 我愿意.mp3
+钢琴 - 文武贝 - Linkin Park - Numb.mp3
+钢琴 - 文武贝 - 匆匆那年.mp3
+钢琴 - 文武贝 - 默.mp3
+钢琴 - 文武贝 - 如果我们不曾相遇.mp3
+钢琴 - 文武贝 - 世间始终你好.mp3
+钢琴 - 文武贝 - 五月天8首歌曲钢琴串烧.mp3
+钢琴 - 五月天 - 仓颉.mp3
+钢琴 - 五月天 - 我不愿让你一个人.mp3
+钢琴 - 五月天 - 知足.mp3
+钢琴 - 一千年以后.mp3
+钢琴 - 幽蓝键 - The Sound of Silence.mp3
+钢琴 - 幽蓝键 - 梦里水乡.mp3
+钢琴 - 幽蓝键 - 千年等一回.mp3
+钢琴 - 赵雷 - 成都.mp3
+钢琴 - 周杰伦 - 爱你没差.mp3
+钢琴 - 周杰伦 - 夜曲.mp3
+古筝 - 张晓红 - 沧海一声笑.mp3
+古筝 - 周桃桃 - 神话.mp3
+葫芦丝 - 悲情面具.mp3
+葫芦丝 - 沧海一声笑.mp3
+葫芦丝 - 弹唱词.mp3
+葫芦丝 - 渡情.mp3
+葫芦丝 - 发如雪.mp3
+葫芦丝 - 神话.mp3
+吉他 - Down By the Salley Gandens.mp3
+吉它 - Over The Rainbow.mp3
+爵士乐 - Over The Rainbow.mp3
+口琴 - 送别.mp3
+口哨 - 斯卡布罗集市.mp3
+萨克斯 - My Heart Will Go On.mp3
+萨克斯 - The Sound of Silence - Kenny G.mp3
 
 
 # 中岛美雪
@@ -262,6 +733,3 @@ Teshima Aoi - 再见夏天 - 虞美人之坡.mp3
 中島みゆき - 本日、未熟[Live].mp3
 中島みゆき - 竹の歌.mp3
 中島みゆき - 紫の桜[Live].mp3
-
-
-
