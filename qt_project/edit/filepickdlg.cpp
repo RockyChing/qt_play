@@ -221,7 +221,7 @@ void FilePickDlg::onBtnPickClicked()
         return;
     }
     qDebug() << "srcFiles count: " << srcFiles.size();
-
+#if 0
     QStringList dirUnderSrcDir = srcDir.entryList(QDir::NoSymLinks | QDir::AllDirs  | QDir::Dirs | QDir::NoDotAndDotDot);
     for (int i = 0; i < dirUnderSrcDir.size(); i ++) {
         QString newPath = dstDirStr + "/" + dirUnderSrcDir.at(i);
@@ -236,7 +236,7 @@ void FilePickDlg::onBtnPickClicked()
             }
         }
     }
-
+#endif
     // parse favorites.txt
     if (!favListFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         ui->btnPick->setEnabled(true);
@@ -246,6 +246,7 @@ void FilePickDlg::onBtnPickClicked()
 
     // get favorite items
     QTextStream in(&favListFile);
+    in.setCodec("utf-8");
     QString failMsg("");
     int favCnt = 0, copyCnt = 0;
     while (!in.atEnd()) {
@@ -255,17 +256,42 @@ void FilePickDlg::onBtnPickClicked()
         if (line.isEmpty() || line.startsWith("#")) {
             continue;
         }
-        favCnt ++;
+        favCnt += 1;
 
         for (int i = 0; i < srcFiles.size(); i ++) {
             QString tmp = srcFiles.at(i);
-            if (tmp.endsWith(line)) {
+            QFileInfo srcFilInfo(tmp);
+            qDebug() << "srcFile name: " << srcFilInfo.fileName();
+            qDebug() << "find name: " << line;
+
+            if (0 == QString::compare(srcFilInfo.fileName(), line)) { // found
                 QString copyFilePath = tmp.replace(srcDirStr, dstDirStr);
                 //qDebug() << "copyFilePath: " << copyFilePath;
-                QFile::copy(srcFiles.at(i), copyFilePath);
+
+                QFileInfo copyFilInfo(copyFilePath);
+                QDir dir(copyFilInfo.absolutePath());
+                if (!dir.exists()) {
+                    dir.mkpath(copyFilInfo.absolutePath());
+                    if (!dir.exists()) {
+                        failMsg.append(copyFilInfo.absolutePath());
+                        failMsg.append(" not exist!");
+                        failMsg.append("\n");
+                        break;
+                    }
+                }
+
+                bool copyRes = QFile::copy(srcFiles.at(i), copyFilePath);
+                if (copyRes) {
+                    copyCnt += 1;
+                    srcFiles.removeAt(i);
+                } else {
+                    failMsg.append(line);
+                    failMsg.append(" copy failed!");
+                    failMsg.append("\n");
+                }
 
                 found = true;
-                copyCnt ++;
+                break;
             }
         }
 

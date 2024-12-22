@@ -77,7 +77,7 @@
         </font>
        </property>
        <property name="placeholderText">
-        <string>必填</string>
+        <string>文件编码：UTF-8</string>
        </property>
       </widget>
      </item>
