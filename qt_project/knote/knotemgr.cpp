@@ -290,7 +290,7 @@ int KNoteMgr::saveKNote(SaveNoteModeFlag flag)
     QFileInfo fileInfo(file);
     mKNoteSaveDir = QDir::toNativeSeparators(fileInfo.absolutePath());
     QSettings s(AppSettings::APP_SETTINGS_FILE, QSettings::IniFormat);
-    s.setValue(AppSettings::KNOTE_SDIR, mKNoteSaveDir);
+    s.setValue(AppSettings::KNOTE_DDIR, mKNoteSaveDir);
 
     file.flush();
     file.close();
